@@ -13,22 +13,23 @@
       <nav id="menu">
         <ul>
           <li>
-            <a [routerLink]="['/sobre-mi']" [routerLinkActive]="['actived']"
+            <a [routerLink]="['/clientes']" [routerLinkActive]="['actived']"
               >Clientes</a
             >
           </li>
           <li>
-            <a [routerLink]="['/proyectos']" [routerLinkActive]="['actived']"
+            <a [routerLink]="['/tareas']" [routerLinkActive]="['actived']"
               >Tareas</a
             >
           </li>
         </ul>
       </nav>
     </header>
+    <div class="clearfix"></div>
 
     <!--Fin de la cabecera-->
 
-    <section id="content">
+    <section id="contenido">
       <router-outlet></router-outlet>
     </section>
 
