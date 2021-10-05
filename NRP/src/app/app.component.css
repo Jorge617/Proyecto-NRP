@@ -1,0 +1,18 @@
+/*Logo*/
+
+#header {
+  width: 100%;
+  min-height: 100px;
+  background-color: #ccc;
+}
+
+#logo img {
+  background-color: white;
+  width: 90px;
+  height: 90px;
+  margin-top: 10px;
+  margin-left: 105px;
+  margin-bottom: 5px;
+  padding: 10px;
+  border-radius: 40px;
+}

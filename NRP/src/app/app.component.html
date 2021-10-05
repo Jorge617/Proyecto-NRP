@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <!--Inicio de la cabecera-->
+    <header id="header">
+      <!--Logo-->
+      <div id="logo">
+        <a href="#"><img src="../assets/calendar.png" alt="Logo" /></a>
+      </div>
+      <nav id="menu">
+        <ul>
+          <li>
+            <a [routerLink]="['/sobre-mi']" [routerLinkActive]="['actived']"
+              >Clientes</a
+            >
+          </li>
+          <li>
+            <a [routerLink]="['/proyectos']" [routerLinkActive]="['actived']"
+              >Tareas</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!--Fin de la cabecera-->
+
+    <section id="content">
+      <router-outlet></router-outlet>
+    </section>
+
+    <footer>NRP 2021 &copy;</footer>
+  </body>
+</html>
