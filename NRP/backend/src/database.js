@@ -3,13 +3,13 @@ const URI = 'mongodb://localhost/NPR';
 
 mongoose.connect(URI, {
 
-useNewUrlParser: true, 
+    useNewUrlParser: true,
 
-useUnifiedTopology: true 
+    useUnifiedTopology: true
 
 }, err => {
-if(err) throw err;
-console.log('Connected to MongoDB!!!')
+    if (err) throw err;
+    console.log('Connected to MongoDB!!!')
 
 
 });
