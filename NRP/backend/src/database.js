@@ -7,9 +7,11 @@ mongoose.connect(URI, {
 
     useUnifiedTopology: true
 
-}, err => {
-    if (err) throw err;
-    console.log('Connected to MongoDB!!!')
+});
 
 
+const connection = mongoose.connection;
+
+connection.once('open', ()=>{
+    console.log('DB connected');
 });
