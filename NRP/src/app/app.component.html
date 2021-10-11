@@ -16,14 +16,12 @@
       <nav id="menu">
         <ul>
           <li>
-            <a [routerLink]="['/clientes']" [routerLinkActive]="['actived']"
+            <a [routerLink]="['/clientes']" routerLinkActive="actived"
               >Clientes</a
             >
           </li>
           <li>
-            <a [routerLink]="['/tareas']" [routerLinkActive]="['actived']"
-              >Tareas</a
-            >
+            <a [routerLink]="['/tareas']" routerLinkActive="actived">Tareas</a>
           </li>
         </ul>
       </nav>
@@ -32,10 +30,12 @@
 
     <!--Fin de la cabecera-->
 
+    <hr />
+
     <section id="contenido">
       <router-outlet></router-outlet>
     </section>
-
+    <div class="clearfix"></div>
     <footer>NRP 2021 &copy;</footer>
   </body>
 </html>
