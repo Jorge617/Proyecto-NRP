@@ -8,8 +8,8 @@ requisitoController.getRequisitos = async (req, res)=> {
     res.json(requisitos);
 }
 requisitoController.getRequisito = async (req, res)=> {
-    const requisito = await requisito.findById(req.params.id);
-    res.json(requisito);
+    const getrequisito = await requisito.findById(req.params.id);
+    res.json(getrequisito);
 }
 requisitoController.crearRequisito = async (req, res)=> {
     const {nombre, coste} = req.body;

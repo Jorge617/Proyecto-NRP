@@ -1,11 +1,16 @@
 const { Schema, model } = require('mongoose');
 
 const clienteSchema = new Schema({
-    nombre: String,
-    prioridad: {
+    nombre: {
+        type : String,
+        required : true,
+        unique : true
+    },
+    prioridad: [{
         valor: Number,
-        requisito: { type: Schema.ObjectId, ref: "Requisito" }
-    }
+        requisito: { type: Schema.ObjectId, ref: "Requisito" }      
+    }],
+    importancia : Number
 });
 
 
