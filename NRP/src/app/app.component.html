@@ -10,28 +10,32 @@
       <div id="logo">
         <a href="#"><img src="../assets/calendar.png" alt="Logo" /></a>
       </div>
+      <div id="titulo">
+        <h1>Gestione los requisitos de su proyecto con NRP</h1>
+      </div>
       <nav id="menu">
         <ul>
           <li>
-            <a [routerLink]="['/sobre-mi']" [routerLinkActive]="['actived']"
+            <a [routerLink]="['/clientes']" routerLinkActive="actived"
               >Clientes</a
             >
           </li>
           <li>
-            <a [routerLink]="['/proyectos']" [routerLinkActive]="['actived']"
-              >Tareas</a
-            >
+            <a [routerLink]="['/tareas']" routerLinkActive="actived">Tareas</a>
           </li>
         </ul>
       </nav>
     </header>
+    <div class="clearfix"></div>
 
     <!--Fin de la cabecera-->
 
-    <section id="content">
+    <hr />
+
+    <section id="contenido">
       <router-outlet></router-outlet>
     </section>
-
+    <div class="clearfix"></div>
     <footer>NRP 2021 &copy;</footer>
   </body>
 </html>
