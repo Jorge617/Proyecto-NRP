@@ -12,8 +12,8 @@ clienteController.getCliente = async (req, res)=> {
     res.json(getcliente);
 }
 clienteController.crearCliente = async (req, res)=> {
-    const {nombre, prioridad, importancia} = req.body;
-    const nuevoCliente = new cliente({nombre, prioridad, importancia});
+    const {nombre, importancia} = req.body;
+    const nuevoCliente = new cliente({nombre, importancia});
     await nuevoCliente.save();
     res.json({message : 'Cliente dado de alta'});
 }
@@ -24,9 +24,9 @@ clienteController.borrarCliente = async (req, res) => {
 }
 
 clienteController.updateCliente  = async (req, res) => {
-    const {nombre, prioridad, importancia} = req.body;
+    const {nombre, importancia} = req.body;
     await cliente.findByIdAndUpdate(req.params.id, {
-        nombre, prioridad, importancia
+        nombre, importancia
     });
     res.json('Product Updated');
 }

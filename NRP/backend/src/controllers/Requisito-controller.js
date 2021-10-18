@@ -12,10 +12,10 @@ requisitoController.getRequisito = async (req, res)=> {
     res.json(getrequisito);
 }
 requisitoController.crearRequisito = async (req, res)=> {
-    const {nombre, coste} = req.body;
-    const nuevoRequisito = new requisito({nombre, coste});
+    const {nombre, prioridad, coste} = req.body;
+    const nuevoRequisito = new requisito({nombre, prioridad, coste});
     await nuevoRequisito.save();
-    res.json({message : `Requisito dado de alta ${nombre} ${coste} `});
+    res.json({message : `Requisito dado de alta ${nombre} ${prioridad} ${coste} `});
 }
 requisitoController.borrarRequisito = async (req, res) => {
     const { id } = req.params;

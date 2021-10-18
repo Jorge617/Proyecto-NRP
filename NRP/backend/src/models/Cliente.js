@@ -6,10 +6,7 @@ const clienteSchema = new Schema({
         required : true,
         unique : true
     },
-    prioridad: [{
-        valor: Number,
-        requisito: { type: Schema.ObjectId, ref: "Requisito" }      
-    }],
+    
     importancia : Number
 });
 
