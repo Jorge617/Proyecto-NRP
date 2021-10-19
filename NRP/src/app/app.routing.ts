@@ -1,16 +1,13 @@
 import { ModuleWithProviders } from "@angular/core";
 import { Routes,RouterModule, Route } from "@angular/router";
 
+import { LoginComponent } from "./components/login/login.component";
 
-import { InicioComponent } from "./components/inicio/inicio.component";
-import { ClientesComponent } from "./components/clientes/clientes.component";
-import { TareasComponent } from "./components/tareas/tareas.component";
+
 
 const appRoutes : Routes = [
-    {path : '', component : InicioComponent},
-    {path : 'clientes', component : ClientesComponent},
-    {path : 'tareas', component : TareasComponent},
-    {path : '**', component : InicioComponent}
+    {path : '', component : LoginComponent},
+    {path : '**', component : LoginComponent}
 ];
 
 export const appRoutingProviders : any[] = [];
