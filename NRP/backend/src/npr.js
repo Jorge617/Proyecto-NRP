@@ -25,10 +25,10 @@ async function calcularPrioridad() {
         for (var j = 0; j < requisitos[i].prioridad.length; j++) {
             suma += clientes.find(element => element._id == requisitos[i].prioridad[j].cliente).importancia * requisitos[i].prioridad[j].valor
         }
-        ordenPrioridad.push(suma);        
+        ordenPrioridad.push([requisitos[i]._id,suma]);        
 
         ordenPrioridad.sort(function(a, b){return b-a});
-
+        console.log(ordenPrioridad);
     }
 
     return ordenPrioridad;

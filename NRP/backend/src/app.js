@@ -12,6 +12,7 @@ app.use(express.json());
 
 app.use('/clientes', require('./routes/Clientes')); 
 app.use('/requisitos', require('./routes/Requisitos'));
+app.use('/usuarios', require('./routes/Usuarios'));
 
 
 module.exports = app;
