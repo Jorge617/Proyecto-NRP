@@ -14,7 +14,7 @@ usuarioController.login = async (req, res) => {
     const{nombre, password} = req.body;
     usuarioLogeado = await usuario.find({nombre});
     if(!usuarioLogeado){
-        res.json('False');
+        res.json('false');
     } else {
         res.json('true');       
     }
