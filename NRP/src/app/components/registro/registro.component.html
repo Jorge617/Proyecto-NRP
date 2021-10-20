@@ -1,56 +1,88 @@
-<section class="vh-100 gradient-custom">
-    <div class="container py-5 h-100">
-        <div class="row justify-content-center align-items-center h-100">
-            <div class="col-12 col-lg-9 col-xl-7">
-                <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
-                    <div class="card-body p-4 p-md-5">
-                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text">Registrarse</h3>
-                        <form>
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
 
-                            <div class="col ">
-                                <div class="col-md-6 mb-4">
+    <link
+      rel="canonical"
+      href="https://getbootstrap.com/docs/5.1/examples/sign-in/"
+    />
 
-                                    <div class="form-outline ">
-                                        <label class="form-label" for="firstName">Nombre</label>
-                                        <input type="text" id="firstName" class="form-control form-control-lg" />
-                                    </div>
+    <!-- Bootstrap core CSS -->
+    <link href="registro.component.css" rel="stylesheet" />
 
-                                </div>
-                                <div class="col-md-6 mb-4">
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
 
-                                    <div class="form-outline">
-                                        <label class="form-label" for="lastName">Contraseña</label>
-                                        <input type="text" id="lastName" class="form-control form-control-lg" />
-                                    </div>
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
 
-                                </div>
-                            </div>
+    <!-- Custom styles for this template -->
+    <link href="registro.component.css" rel="stylesheet" />
+  </head>
+  <body class="text-center">
+    <main class="form-signin">
+      <form>
+        <img
+          class="mb-4 border-radius rounded-circle"
+          src="./assets/logo.jpg"
+          alt="Logo"
+          width="200"
+          height="200"
+        />
+        <h1 class="h3 mb-3 fw-normal">Registrarse</h1>
 
-                            <div class="row">
-                                <div class="col-md-6 mb-4 d-flex align-items-center">
-
-                                    <div class="form-outline datepicker w-100">
-                                        <label for="birthdayDate" class="form-label">Repetir contraseña</label>
-                                        <input type="text" class="form-control form-control-lg" id="birthdayDate" />
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-
-
-                            <div class="mt-4 pt-2">
-                                <input class="btn btn-primary btn-lg boton" type="submit" value="Registrarse" />
-                            </div>
-
-                            <div class="mt-4 pt-2">
-                                <a [routerLink]="['/login']" routerLinkActive="router-link-active">¿Quieres iniciar sesión?</a>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+        <div class="form-floating">
+          <input
+            type="name"
+            class="form-control"
+            id="floatingInput"
+            placeholder="jm890"
+          />
+          <label for="floatingInput">Nombre usuario</label>
         </div>
-    </div>
-</section>
+        <div class="form-floating mt-3">
+          <input
+            type="password"
+            class="form-control"
+            id="floatingPassword"
+            placeholder="Password"
+          />
+          <label for="floatingPassword">Contraseña</label>
+        </div>
+
+        <div class="form-floating mt-3">
+          <input
+            type="password"
+            class="form-control"
+            id="floatingPassword"
+            placeholder="Password"
+          />
+          <label for="floatingPassword">Repetir contraseña</label>
+        </div>
+
+        <div class="checkbox mb-3">
+          <label>
+            <a [routerLink]="['/login']">¿Ya tienes cuenta? Inicia sesión</a>
+          </label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">
+          Registrarse
+        </button>
+        <p class="mt-5 mb-3 text-muted">&copy; NRP–2021</p>
+      </form>
+    </main>
+  </body>
+</html>

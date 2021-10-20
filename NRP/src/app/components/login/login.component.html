@@ -1,55 +1,78 @@
-<section class="h-100 gradient-form" style="background-color:white;">
-    <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-xl-10">
-                <div class="card rounded-3 text-black">
-                    <div class="row g-0">
-                        <div class="col-lg-6">
-                            <div class="card-body p-md-5 mx-md-4">
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
 
-                                <div class="text-center">
-                                    <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-login-form/lotus.png" style="width: 185px;" alt="logo">
-                                    <h4 class="mt-1 mb-5 pb-1">Equipo 1</h4>
-                                </div>
+    <link
+      rel="canonical"
+      href="https://getbootstrap.com/docs/5.1/examples/sign-in/"
+    />
 
-                                <form>
-                                    <h2> Inicio de sesión </h2>
+    <!-- Bootstrap core CSS -->
+    <link href="login.component.css" rel="stylesheet" />
 
-                                    <div class="form-outline mb-4">
-                                        <label class="form-label" for="form2Example11">Nombre de usuario</label>
-                                        <input type="email" id="form2Example11" class="form-control" placeholder="Introduzca el nombre de usuario" />
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
 
-                                    </div>
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
 
-                                    <div class="form-outline mb-4">
-                                        <label class="form-label" for="form2Example22">Contraseña</label>
-                                        <input type="password" id="form2Example22" class="form-control" placeholder="Introduzca la contraseña" />
-                                    </div>
+    <!-- Custom styles for this template -->
+    <link href="login.component.css" rel="stylesheet" />
+  </head>
+  <body class="text-center">
+    <main class="form-signin">
+      <form>
+        <img
+          class="mb-4 border-radius rounded-circle"
+          src="./assets/logo.jpg"
+          alt="Logo"
+          width="200"
+          height="200"
+        />
+        <h1 class="h3 mb-3 fw-normal">Iniciar sesión</h1>
 
-                                    <div class="text-center pt-1 mb-5 pb-1">
-                                        <button id="botonLogin" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button">Iniciar sesión</button>
-                                    </div>
-
-                                    <div class="d-flex align-items-center justify-content-center pb-4">
-
-                                        <a [routerLink]="['/registro']" routerLinkActive="router-link-active">¿No tienes cuenta? Registrate </a>
-                                    </div>
-
-                                </form>
-
-                            </div>
-                        </div>
-                        <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
-                            <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                                <h4 class="mb-4">We are more than just a company</h4>
-                                <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                    consequat.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="form-floating">
+          <input
+            type="name"
+            class="form-control"
+            id="floatingInput"
+            placeholder="jm890"
+          />
+          <label for="floatingInput">Nombre usuario</label>
         </div>
-    </div>
-</section>
+        <div class="form-floating mt-3">
+          <input
+            type="password"
+            class="form-control"
+            id="floatingPassword"
+            placeholder="Password"
+          />
+          <label for="floatingPassword">Contraseña</label>
+        </div>
+
+        <div class="checkbox mb-3">
+          <label>
+            <a [routerLink]="['/registro']">¿No tienes cuenta? Registrate</a>
+          </label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">
+          Entrar
+        </button>
+        <p class="mt-5 mb-3 text-muted">&copy; NRP–2021</p>
+      </form>
+    </main>
+  </body>
+</html>
