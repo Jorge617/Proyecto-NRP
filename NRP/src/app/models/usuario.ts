@@ -1,7 +1,7 @@
-export class Uusario{
+export class Usuario{
 	constructor(
-		public _id: string,
-		public nombre: string,
-		public importancia : Number
+		public nombre: string |undefined,
+		public password : string | undefined
+		
 	){}
 }

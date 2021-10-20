@@ -67,7 +67,7 @@
           <input
             type="password"
             class="form-control"
-            id="floatingPassword"
+            id="floatingPassword2"
             placeholder="Password"
           />
           <label for="floatingPassword">Repetir contraseña</label>
@@ -78,7 +78,11 @@
             <a [routerLink]="['/login']">¿Ya tienes cuenta? Inicia sesión</a>
           </label>
         </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">
+        <button
+          (click)="registro()"
+          class="w-100 btn btn-lg btn-primary"
+          type="submit"
+        >
           Registrarse
         </button>
         <p class="mt-5 mb-3 text-muted">&copy; NRP–2021</p>
