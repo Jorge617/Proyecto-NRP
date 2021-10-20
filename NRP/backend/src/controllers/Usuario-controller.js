@@ -12,12 +12,13 @@ usuarioController.registro = async (req, res)=> {
 
 usuarioController.login = async (req, res) => {
     const{nombre, password} = req.body;
-    usuarioLogeado = await usuario.find({nombre});
-    if(!usuarioLogeado){
-        res.json('false');
-    } else {
-        res.json('true');       
-    }
+    usuarioLogeado = await usuario.findOne({nombre});
+    if(usuarioLogeado.password==password){
+            res.json({resultado:true});
+    } 
+     else {
+        res.json({resultado:false});
+     }
 }
 
 module.exports = usuarioController;
