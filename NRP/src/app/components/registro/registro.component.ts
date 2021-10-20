@@ -31,7 +31,7 @@ export class RegistroComponent implements OnInit {
     var repetir_contrasenia = $("#floatingPassword2").val();
 
     this.usuario = new Usuario("Jorge","123456");
-
+    
     this._usuarioService.registro(this.usuario);
   }
  
