@@ -50,6 +50,9 @@
             class="form-control"
             id="floatingInput"
             placeholder="jm890"
+            name="nombre"
+            #nombre="ngModel"
+            [(ngModel)]="usuario.nombre"
           />
           <label for="floatingInput">Nombre usuario</label>
         </div>
@@ -59,6 +62,9 @@
             class="form-control"
             id="floatingPassword"
             placeholder="Password"
+            name="password"
+            #password="ngModel"
+            [(ngModel)]="usuario.password"
           />
           <label for="floatingPassword">Contraseña</label>
         </div>
@@ -69,6 +75,9 @@
             class="form-control"
             id="floatingPassword2"
             placeholder="Password"
+            name="r_password"
+            #r_password="ngModel"
+            [(ngModel)]="usuario.r_password"
           />
           <label for="floatingPassword">Repetir contraseña</label>
         </div>

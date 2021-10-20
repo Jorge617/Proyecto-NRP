@@ -14,21 +14,18 @@ export class RegistroComponent implements OnInit {
 
   public nombre:string|undefined;
   public password:string|undefined;
+  public r_password:string|undefined;
   public usuario:Usuario;
 
   constructor(private _usuarioService:UsuarioService) {
-    this.usuario = new Usuario("","");
+    this.usuario = new Usuario("","","");
+    this.r_password = "";
    }
-
-   
-            
+       
   ngOnInit(): void {
   }
 
   registro(){
-
-    this.usuario = new Usuario("David","123456");
-    console.log("Aquí");
     this._usuarioService.registro(this.usuario).subscribe();
   }
  
