@@ -26,13 +26,10 @@ export class RegistroComponent implements OnInit {
   }
 
   registro(){
-    var _nombre = $("#floatingInput").val();
-    var _contrasenia = $("#floatingPassword").val();
-    var repetir_contrasenia = $("#floatingPassword2").val();
 
-    this.usuario = new Usuario("Jorge","123456");
-    
-    this._usuarioService.registro(this.usuario);
+    this.usuario = new Usuario("David","123456");
+    console.log("Aquí");
+    this._usuarioService.registro(this.usuario).subscribe();
   }
  
 

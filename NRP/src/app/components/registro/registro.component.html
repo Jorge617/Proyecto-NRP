@@ -34,7 +34,7 @@
   </head>
   <body class="text-center">
     <main class="form-signin">
-      <form>
+      <form (ngSubmit)="registro()">
         <img
           class="mb-4 border-radius rounded-circle"
           src="./assets/logo.jpg"
@@ -78,11 +78,7 @@
             <a [routerLink]="['/login']">¿Ya tienes cuenta? Inicia sesión</a>
           </label>
         </div>
-        <button
-          (click)="registro()"
-          class="w-100 btn btn-lg btn-primary"
-          type="submit"
-        >
+        <button class="w-100 btn btn-lg btn-primary" type="submit">
           Registrarse
         </button>
         <p class="mt-5 mb-3 text-muted">&copy; NRP–2021</p>
