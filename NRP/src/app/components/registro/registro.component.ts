@@ -26,6 +26,7 @@ export class RegistroComponent implements OnInit {
   }
 
   registro(){
+    
     this._usuarioService.registro(this.usuario).subscribe();
   }
  
