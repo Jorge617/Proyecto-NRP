@@ -12,9 +12,6 @@ import * as $ from 'jquery';
 })
 export class RegistroComponent implements OnInit {
 
-  public nombre:string|undefined;
-  public password:string|undefined;
-  public r_password:string|undefined;
   public usuario:Usuario;
 
   constructor(private _usuarioService:UsuarioService) {

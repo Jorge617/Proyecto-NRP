@@ -19,6 +19,13 @@ export class UsuarioService {
 		return this._http.post(this.url+'usuarios', params, {headers: headers});
 	}
 
+	login(usuario:Usuario): Observable<any> {
+        let params = JSON.stringify(usuario);
+		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+		return this._http.post(this.url+'usuarios/login', params, {headers: headers});
+	}
+
 	
 
 }
