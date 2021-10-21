@@ -1,127 +1,76 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="" />
 
-    <link
-      rel="canonical"
-      href="https://getbootstrap.com/docs/5.1/examples/sign-in/"
-    />
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/" />
 
     <!-- Bootstrap core CSS -->
     <link href="registro.component.css" rel="stylesheet" />
 
     <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
         }
-      }
+        
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
     </style>
 
     <!-- Custom styles for this template -->
     <link href="registro.component.css" rel="stylesheet" />
-  </head>
+</head>
 
-  <body class="text-center">
+<body class="text-center">
     <main class="form-signin">
-      <form #formRegistro="ngForm" (ngSubmit)="registro(formRegistro)">
-        <img
-          class="mb-4 border-radius rounded-circle"
-          src="./assets/logo.jpg"
-          alt="Logo"
-          width="200"
-          height="200"
-        />
-        <h1 class="h3 mb-3 fw-normal">Registrarse</h1>
+        <form #formRegistro="ngForm" (ngSubmit)="registro(formRegistro)">
+            <img class="mb-4 border-radius rounded-circle" src="./assets/logo.jpg" alt="Logo" width="200" height="200" />
+            <h1 class="h3 mb-3 fw-normal">Registrarse</h1>
 
-        <div class="form-floating mt-3">
-          <input
-            type="text"
-            class="form-control"
-            id="floatingInput"
-            placeholder="jm890"
-            name="nombre"
-            #nombre="ngModel"
-            [(ngModel)]="usuario.nombre"
-            required
-          />
-          <label for="floatingInput">Nombre usuario</label>
-          <div
-            *ngIf="nombre.touched && !nombre.valid"
-            class="alert alert-danger mt-3"
-            role="alert"
-          >
-            El nombre de usuario es obligatorio
-          </div>
-        </div>
-        <div class="form-floating mt-3">
-          <input
-            type="password"
-            class="form-control"
-            id="floatingPassword"
-            placeholder="Password"
-            name="password"
-            #password="ngModel"
-            [(ngModel)]="usuario.password"
-            required
-          />
-          <label for="floatingPassword">Contraseña</label>
-          <div
-            *ngIf="password.touched && !password.valid"
-            class="alert alert-danger mt-3"
-            role="alert"
-          >
-            La contraseña es obligatoria
-          </div>
-        </div>
+            <div class="form-floating mt-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="jm890" name="nombre" #nombre="ngModel" [(ngModel)]="usuario.nombre" required />
+                <label for="floatingInput">Nombre usuario</label>
+                <div *ngIf="nombre.touched && !nombre.valid" class="alert alert-danger mt-3" role="alert">
+                    El nombre de usuario es obligatorio
+                </div>
+            </div>
+            <div class="form-floating mt-3">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" #password="ngModel" [(ngModel)]="usuario.password" required />
+                <label for="floatingPassword">Contraseña</label>
+                <div *ngIf="password.touched && !password.valid" class="alert alert-danger mt-3" role="alert">
+                    La contraseña es obligatoria
+                </div>
+            </div>
 
-        <div class="form-floating mt-3">
-          <input
-            type="password"
-            class="form-control"
-            id="floatingPassword2"
-            placeholder="Password"
-            name="r_password"
-            #r_password="ngModel"
-            [(ngModel)]="usuario.r_password"
-            required
-          />
-          <label for="floatingPassword">Repetir contraseña</label>
-          <div
-            *ngIf="r_password.touched && !r_password.valid"
-            class="alert alert-danger mt-3 mb-3"
-            role="alert"
-          >
-            Repita la contraseña
-          </div>
-        </div>
+            <div class="form-floating mt-3">
+                <input type="password" class="form-control" id="floatingPassword2" placeholder="Password" name="r_password" #r_password="ngModel" [(ngModel)]="usuario.r_password" required />
+                <label for="floatingPassword">Repetir contraseña</label>
+                <div *ngIf="r_password.touched && !r_password.valid" class="alert alert-danger mt-3 mb-3" role="alert">
+                    Repita la contraseña
+                </div>
+            </div>
 
-        <div class="checkbox mb-3">
-          <label>
+            <div class="checkbox mb-3">
+                <label>
             <a [routerLink]="['/login']">¿Ya tienes cuenta? Inicia sesión</a>
           </label>
-        </div>
-        <button
-          [routerLink]="['/login']"
-          class="w-100 btn btn-lg btn-primary"
-          type="submit"
-          [disabled]="!formRegistro.form.valid"
-        >
+            </div>
+            <button [routerLink]="['/login']" class="w-100 btn btn-lg btn-primary" type="submit" [disabled]="!formRegistro.form.valid">
           Registrarse
         </button>
-        <p class="mt-5 mb-3 text-muted">&copy; NRP–2021</p>
-      </form>
+            <p class="mt-5 mb-3 text-muted">&copy; NRP–2021</p>
+        </form>
     </main>
-  </body>
+</body>
+
 </html>
