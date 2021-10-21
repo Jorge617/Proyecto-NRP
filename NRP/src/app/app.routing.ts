@@ -9,6 +9,7 @@ import { InicioComponent } from "./components/inicio/inicio.component";
 const appRoutes : Routes = [
     {path : '', component : LoginComponent},
     {path : 'registro', component : RegistroComponent},
+    {path : 'login', component : LoginComponent},
     {path : 'inicio', component : InicioComponent},
     {path : '**', component : LoginComponent}
 ];
