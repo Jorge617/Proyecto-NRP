@@ -32,9 +32,10 @@
     <!-- Custom styles for this template -->
     <link href="registro.component.css" rel="stylesheet" />
   </head>
+
   <body class="text-center">
     <main class="form-signin">
-      <form (ngSubmit)="registro()">
+      <form #formRegistro="ngForm" (ngSubmit)="registro(formRegistro)">
         <img
           class="mb-4 border-radius rounded-circle"
           src="./assets/logo.jpg"
@@ -44,14 +45,25 @@
         />
         <h1 class="h3 mb-3 fw-normal">Registrarse</h1>
 
-        <div class="form-floating">
+        <div class="form-floating mt-3">
           <input
-            type="name"
+            type="text"
             class="form-control"
             id="floatingInput"
             placeholder="jm890"
+            name="nombre"
+            #nombre="ngModel"
+            [(ngModel)]="usuario.nombre"
+            required
           />
           <label for="floatingInput">Nombre usuario</label>
+          <div
+            *ngIf="nombre.touched && !nombre.valid"
+            class="alert alert-danger mt-3"
+            role="alert"
+          >
+            El nombre de usuario es obligatorio
+          </div>
         </div>
         <div class="form-floating mt-3">
           <input
@@ -59,8 +71,19 @@
             class="form-control"
             id="floatingPassword"
             placeholder="Password"
+            name="password"
+            #password="ngModel"
+            [(ngModel)]="usuario.password"
+            required
           />
           <label for="floatingPassword">Contraseña</label>
+          <div
+            *ngIf="password.touched && !password.valid"
+            class="alert alert-danger mt-3"
+            role="alert"
+          >
+            La contraseña es obligatoria
+          </div>
         </div>
 
         <div class="form-floating mt-3">
@@ -69,8 +92,19 @@
             class="form-control"
             id="floatingPassword2"
             placeholder="Password"
+            name="r_password"
+            #r_password="ngModel"
+            [(ngModel)]="usuario.r_password"
+            required
           />
           <label for="floatingPassword">Repetir contraseña</label>
+          <div
+            *ngIf="r_password.touched && !r_password.valid"
+            class="alert alert-danger mt-3 mb-3"
+            role="alert"
+          >
+            Repita la contraseña
+          </div>
         </div>
 
         <div class="checkbox mb-3">
@@ -78,7 +112,12 @@
             <a [routerLink]="['/login']">¿Ya tienes cuenta? Inicia sesión</a>
           </label>
         </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">
+        <button
+          [routerLink]="['/login']"
+          class="w-100 btn btn-lg btn-primary"
+          type="submit"
+          [disabled]="!formRegistro.form.valid"
+        >
           Registrarse
         </button>
         <p class="mt-5 mb-3 text-muted">&copy; NRP–2021</p>

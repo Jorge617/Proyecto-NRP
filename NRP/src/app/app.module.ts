@@ -7,6 +7,7 @@ import { routing,appRoutingProviders } from './app.routing';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
+import { InicioComponent } from './components/inicio/inicio.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { RegistroComponent } from './components/registro/registro.component';
     AppComponent,
     LoginComponent,
     RegistroComponent,
+    InicioComponent,
   ],
   imports: [
     BrowserModule,
