@@ -10,7 +10,34 @@
 </head>
 
 <body>
+    <!-- menu de navegación-->
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark border-3 border-bottom border-primary">
+            <div class="container-fluid">
+                <a href="#" class="navbar-brand">Inicio</a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#MenuNavegacion">
+                    <span class="navbar-toggler-icon"></span>
+            </button>
+                <div id="MenuNavegación" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ms-3">
+                        <li id="itemsMenu" class="nav-item"><a class="nav-link" href="#">Item 1</a></li>
+                        <li id="itemsMenu" class="nav-item"><a class="nav-link" href="#">Item 2</a></li>
+                        <li id="itemsMenu" class="nav-item"><a class="nav-link" href="#">Item 3</a></li>
+                        <li id="itemsMenu" class="nav-item"><a class="nav-link" href="#">Item 4</a></li>
+                        <a id="itemsMenu" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Configuración
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li> <a id="itemsMenu" class="dropdown-item" href="#"> Cambiar contraseña</a></li>
+                            <li> <a id="itemsMenu" class="dropdown-item" href="#"> Cerrar sesión</a></li>
+                        </ul>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
 
+    <!--
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Inicio</a>
@@ -40,7 +67,8 @@
             </div>
         </div>
     </nav>
-
+    
+-->
     <div class="container-fluid mt-3 ">
         <h3>Navbar With Dropdown</h3>
         <p>This example adds a dropdown menu in the navbar.</p>

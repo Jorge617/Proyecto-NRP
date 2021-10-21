@@ -5,16 +5,14 @@ import { Global } from './global';
 import { Usuario } from '../models/usuario';
 
 @Injectable()
-export class UsuarioService{
+export class UsuarioService {
 	public url:string;
 
-	constructor(
-		private _http: HttpClient
-	){
+	constructor(private _http: HttpClient){
 		this.url = Global.url;
 	}
 
-    registro(usuario:Usuario): Observable<any>{
+    registro(usuario:Usuario): Observable<any> {
         let params = JSON.stringify(usuario);
 		let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
