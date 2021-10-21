@@ -19,15 +19,15 @@ export class RegistroComponent implements OnInit {
 
   constructor(private _usuarioService:UsuarioService) {
     this.usuario = new Usuario("","","");
-    this.r_password = "";
    }
        
   ngOnInit(): void {
   }
 
-  registro(){
+  registro(form:any){
     
     this._usuarioService.registro(this.usuario).subscribe();
+    form.reset();
   }
  
 
