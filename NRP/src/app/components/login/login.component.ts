@@ -2,6 +2,7 @@ import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,26 +15,36 @@ export class LoginComponent implements OnInit {
 
   public usuario:Usuario;
   public logueado:boolean;
+  public mensaje : string;
 
-  constructor(private _usuarioService:UsuarioService) { 
+  constructor(private _usuarioService:UsuarioService,public router: Router) { 
     this.usuario =  new Usuario("","","");
+    this.mensaje = "";
     this.logueado = false;
   }
 
   ngOnInit(): void {
   }
 
-/*login(){
+login(form:any){
   this._usuarioService.login(this.usuario).subscribe(
-
+    
     data => {
-      console.log(data);
-      console.log("Aquí");
+      if(data.resultado == true){
+      this.logueado = true;
+      this._usuarioService.setToken(data.token);
+      form.reset();
+      this.router.navigateByUrl('/inicio');
+      }else{
+        this.logueado = false;
+        this.mensaje = data.error;
+        this.router.navigateByUrl('/login');
+      }
     },
     error => {
       console.log(<any>error);
     }
   )
-}*/
+}
 
 }

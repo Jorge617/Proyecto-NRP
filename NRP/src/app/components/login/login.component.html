@@ -35,7 +35,7 @@
 
   <body class="text-center">
     <main class="form-signin">
-      <form>
+      <form #formLogin="ngForm" (ngSubmit)="login(formLogin)">
         <img
           class="mb-4 border-radius rounded-circle"
           src="./assets/logo.jpg"
@@ -58,6 +58,13 @@
           />
           <label for="floatingInput">Nombre usuario</label>
         </div>
+        <div
+          *ngIf="logueado == false && mensaje == 'usuario'"
+          class="alert alert-danger mt-3"
+          role="alert"
+        >
+          Nombre de usuario incorrecto
+        </div>
         <div class="form-floating mt-3">
           <input
             type="password"
@@ -69,6 +76,13 @@
             placeholder="Password"
           />
           <label for="floatingPassword">Contraseña</label>
+        </div>
+        <div
+          *ngIf="logueado == false && mensaje == 'password'"
+          class="alert alert-danger mt-3"
+          role="alert"
+        >
+          Contraseña incorrecta
         </div>
 
         <div class="checkbox mb-3">

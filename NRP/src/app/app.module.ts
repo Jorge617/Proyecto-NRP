@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
+
 import { routing,appRoutingProviders } from './app.routing';
 
 import { AppComponent } from './app.component';
@@ -27,7 +29,7 @@ import { DescripcionTareaClienteComponent } from './components/descripcion-tarea
     HttpClientModule,
     FormsModule
   ],
-  providers: [appRoutingProviders],
+  providers: [appRoutingProviders,CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

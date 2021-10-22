@@ -24,9 +24,16 @@ export class RegistroComponent implements OnInit {
 
   registro(form:any){
     
-    this._usuarioService.registro(this.usuario).subscribe();
-    form.reset();
-    this.router.navigateByUrl('/login');
+    this._usuarioService.registro(this.usuario).subscribe( 
+      data => {
+      this._usuarioService.setToken(data.token);
+      form.reset();
+      this.router.navigateByUrl('/inicio');
+    },
+    error => {
+      console.log(<any>error);
+    });
+   
   }
  
 
