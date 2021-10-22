@@ -12,6 +12,8 @@ app.use(express.json());
 
 app.use('/requisitos', require('./routes/Requisitos'));
 app.use('/usuarios', require('./routes/Usuarios'));
+app.use('/tokens', require('./routes/Tokens'));
+
 
 
 module.exports = app;
