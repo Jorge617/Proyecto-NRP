@@ -29,9 +29,10 @@ export class UsuarioService {
 		return this._http.get(this.url+'tokens/'+id, {headers: headers});
 	}
 
-	updateToken(id:any){
+	updateToken(id:any,usuario:Usuario){
+		let params = JSON.stringify(usuario);
 		let headers = new HttpHeaders().set('Content-Type', 'application/json');
-		return this._http.put(this.url+'tokens/'+id, {headers: headers});
+		return this._http.put(this.url+'tokens/'+ id, params ,{headers: headers});
 	}
 
 
@@ -76,6 +77,7 @@ export class UsuarioService {
 	getUserLogged() {
 		const token = this.getTokenCookies();
 		// Aquí iría el endpoint para devolver el usuario para un token
+		
 
 	  }
 
