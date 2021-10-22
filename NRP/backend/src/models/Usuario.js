@@ -10,6 +10,7 @@ const usuarioSchema = new Schema({
         type : String,
         required : true
     },
+    token : String
 });
 
 

@@ -4,8 +4,8 @@ const usuario = require('../models/Usuario.js');
 
 
 usuarioController.registro = async (req, res) => {
-    const { nombre, password } = req.body;
-    const nuevoUsuario = new usuario({ nombre, password });
+    const { nombre, password, token } = req.body;
+    const nuevoUsuario = new usuario({ nombre, password, token });
     console.log(nuevoUsuario)
     await nuevoUsuario.save();
     res.json({ message: `usuario dado de alta ${nombre} ` });
@@ -24,6 +24,27 @@ usuarioController.login = async (req, res) => {
         res.json({ resultado: false,  error: "usuario" });
     }
 
+}
+
+
+usuarioController.getUsuarios = async (req, res)=> {
+    const usuarios = await usuario.find();
+    res.json(usuarios);
+}
+
+
+usuarioController.getToken =  async (req, res) => {
+    const tokenUsuario = await usuario.findById(req.params.id);
+    res.json({token:tokenUsuario.token});
+}
+
+
+usuarioController.updateToken = async (req, res) => {
+    const {token} = req.body;
+    await usuario.findByIdAndUpdate(req.params.id, {
+       token
+    });
+    res.json('Usuario Updated');
 }
 
 module.exports = usuarioController;
