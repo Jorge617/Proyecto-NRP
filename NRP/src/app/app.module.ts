@@ -9,6 +9,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { RequisitoComponent } from './components/requisito/requisito.component';
+import { DescripcionTareaClienteComponent } from './components/descripcion-tarea-cliente/descripcion-tarea-cliente.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { RequisitoComponent } from './components/requisito/requisito.component';
     RegistroComponent,
     InicioComponent,
     RequisitoComponent,
+    DescripcionTareaClienteComponent,
   ],
   imports: [
     BrowserModule,
