@@ -16,7 +16,7 @@ usuarioController.login = async (req, res) => {
     usuarioLogeado = await usuario.findOne({ nombre });
     if (usuarioLogeado != null) {
         if (usuarioLogeado.password == password) {
-            res.json({ resultado: true, id:usuarioLogeado._id });
+            res.json({ resultado: true, id: usuarioLogeado._id });
         } else if (usuarioLogeado.password != password) {
             res.json({ resultado: false,  error: "password" });
         }
@@ -56,10 +56,10 @@ usuarioController.updateToken = async (req, res) => {
 
 
 
-usuarioController.getUsuario = async (req, res)=> {
+/*usuarioController.getUsuario = async (req, res)=> {
     const usuarios = await usuario.find();
     res.json(usuarios);
-}
+}*/
 usuarioController.getUsuario = async (req, res)=> {
     const getusuario = await usuario.findById(req.params.id);
     res.json(getusuario);
