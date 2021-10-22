@@ -15,7 +15,7 @@
         <div class="bg-light">
             <nav class="navbar navbar-expand-md navbar-dark bg-primary border-1 rounder border-dark">
                 <div class="container-fluid">
-                    <a routerLink]="['/inicio']" class="navbar-brand">Inicio</a>
+                    <a [routerLink]="['/inicio']" class="navbar-brand">Inicio</a>
                     <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#MenuNavegacion">
                             <span class="navbar-toggler-icon"></span>
                     </button>
@@ -29,8 +29,8 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"> Opciones </a>
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end">
-                                <li><a class="dropdown-item mb-3" routerLink]="['/registro']">Modificar perfil</a></li>
-                                <li><a class="dropdown-item mb-3" routerLink]="['/login']">Cerrar sesión</a></li>
+                                <li><a class="dropdown-item mb-3" [routerLink]="['/registro']">Modificar perfil</a></li>
+                                <li><a class="dropdown-item mb-3" [routerLink]="['/login']">Cerrar sesión</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -41,7 +41,7 @@
 
     <!-- Fin de la barra de navegación-->
 
-    <h3 style="margin-top: 1rem; margin-left: 1rem;">Tareas del proyecto</h3>
+    <h3 style="margin-top: 1rem; margin-left: 1rem;">Tareas del proyecto - "nombre"</h3>
 
 
 </body>
