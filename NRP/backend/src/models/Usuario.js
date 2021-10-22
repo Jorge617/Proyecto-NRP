@@ -11,8 +11,8 @@ const usuarioSchema = new Schema({
         required : true
     },
     token : String,
-    importancia : Number
-
+    importancia : Number,
+    esCliente : Boolean
 });
 
 
