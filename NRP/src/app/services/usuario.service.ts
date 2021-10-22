@@ -14,6 +14,27 @@ export class UsuarioService {
 		this.url = Global.url;
 	}
 
+	getUsuario(id:any){
+		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+		return this._http.get(this.url+'usuarios/'+id, {headers: headers});
+	}
+
+	getUsuarios(){
+		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+		return this._http.get(this.url+'usuarios', {headers: headers});
+	}
+
+	getToken(id:any){
+		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+		return this._http.get(this.url+'tokens/'+id, {headers: headers});
+	}
+
+	updateToken(id:any){
+		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+		return this._http.put(this.url+'tokens/'+id, {headers: headers});
+	}
+
+
     registro(usuario:Usuario): Observable<any> {
         let params = JSON.stringify(usuario);
 		let headers = new HttpHeaders().set('Content-Type', 'application/json');
@@ -27,16 +48,35 @@ export class UsuarioService {
 		return this._http.get(`${this.url}usuarios/login?nombre=${usuario.nombre}&password=${usuario.password}`,{headers:headers});
 	}
 
-	setToken(token: string) {
-		this.cookies.set("token", "2");
+	updateUsuario(id:any){
+		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+		return this._http.put(this.url+'usuarios'+id, {headers: headers});
+	}
+
+	borrarUsuario(id:any){
+		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+		return this._http.delete(this.url+'usuarios'+id, {headers: headers});
+	}
+
+	randomToken() {
+		return Math.random().toString(36).substr(2); // Eliminar `0.`
+	}
+	
+	token() {
+	  return this.randomToken() + this.randomToken(); // Para hacer el token más largo
+	}
+
+	setTokenCookies(token: string) {
+		this.cookies.set("token", token);
 	  }
-	  getToken() {
+	getTokenCookies() {
 		return this.cookies.get("token");
 	  }
 
-	  getUserLogged() {
-		const token = this.getToken();
+	getUserLogged() {
+		const token = this.getTokenCookies();
 		// Aquí iría el endpoint para devolver el usuario para un token
+
 	  }
 
 	

@@ -16,7 +16,7 @@ usuarioController.login = async (req, res) => {
     usuarioLogeado = await usuario.findOne({ nombre });
     if (usuarioLogeado != null) {
         if (usuarioLogeado.password == password) {
-            res.json({ resultado: true });
+            res.json({ resultado: true, id:usuarioLogeado._id });
         } else if (usuarioLogeado.password != password) {
             res.json({ resultado: false,  error: "password" });
         }
