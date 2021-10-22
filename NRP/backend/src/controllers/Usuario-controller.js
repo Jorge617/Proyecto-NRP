@@ -12,7 +12,7 @@ usuarioController.registro = async (req, res) => {
 }
 
 usuarioController.login = async (req, res) => {
-    const { nombre, password } = req.body;
+    const { nombre, password } = req.query;
     usuarioLogeado = await usuario.findOne({ nombre });
     if (usuarioLogeado != null) {
         if (usuarioLogeado.password == password) {
