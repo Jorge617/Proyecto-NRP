@@ -38,7 +38,7 @@ login(form:any){
       }else{
         this.logueado = false;
         this.mensaje = data.error;
-        this.router.navigateByUrl('/login');
+        this.router.navigateByUrl('/');
       }
     },
     error => {
