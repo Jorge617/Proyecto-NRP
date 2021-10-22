@@ -35,7 +35,7 @@
 
   <body class="text-center">
     <main class="form-signin">
-      <form #formLogin="ngForm" (ngSubmit)="login()">
+      <form>
         <img
           class="mb-4 border-radius rounded-circle"
           src="./assets/logo.jpg"
@@ -76,12 +76,7 @@
             <a [routerLink]="['/registro']">¿No tienes cuenta? Registrate</a>
           </label>
         </div>
-        <button
-          (click)="login()"
-          [routerLink]="['/inicio']"
-          class="w-100 btn btn-lg btn-primary"
-          type="submit"
-        >
+        <button class="w-100 btn btn-lg btn-primary" type="submit">
           Entrar
         </button>
         <p class="mt-5 mb-3 text-muted">&copy; NRP–2021</p>

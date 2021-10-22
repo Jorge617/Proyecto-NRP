@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-login(){
+/*login(){
   this._usuarioService.login(this.usuario).subscribe(
 
     data => {
@@ -34,6 +34,6 @@ login(){
       console.log(<any>error);
     }
   )
-}
+}*/
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario';
+import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 import * as $ from 'jquery';
@@ -14,7 +15,7 @@ export class RegistroComponent implements OnInit {
 
   public usuario:Usuario;
 
-  constructor(private _usuarioService:UsuarioService) {
+  constructor(private _usuarioService:UsuarioService,public router: Router) {
     this.usuario = new Usuario("","","");
    }
        
@@ -25,6 +26,7 @@ export class RegistroComponent implements OnInit {
     
     this._usuarioService.registro(this.usuario).subscribe();
     form.reset();
+    this.router.navigateByUrl('/login');
   }
  
 
