@@ -7,8 +7,8 @@ const requisitoSchema = new Schema({
         unique : true
     },
     prioridad: [{
-        valor: Number,
-        cliente: { type: Schema.ObjectId, ref: "Cliente" }      
+        usuario: { type: Schema.ObjectId, ref: "Usuario" },
+        valor: Number
     }],
     coste: Number 
 });

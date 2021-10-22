@@ -47,4 +47,33 @@ usuarioController.updateToken = async (req, res) => {
     res.json('Usuario Updated');
 }
 
+
+
+
+usuarioController.getUsuario = async (req, res)=> {
+    const usuarios = await usuario.find();
+    res.json(usuarios);
+}
+usuarioController.getUsuario = async (req, res)=> {
+    const getusuario = await usuario.findById(req.params.id);
+    res.json(getusuario);
+}
+
+usuarioController.borrarUsuario = async (req, res) => {
+    const { id } = req.params;
+    await usuario.findByIdAndDelete(id);
+    res.json('usuario borrado');
+}
+
+usuarioController.updateUsuario  = async (req, res) => {
+    const {nombre, importancia} = req.body;
+    await usuario.findByIdAndUpdate(req.params.id, {
+        nombre, importancia
+    });
+    res.json('usuario Updated');
+}
+
+
+
+
 module.exports = usuarioController;
