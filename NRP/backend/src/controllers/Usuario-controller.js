@@ -72,9 +72,9 @@ usuarioController.borrarUsuario = async (req, res) => {
 }
 
 usuarioController.updateUsuario  = async (req, res) => {
-    const {nombre, importancia} = req.body;
+    const {nombre, password, token, importancia, esCliente} = req.body;
     await usuario.findByIdAndUpdate(req.params.id, {
-        nombre, importancia
+        nombre,  password, token, importancia, esCliente
     });
     res.json('usuario Updated');
 }
