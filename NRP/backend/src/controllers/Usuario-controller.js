@@ -5,7 +5,9 @@ const usuario = require('../models/Usuario.js');
 
 usuarioController.registro = async (req, res) => {
     const { nombre, password, token } = req.body;
-    const nuevoUsuario = new usuario({ nombre, password, token });
+    const importancia = 0;
+    const esCliente = false;
+    const nuevoUsuario = new usuario({ nombre, password, token, importancia, esCliente });
     console.log(nuevoUsuario)
     await nuevoUsuario.save();
     res.json({ message: `usuario dado de alta ${nombre} ` });
