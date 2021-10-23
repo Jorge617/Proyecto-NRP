@@ -54,12 +54,6 @@ usuarioController.updateToken = async (req, res) => {
 }
 
 
-
-
-/*usuarioController.getUsuario = async (req, res)=> {
-    const usuarios = await usuario.find();
-    res.json(usuarios);
-}*/
 usuarioController.getUsuario = async (req, res)=> {
     const getusuario = await usuario.findById(req.params.id);
     res.json(getusuario);
