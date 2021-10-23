@@ -5,6 +5,7 @@ import { Global } from './global';
 import { Usuario } from '../models/usuario';
 import { param } from 'jquery';
 import { CookieService } from 'ngx-cookie-service';
+import { UsuarioMDB } from '../models/usuarioMDB';
 
 @Injectable()
 export class UsuarioService {
@@ -14,17 +15,17 @@ export class UsuarioService {
 		this.url = Global.url;
 	}
 
-	getUsuario(id:any){
+	getUsuario(id:any) : Observable<any>{
 		let headers = new HttpHeaders().set('Content-Type', 'application/json');
 		return this._http.get(this.url+'usuarios/'+id, {headers: headers});
 	}
 
-	getUsuarios(){
+	getUsuarios() : Observable<any>{
 		let headers = new HttpHeaders().set('Content-Type', 'application/json');
 		return this._http.get(this.url+'usuarios', {headers: headers});
 	}
 
-	getUsuarioByToken(token:string){
+	getUsuarioByToken(token:string) : Observable<any>{
 		let headers = new HttpHeaders().set('Content-Type', 'application/json');
 		return this._http.get(this.url+'token/'+ token,{headers: headers});
 	}
@@ -43,17 +44,18 @@ export class UsuarioService {
 		return this._http.get(`${this.url}usuarios/login?nombre=${usuario.nombre}&password=${usuario.password}`,{headers:headers});
 	}
 
-	updateUsuario(id:any){
+	updateUsuario(usuario:Usuario): Observable<any> {
+		let params = JSON.stringify(usuario);
 		let headers = new HttpHeaders().set('Content-Type', 'application/json');
-		return this._http.put(this.url+'usuarios'+id, {headers: headers});
+		return this._http.put("http://localhost:4000/usuarios/61746d811d216571586557f3", params, {headers: headers});
 	}
 
-	updateToken(id:any){
+	updateToken(id:any) : Observable<any>{
 		let headers = new HttpHeaders().set('Content-Type', 'application/json');
 		return this._http.put(this.url+'token'+id, {headers: headers});
 	}
 
-	borrarUsuario(id:any){
+	borrarUsuario(id:any) : Observable<any>{
 		let headers = new HttpHeaders().set('Content-Type', 'application/json');
 		return this._http.delete(this.url+'usuarios'+id, {headers: headers});
 	}

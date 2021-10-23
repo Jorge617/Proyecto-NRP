@@ -1,8 +1,9 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const path = require('path')
-    //SETTNGS
+const path = require('path');
+
+//SETTNGS
 app.set('port', process.env.PORT || 4000);
 
 //MIDDLEWARES

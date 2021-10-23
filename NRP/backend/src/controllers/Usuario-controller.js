@@ -18,7 +18,7 @@ usuarioController.login = async (req, res) => {
     usuarioLogeado = await usuario.findOne({ nombre });
     if (usuarioLogeado != null) {
         if (usuarioLogeado.password == password) {
-            res.json({ resultado: true, id: usuarioLogeado._id });
+            res.json({ resultado: true, usuario: usuarioLogeado });
         } else if (usuarioLogeado.password != password) {
             res.json({ resultado: false,  error: "password" });
         }
@@ -72,6 +72,7 @@ usuarioController.updateUsuario  = async (req, res) => {
     await usuario.findByIdAndUpdate(req.params.id, {
         nombre,  password, token, importancia, esCliente
     });
+    console.log("Nombre backend: " + nombre);
     res.json('usuario Updated');
 }
 
