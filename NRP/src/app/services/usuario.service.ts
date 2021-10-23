@@ -27,7 +27,7 @@ export class UsuarioService {
 
 	getUsuarioByToken(token:string) : Observable<any>{
 		let headers = new HttpHeaders().set('Content-Type', 'application/json');
-		return this._http.get(this.url+'token/'+ token,{headers: headers});
+		return this._http.get(this.url+'usuarios/token/'+ token,{headers: headers});
 	}
 
 
@@ -47,17 +47,17 @@ export class UsuarioService {
 	updateUsuario(usuario:Usuario): Observable<any> {
 		let params = JSON.stringify(usuario);
 		let headers = new HttpHeaders().set('Content-Type', 'application/json');
-		return this._http.put("http://localhost:4000/usuarios/61746d811d216571586557f3", params, {headers: headers});
+		return this._http.put(this.url+'usuarios/'+usuario.id, params, {headers: headers});
 	}
 
 	updateToken(id:any) : Observable<any>{
 		let headers = new HttpHeaders().set('Content-Type', 'application/json');
-		return this._http.put(this.url+'token'+id, {headers: headers});
+		return this._http.put(this.url+'token/'+id, {headers: headers});
 	}
 
 	borrarUsuario(id:any) : Observable<any>{
 		let headers = new HttpHeaders().set('Content-Type', 'application/json');
-		return this._http.delete(this.url+'usuarios'+id, {headers: headers});
+		return this._http.delete(this.url+'usuarios/'+id, {headers: headers});
 	}
 
 	randomToken() {
@@ -75,13 +75,24 @@ export class UsuarioService {
 		return this.cookies.get("token");
 	  }
 
-	getUserLogged() {
+	/*getUserLogged(usuario:Usuario) {
 		const token = this.getTokenCookies();
 		// Aquí iría el endpoint para devolver el usuario para un token
-		return this.getUsuarioByToken(token);
-		
-
-	  }
+		this.getUsuarioByToken(token).subscribe(
+			data => {
+			 usuario.id = data.usuarioByToken._id;
+			 usuario.nombre =data.usuarioByToken.nombre
+			 usuario.password =data.usuarioByToken.password;
+			 usuario.token =data.usuarioByToken.token;
+			 usuario.importancia =data.usuarioByToken.importancia;
+			 usuario.esCliente = data.usuarioByToken.esCliente;
+			 console.log(usuario);
+			  },
+			  error => {
+				console.log(<any>error);
+			  }
+		)
+	  }*/
 
 	
 

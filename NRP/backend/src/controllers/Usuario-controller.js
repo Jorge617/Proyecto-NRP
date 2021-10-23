@@ -36,8 +36,7 @@ usuarioController.getUsuarios = async (req, res)=> {
 
 usuarioController.getUsuarioByToken =  async (req, res) => {
     const token = req.params;
-    const usuarioByToken = await usuario.findOne(token)
-    console.log("eragr")
+    const usuarioByToken = await usuario.findOne(token);
     res.json({usuarioByToken});
 }
 
