@@ -23,9 +23,9 @@ export class RegistroComponent implements OnInit {
   }
 
   registro(form:any){
-    this.usuario.token = this._usuarioService.token();
-    this._usuarioService.setTokenCookies(this.usuario.token);
-
+    let token = this._usuarioService.token();
+    this._usuarioService.setTokenCookies(token);
+    this.usuario.token = token;
     this._usuarioService.registro(this.usuario).subscribe( 
       data => {
       form.reset();

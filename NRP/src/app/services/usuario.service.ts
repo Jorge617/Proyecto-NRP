@@ -24,15 +24,9 @@ export class UsuarioService {
 		return this._http.get(this.url+'usuarios', {headers: headers});
 	}
 
-	getToken(id:any){
+	getUsuarioByToken(token:string){
 		let headers = new HttpHeaders().set('Content-Type', 'application/json');
-		return this._http.get(this.url+'tokens/'+id, {headers: headers});
-	}
-
-	updateToken(id:any,usuario:Usuario){
-		let params = JSON.stringify(usuario);
-		let headers = new HttpHeaders().set('Content-Type', 'application/json');
-		return this._http.put(this.url+'tokens/'+ id, params ,{headers: headers});
+		return this._http.get(this.url+'token/'+ token,{headers: headers});
 	}
 
 
@@ -52,6 +46,11 @@ export class UsuarioService {
 	updateUsuario(id:any){
 		let headers = new HttpHeaders().set('Content-Type', 'application/json');
 		return this._http.put(this.url+'usuarios'+id, {headers: headers});
+	}
+
+	updateToken(id:any){
+		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+		return this._http.put(this.url+'token'+id, {headers: headers});
 	}
 
 	borrarUsuario(id:any){
@@ -77,6 +76,7 @@ export class UsuarioService {
 	getUserLogged() {
 		const token = this.getTokenCookies();
 		// Aquí iría el endpoint para devolver el usuario para un token
+		return this.getUsuarioByToken(token);
 		
 
 	  }
