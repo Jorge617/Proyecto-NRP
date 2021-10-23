@@ -20,21 +20,11 @@ export class InicioComponent implements OnInit {
   
   ngOnInit(): void {
    this.getUserLogged();
-   console.log(this.getUserLogged());
   }
 
   getUserLogged(){
-    this._usuarioService.getUsuarioByToken(this._usuarioService.getTokenCookies()).subscribe(data =>{
-      this.usuario.id = data.usuarioByToken._id;
-      this.usuario.nombre =data.usuarioByToken.nombre
-      this.usuario.password =data.usuarioByToken.password;
-      this.usuario.token =data.usuarioByToken.token;
-      this.usuario.importancia =data.usuarioByToken.importancia;
-      this.usuario.esCliente = data.usuarioByToken.esCliente;
-    }, error => {
-      console.log(<any>error);
-      })
-     
+    this._usuarioService.getUserLogged(this.usuario);
+   
   }
 
 }

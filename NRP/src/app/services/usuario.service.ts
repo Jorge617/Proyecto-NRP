@@ -75,24 +75,23 @@ export class UsuarioService {
 		return this.cookies.get("token");
 	  }
 
-	/*getUserLogged(usuario:Usuario) {
+	getUserLogged(usuario:Usuario) {
 		const token = this.getTokenCookies();
 		// Aquí iría el endpoint para devolver el usuario para un token
 		this.getUsuarioByToken(token).subscribe(
-			data => {
-			 usuario.id = data.usuarioByToken._id;
-			 usuario.nombre =data.usuarioByToken.nombre
-			 usuario.password =data.usuarioByToken.password;
-			 usuario.token =data.usuarioByToken.token;
-			 usuario.importancia =data.usuarioByToken.importancia;
-			 usuario.esCliente = data.usuarioByToken.esCliente;
-			 console.log(usuario);
+			response => {
+			 usuario.id = response.usuarioByToken._id;
+			 usuario.nombre =response.usuarioByToken.nombre
+			 usuario.password =response.usuarioByToken.password;
+			 usuario.token =response.usuarioByToken.token;
+			 usuario.importancia =response.usuarioByToken.importancia;
+			 usuario.esCliente = response.usuarioByToken.esCliente;
 			  },
 			  error => {
 				console.log(<any>error);
 			  }
 		)
-	  }*/
+	  }
 
 	
 
