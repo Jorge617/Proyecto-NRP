@@ -75,6 +75,10 @@ export class UsuarioService {
 		return this.cookies.get("token");
 	  }
 
+	  deleteTokenCookies(){
+		  this.cookies.delete("token");
+	  }
+
 	getUserLogged(usuario:Usuario) {
 		const token = this.getTokenCookies();
 		// Aquí iría el endpoint para devolver el usuario para un token
