@@ -12,8 +12,10 @@ import { RegistroComponent } from './components/registro/registro.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { RequisitoComponent } from './components/requisito/requisito.component';
 import { DescripcionTareaClienteComponent } from './components/descripcion-tarea-cliente/descripcion-tarea-cliente.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,12 +24,17 @@ import { DescripcionTareaClienteComponent } from './components/descripcion-tarea
     InicioComponent,
     RequisitoComponent,
     DescripcionTareaClienteComponent,
+    
   ],
   imports: [
     BrowserModule,
     routing,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatMomentDateModule
+    
   ],
   providers: [appRoutingProviders,CookieService],
   bootstrap: [AppComponent]

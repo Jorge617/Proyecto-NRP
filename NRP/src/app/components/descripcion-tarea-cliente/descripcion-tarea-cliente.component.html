@@ -10,47 +10,84 @@
 </head>
 
 <body>
-    <div class="container-fluid">
-        <!-- BARRA NAVEGACIÓN -->
-        <div class="bg-light">
-            <nav class="navbar navbar-expand-md navbar-dark bg-primary border-1 rounder border-dark">
+    <div class="container">
+        <!--Inicio del menu-->
+        <header class="row-12">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
-                    <a [routerLink]="['/inicio']" class="navbar-brand">Inicio</a>
-                    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#MenuNavegacion">
-                            <span class="navbar-toggler-icon"></span>
-                    </button>
-                </div>
+                    <a class="navbar-brand" [routerLink]="['/inicio']">
+                        <img src="./assets/logoB.png" alt="logo" width="200" height="100" /></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
 
-                <div id="MenuNavegacion" class="collapse navbar-collapse">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link">Atras</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"> Opciones </a>
-                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end">
-                                <li><a class="dropdown-item mb-3" [routerLink]="['/registro']">Modificar perfil</a></li>
-                                <li><a class="dropdown-item mb-3" [routerLink]="['/login']">Cerrar sesión</a></li>
-                            </ul>
-                        </li>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="col navbar-nav mb-2 mb-lg-0 justify-content-lg-end">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-black" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Bienvenido, {{ usuario.nombre }}
+                    </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="#">Configuración</a></li>
+                                    <li>
+                                        <a class="dropdown-item" (click)="cerrarSesion()">Cerrar sesión</a
+                        >
+                      </li>
                     </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </header>
+        
+        <!-- Titulo de la vista-->
+        <div class = "row-12">
+            <div class = "col-5 justify-content-lg-end">
+                <h2>Tarea "nombre"</h2>
+            </div>
+            
+        </div>
+       
+
+       <!-- Contenido de la vista-->
+        
+        <div id="descripcionRequisito">      
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">DESCRIPCIÓN </label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+        </div>
+
+        <!-- Fecha inicio y ficha fin-->
+        <div id="fechaInicioFin" class="row align-items-center">
+            <div class="col-6 form-check" style="margin-left: 1rem;">
+                <input class="form-check-input" type="checkbox" id="gridCheck">
+                <label class="form-check-label" for="gridCheck">Terminar</label>
+            </div>
+
+            <div class="col"> 
+            <div class="col"> </div>
+            <div class="col">
+                Comienzo:
+                <input matInput [matDatepicker]="datepicker" placeholder="Elige una fecha" style="display: inline; width: 125px;">
+                <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                <mat-datepicker #datepicker></mat-datepicker>  
+                </div>  
+            
+        </div>
+   
+        <div class="col"> 
+            <div class="col"> </div>
+                <div class="col">
+                    Fin:
+                    <input matInput [matDatepicker]="picker" placeholder="Elige una fecha" style="display: inline; width: 125px;">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
                 </div>
-            </nav>
+            </div>
         </div>
     </div>
-
-    <!-- Fin de la barra de navegación-->
-
-    <!-- Titulo de la vista-->
-    <h3 style="margin-left: 1rem; margin-top: 1rem;">Requisito- "nombre"</h3>
-
-    <!-- Contenido de la vista-->
-
-    <div id="descripcionRequisito">
-        <h5 id="titulo"> Descripcion </h5>
-        <span> Aqui va la descripcion del requisito</span>
-    </div>
-
 </body>
 
 </html>
