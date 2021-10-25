@@ -12,6 +12,10 @@ import { RegistroComponent } from './components/registro/registro.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { RequisitoComponent } from './components/requisito/requisito.component';
 import { DescripcionTareaClienteComponent } from './components/descripcion-tarea-cliente/descripcion-tarea-cliente.component';
+import { InicioJefeProyectoComponent } from './components/inicio-jefe-proyecto/inicio-jefe-proyecto.component';
+import { CrearProyectoJefeProyectoComponent } from './components/crear-proyecto-jefe-proyecto/crear-proyecto-jefe-proyecto.component';
+import { ProyectoJefeProyectoComponent } from './components/proyecto-jefe-proyecto/proyecto-jefe-proyecto.component';
+import { CrearTareaJefeProyectoComponent } from './components/crear-tarea-jefe-proyecto/crear-tarea-jefe-proyecto.component';
 
 
 @NgModule({
@@ -22,6 +26,10 @@ import { DescripcionTareaClienteComponent } from './components/descripcion-tarea
     InicioComponent,
     RequisitoComponent,
     DescripcionTareaClienteComponent,
+    InicioJefeProyectoComponent,
+    CrearProyectoJefeProyectoComponent,
+    ProyectoJefeProyectoComponent,
+    CrearTareaJefeProyectoComponent,
   ],
   imports: [
     BrowserModule,
