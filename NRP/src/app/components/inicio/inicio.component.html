@@ -4,76 +4,71 @@
     <title>Pagina cliente principal</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
   </head>
 
   <body>
-    <div class="container-fluid">
-      <!-- BARRA NAVEGACIÓN -->
-      <div class="bg-light">
-        <nav
-          class="
-            navbar navbar-expand-md navbar-dark
-            bg-primary
-            border-1
-            rounder
-            border-dark
-          "
-        >
+    <div class="container">
+      <!--Inicio del menu-->
+      <header class="row-12">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <div class="container-fluid">
-            <a [routerLink]="['/inicio']" class="navbar-brand">Inicio</a>
+            <a class="navbar-brand" [routerLink]="['/inicio']">
+              <img src="./assets/logoB.png" alt="logo" width="200" height="100"
+            /></a>
             <button
-              type="button"
               class="navbar-toggler"
+              type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#MenuNavegacion"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
             >
               <span class="navbar-toggler-icon"></span>
             </button>
-          </div>
 
-          <div id="MenuNavegacion" class="collapse navbar-collapse">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item">
-                <a class="nav-link">Item</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle active"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                >
-                  Opciones
-                </a>
-                <ul
-                  class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end"
-                >
-                  <li><a class="dropdown-item mb-3">Modificar perfil</a></li>
-                  <li><a class="dropdown-item mb-3">Cerrar sesión</a></li>
-                </ul>
-              </li>
-            </ul>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="col navbar-nav mb-2 mb-lg-0 justify-content-lg-end">
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle text-black"
+                    id="navbarDropdown"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Bienvenido, {{ usuario.nombre }}
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#">Configuración</a></li>
+                    <li>
+                      <a class="dropdown-item" (click)="cerrarSesion()"
+                        >Cerrar sesión</a
+                      >
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
           </div>
         </nav>
+      </header>
+
+      <!--Fin del menu-->
+      <!--Inicio del contenido de INICIO-->
+      <div class="row">
+        <div class="col-12">
+          <h1 class="text-black mt-3 ms-4">Proyectos</h1>
+          <ul class="list-group list-group-flush ms-3">
+            <li class="list-group-item">Proyecto 1</li>
+            <li class="list-group-item">Proyecto 2</li>
+            <li class="list-group-item">Proyecto 3</li>
+            <li class="list-group-item">Proyecto 4</li>
+            <li class="list-group-item">Proyecto 5</li>
+          </ul>
+        </div>
       </div>
-    </div>
-
-    <!-- Fin de la barra de navegación-->
-
-    <!-- Titulo de la vista-->
-    <h3 id="titulo" style="margin-left: 1rem; margin-top: 1rem">Proyectos</h3>
-
-    <!-- Contenido de la vista-->
-    <div id="proyectos" style="margin-left: 1rem; margin-top: 1rem">
-      <span> prueba </span>
+      <!--Fin del contenido de INICIO-->
     </div>
   </body>
 </html>
