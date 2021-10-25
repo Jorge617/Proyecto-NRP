@@ -1,8 +1,9 @@
-.itemsMenu {
-    background: blue;
-    color: white;
+#navbarDropdown {
+  font-size: 110%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-#titulo {
-    color: aquamarine;
+.dropdown-item {
+  font-size: 100%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }

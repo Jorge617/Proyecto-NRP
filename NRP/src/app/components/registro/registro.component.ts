@@ -16,17 +16,18 @@ export class RegistroComponent implements OnInit {
   public usuario:Usuario;
 
   constructor(private _usuarioService:UsuarioService,public router: Router) {
-    this.usuario = new Usuario("","","");
+    this.usuario = new Usuario("","","","","",0,false);
    }
        
   ngOnInit(): void {
   }
 
   registro(form:any){
-    
+    let token = this._usuarioService.token();
+    this._usuarioService.setTokenCookies(token);
+    this.usuario.token = token;
     this._usuarioService.registro(this.usuario).subscribe( 
       data => {
-      this._usuarioService.setToken(data.token);
       form.reset();
       this.router.navigateByUrl('/inicio');
     },

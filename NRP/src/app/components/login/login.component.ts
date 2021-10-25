@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   public mensaje : string;
 
   constructor(private _usuarioService:UsuarioService,public router: Router) { 
-    this.usuario =  new Usuario("","","");
+    this.usuario =  new Usuario("","","","","",0,false);
     this.mensaje = "";
     this.logueado = false;
   }
@@ -26,13 +26,22 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
 login(form:any){
   this._usuarioService.login(this.usuario).subscribe(
     
     data => {
+     
       if(data.resultado == true){
       this.logueado = true;
-      this._usuarioService.setToken(data.token);
+      let token = this._usuarioService.token();
+      this._usuarioService.setTokenCookies(token.toString());
+      this.usuario.id = data.usuario._id;
+      this.usuario.token = token;
+      this.usuario.importancia = data.usuario.importancia;
+      this.usuario.esCliente = data.usuario.esCliente;
+
+      this._usuarioService.updateUsuario(this.usuario).subscribe();
       form.reset();
       this.router.navigateByUrl('/inicio');
       }else{

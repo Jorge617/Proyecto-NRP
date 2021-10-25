@@ -10,6 +10,9 @@ const usuarioSchema = new Schema({
         type : String,
         required : true
     },
+    token : String,
+    importancia : Number,
+    esCliente : Boolean
 });
 
 

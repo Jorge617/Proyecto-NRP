@@ -6,7 +6,6 @@ async function main() {
     console.log('Server on port', app.get('port'));
     
     
-    npr.calcularPrioridad();
 }
 
 main();
