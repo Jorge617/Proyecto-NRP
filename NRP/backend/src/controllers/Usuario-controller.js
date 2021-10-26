@@ -8,7 +8,6 @@ usuarioController.registro = async (req, res) => {
     const importancia = 0;
     const esCliente = false;
     const nuevoUsuario = new usuario({ nombre, password, token, importancia, esCliente });
-    console.log(nuevoUsuario)
     await nuevoUsuario.save();
     res.json({ message: `usuario dado de alta ${nombre} ` });
 }
@@ -67,11 +66,12 @@ usuarioController.borrarUsuario = async (req, res) => {
 }
 
 usuarioController.updateUsuario  = async (req, res) => {
+    
     const {nombre, password, token, importancia, esCliente} = req.body;
+
     await usuario.findByIdAndUpdate(req.params.id, {
         nombre,  password, token, importancia, esCliente
     });
-    console.log("Nombre backend: " + nombre);
     res.json('usuario Updated');
 }
 

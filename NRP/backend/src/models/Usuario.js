@@ -12,7 +12,9 @@ const usuarioSchema = new Schema({
     },
     token : String,
     importancia : Number,
-    esCliente : Boolean
+    esCliente : Boolean,
+    jefe : Boolean,
+    
 });
 
 
