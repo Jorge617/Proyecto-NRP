@@ -4,8 +4,8 @@ const usuario = require('../models/Usuario.js');
 
 
 proyectoController.crearProyecto = async (req, res) => {
-    const { nombre, fechaInicio, fechaFin, usuarios, idUsuario} = req.body
-    const nuevoProyecto = new proyecto({ nombre, fechaInicio, fechaFin, usuarios });
+    const { nombre, fechaInicio, fechaFin, usuarios,descripcion, idUsuario} = req.body
+    const nuevoProyecto = new proyecto({ nombre, fechaInicio, fechaFin, usuarios, descripcion });
     await nuevoProyecto.save();
 
     await usuario.updateOne({_id:{$eq:idUsuario}}, {$set : {propietario:nuevoProyecto._id}})
