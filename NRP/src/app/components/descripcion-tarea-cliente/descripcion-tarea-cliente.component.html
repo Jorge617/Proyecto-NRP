@@ -97,11 +97,10 @@
             <h2>Compañeros de la tarea</h2>
             <div class="row">
                 <ul class="list-group list-group-flush ms-3">
-                    <li class="list-group-item">Pepe de los palotes</li>
-                    <li class="list-group-item">Manolo del bombo</li>
-                    <li class="list-group-item">Juanito camela</li>
-                    <li class="list-group-item">Jorge maricon</li>
-                    <li class="list-group-item">Que chulo</li>
+                    <li *ngFor="let usuario of arrUsuarios" class="list-group-item">
+                         {{usuario.nombre}}
+                         {{usuario.token}}
+                    </li>
                   </ul>
             </div>
         </div>

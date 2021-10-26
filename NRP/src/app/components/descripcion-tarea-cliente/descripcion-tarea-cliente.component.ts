@@ -30,10 +30,7 @@ export class DescripcionTareaClienteComponent implements OnInit {
     this._usuarioService.getUsuarios().subscribe(
       
         response =>{
-            this.arrUsuarios = response;
-            console.log(this.arrUsuarios);
-             
-          
+            this.arrUsuarios = response.usuarios; 
         },
         error =>{
           console.log(<any>error);
