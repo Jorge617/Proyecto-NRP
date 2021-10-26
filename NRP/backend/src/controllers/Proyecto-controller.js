@@ -1,12 +1,15 @@
 const proyectoController = {};
-const Proyecto = require('../models/Proyecto.js');
 const proyecto = require('../models/Proyecto.js');
+const usuario = require('../models/Usuario.js');
 
 
 proyectoController.crearProyecto = async (req, res) => {
-    const { nombre, fechaInicio, fechaFin, usuarios } = req.body
-    const nuevoProyecto = new Proyecto({ nombre, fechaInicio, fechaFin, usuarios });
+    const { nombre, fechaInicio, fechaFin, usuarios, idUsuario} = req.body
+    const nuevoProyecto = new proyecto({ nombre, fechaInicio, fechaFin, usuarios });
     await nuevoProyecto.save();
+
+    await usuario.updateOne({_id:{$eq:idUsuario}}, {$set : {propietario:nuevoProyecto._id}})
+
     res.json({ message: `proyecto dado de alta ${nombre} ` });
 
 }
@@ -26,6 +29,14 @@ proyectoController.getProyecto = async (req, res) => {
 
 proyectoController.deleteProyecto = async (req, res) => {
     const { id } = req.params;
+
+    const getProyecto = await proyecto.findById(req.params.id);
+    var usuarios = getProyecto.usuarios
+    for(var i = 0; i < usuarios.length; i++){
+        await usuario.updateOne({_id : {$eq:usuarios[i]}} , {$pull : {proyectos:id} })
+    }
+
+    
     await proyecto.findByIdAndDelete(id);
     res.json('proyecto borrado');
 }
@@ -44,11 +55,15 @@ proyectoController.updateProyecto = async (req, res) => {
 proyectoController.postUsuarios = async (req, res) => {
     var usuarios = [];
     usuarios = req.body.usuarios
+
+    for(var i = 0; i < usuarios.length; i++){
+        await usuario.updateOne({_id : {$eq:usuarios[i]}} , {$push : {proyectos:req.params.id} })
+
+    }
     const proyect = await proyecto.findById(req.params.id);
     var aux = [];
     aux = proyect.usuarios;
     var resultado = aux.concat(usuarios)
-
     try {
         await proyect.updateOne({ "usuarios": resultado });
     } catch (e) {
