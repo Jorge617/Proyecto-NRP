@@ -30,7 +30,7 @@ usuarioController.login = async (req, res) => {
 
 usuarioController.getUsuarios = async (req, res)=> {
     const usuarios = await usuario.find();
-    res.json(usuarios);
+    res.json({usuarios});
 }
 
 usuarioController.getUsuarioByToken =  async (req, res) => {
