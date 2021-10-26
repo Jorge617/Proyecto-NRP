@@ -15,6 +15,7 @@ const appRoutes : Routes = [
     {path : 'inicio', component : InicioComponent},
     {path : 'inicio/:id', component : InicioComponent},
     {path: 'requisito', component: RequisitoComponent},
+    {path: 'crear-proyecto', component: CrearProyectoComponent},
     {path: 'descripcion-tarea-cliente', component: DescripcionTareaClienteComponent},
     {path : '**', component : LoginComponent}
 ];
