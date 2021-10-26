@@ -5,7 +5,7 @@ import { Global } from './global';
 import { Usuario } from '../models/usuario';
 import { param } from 'jquery';
 import { CookieService } from 'ngx-cookie-service';
-import { UsuarioMDB } from '../models/usuarioMDB';
+
 
 @Injectable()
 export class UsuarioService {
@@ -90,6 +90,8 @@ export class UsuarioService {
 			 usuario.token =response.usuarioByToken.token;
 			 usuario.importancia =response.usuarioByToken.importancia;
 			 usuario.esCliente = response.usuarioByToken.esCliente;
+			 usuario.proyectos = response.usuarioByToken.proyectos;
+			 usuario.propietario = response.usuarioByToken.propietario
 			  },
 			  error => {
 				console.log(<any>error);
