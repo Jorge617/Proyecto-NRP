@@ -4,9 +4,12 @@ const usuario = require('../models/Usuario.js');
 
 
 proyectoController.crearProyecto = async (req, res) => {
-    const { nombre, fechaInicio, fechaFin, usuarios } = req.body
+    const { nombre, fechaInicio, fechaFin, usuarios, idUsuario} = req.body
     const nuevoProyecto = new proyecto({ nombre, fechaInicio, fechaFin, usuarios });
     await nuevoProyecto.save();
+
+    await usuario.updateOne({_id:{$eq:idUsuario}}, {$set : {propietario:nuevoProyecto._id}})
+
     res.json({ message: `proyecto dado de alta ${nombre} ` });
 
 }
@@ -55,7 +58,6 @@ proyectoController.postUsuarios = async (req, res) => {
 
     for(var i = 0; i < usuarios.length; i++){
         await usuario.updateOne({_id : {$eq:usuarios[i]}} , {$push : {proyectos:req.params.id} })
-        console.log("si")
 
     }
     const proyect = await proyecto.findById(req.params.id);

@@ -14,7 +14,7 @@ const usuarioSchema = new Schema({
     importancia : Number,
     esCliente : Boolean,
     proyectos : [{type: Schema.ObjectId, ref: "Proyecto" }],
-    Propietario : {type: Schema.ObjectId, ref: "Proyecto" } | undefined
+    propietario : {type: Schema.ObjectId, ref: "Proyecto" }
 
 });
 
