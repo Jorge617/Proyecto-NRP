@@ -13,6 +13,9 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { RequisitoComponent } from './components/requisito/requisito.component';
 import { DescripcionTareaClienteComponent } from './components/descripcion-tarea-cliente/descripcion-tarea-cliente.component';
 import { CrearProyectoComponent } from './components/crear-proyecto/crear-proyecto.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 
 @NgModule({
@@ -23,13 +26,17 @@ import { CrearProyectoComponent } from './components/crear-proyecto/crear-proyec
     InicioComponent,
     RequisitoComponent,
     DescripcionTareaClienteComponent,
-    CrearProyectoComponent,
+    CrearProyectoComponent
   ],
   imports: [
     BrowserModule,
     routing,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatMomentDateModule
+    
   ],
   providers: [appRoutingProviders,CookieService],
   bootstrap: [AppComponent]
