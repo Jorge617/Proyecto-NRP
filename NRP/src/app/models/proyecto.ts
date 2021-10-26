@@ -6,8 +6,8 @@ export class Proyecto{
 		public id : string | undefined,
 		public nombre: string | undefined,
 		public requisitos:Requisito[]|undefined,
-		public fechaInicio:string|undefined,
-		public fechaFin:string|undefined,
+		public fechaInicio:Date|string,
+		public fechaFin:Date|string,
 		public usuarios:Usuario[]|undefined,
 		public descripcion:string|undefined,
 		public idUsuario:string|undefined

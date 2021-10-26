@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Proyecto } from 'src/app/models/proyecto';
 import { ProyectoService } from 'src/app/services/proyecto.service';
+import { DateAdapter } from '@angular/material/core';
+
+
 
 @Component({
   selector: 'app-crear-proyecto',
@@ -17,8 +20,9 @@ export class CrearProyectoComponent implements OnInit {
   public usuario:Usuario = new Usuario("","","","","",0,false,[],"");
   public proyecto:Proyecto;
   
-  constructor(private _usuarioService:UsuarioService, private _proyectoService:ProyectoService,public router: Router) { 
-    this.proyecto = new Proyecto("","",[],"","",[],"","");
+  constructor(private _usuarioService:UsuarioService, private _proyectoService:ProyectoService,public router: Router,private dateAdapter: DateAdapter<Date>) { 
+    this.dateAdapter.setLocale('es-ES');
+    this.proyecto = new Proyecto("","",[],new Date(),new Date(),[],"","");
   }
   
   ngOnInit(): void {
@@ -38,6 +42,7 @@ export class CrearProyectoComponent implements OnInit {
   crearProyecto(){
       this.proyecto.idUsuario = this.usuario.id;
       this._proyectoService.crearProyecto(this.proyecto).subscribe();
+      console.log(this.proyecto.fechaInicio);
       this.router.navigateByUrl('/inicio');
   }
 

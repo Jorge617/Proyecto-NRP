@@ -8,12 +8,14 @@ import { CookieService } from 'ngx-cookie-service';
 import { Proyecto } from '../models/proyecto';
 
 
+
 @Injectable()
 export class ProyectoService{
     public url:string;
 
     constructor(private _http: HttpClient,private cookies: CookieService){
         this.url = Global.url;
+        
     }
 
     getProyecto(id:any) : Observable<any>{
