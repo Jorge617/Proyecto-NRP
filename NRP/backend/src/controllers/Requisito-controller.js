@@ -1,7 +1,7 @@
 const requisitoController = {};
 
 const requisito = require('../models/Requisito.js');
-
+const usuario = require('../models/Usuario.js')
 
 requisitoController.getRequisitos = async (req, res)=> {
     const requisitos = await requisito.find();
@@ -22,4 +22,17 @@ requisitoController.borrarRequisito = async (req, res) => {
     await requisito.findByIdAndDelete(id);
     res.json('Requisito borrado');
 }
+
+requisitoController.getUsuarios = async (req, res ) =>{
+    const {id} = req.params
+    var getRequisito = await requisito.findById(id)
+    var listaUsuarios = []
+
+    for(var i = 0; i < getRequisito.prioridad.length; i++) {
+        var user = await usuario.findById(getRequisito.prioridad[i].usuario)
+        listaUsuarios.push(user)
+    }
+    res.json({usuarios:listaUsuarios})
+}
+
 module.exports = requisitoController;

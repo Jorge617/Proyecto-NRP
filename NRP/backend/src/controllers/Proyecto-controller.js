@@ -91,13 +91,11 @@ proyectoController.postRequisitos = async (req, res) => {
 }
 
 proyectoController.getUsuarios = async (req, res) => {
-    const { usuarios } = req.body
     const proyect = await proyecto.findById(req.params.id);
     res.send({ usuarios: proyect.usuarios })
 }
 
 proyectoController.getRequisitos = async (req, res) => {
-    const { requisitos } = req.body
     const proyect = await proyecto.findById(req.params.id);
     res.send({ requisitos: proyect.requisitos })
 }
