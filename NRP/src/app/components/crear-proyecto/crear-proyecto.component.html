@@ -37,7 +37,7 @@
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    Bienvenido jefe de proyecto, {{ usuario.nombre }}
+                    Bienvenido, {{ usuario.nombre }}
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="#">Configuración</a></li>
@@ -56,6 +56,51 @@
 
       <!--Fin del menu-->
       <!--Inicio del contenido de INICIO-->
+
+      <div class="row">
+        <div class="col">
+          <h1 class="text-black mt-3 ms-4">Nuevo proyecto</h1>
+        </div>
+      </div>
+
+      <!-- Fecha inicio y ficha fin-->
+      <div id="fechaInicioFin" class="row align-items-center">
+        <div class="col">
+          <div class="col"></div>
+          <div class="col">
+            Fecha comienzo
+            <input
+              matInput
+              [matDatepicker]="datepicker"
+              placeholder="Elige una fecha"
+              style="display: inline; width: 125px"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="datepicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #datepicker></mat-datepicker>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="col"></div>
+          <div class="col">
+            Fecha fin
+            <input
+              matInput
+              [matDatepicker]="picker"
+              placeholder="Elige una fecha"
+              style="display: inline; width: 125px"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </div>
+        </div>
+      </div>
       <!--Fin del contenido de INICIO-->
     </div>
   </body>
