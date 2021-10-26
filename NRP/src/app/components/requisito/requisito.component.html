@@ -10,41 +10,47 @@
 </head>
 
 <body>
-    <div class="container-fluid">
-        <!-- BARRA NAVEGACIÓN -->
-        <div class="bg-light">
-            <nav class="navbar navbar-expand-md navbar-dark bg-primary border-1 rounder border-dark">
+    <div class="container">
+        <!--Inicio del menu-->
+        <header class="row-12">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
-                    <a [routerLink]="['/inicio']" class="navbar-brand">Inicio</a>
-                    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#MenuNavegacion">
-                            <span class="navbar-toggler-icon"></span>
-                    </button>
-                </div>
+                    <a class="navbar-brand" [routerLink]="['/inicio']">
+                        <img src="./assets/logoB.png" alt="logo" width="200" height="100" /></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
 
-                <div id="MenuNavegacion" class="collapse navbar-collapse">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link">Atras</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"> Opciones </a>
-                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end">
-                                <li><a class="dropdown-item mb-3" [routerLink]="['/registro']">Modificar perfil</a></li>
-                                <li><a class="dropdown-item mb-3" [routerLink]="['/login']">Cerrar sesión</a></li>
-                            </ul>
-                        </li>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="col navbar-nav mb-2 mb-lg-0 justify-content-lg-end">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-black" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Bienvenido, {{ usuario.nombre }}
+                    </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="#">Configuración</a></li>
+                                    <li>
+                                        <a class="dropdown-item" (click)="cerrarSesion()">Cerrar sesión</a
+                        >
+                      </li>
                     </ul>
-                </div>
-            </nav>
-        </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </header>
     </div>
+  
+<!--Fin del menu-->
 
     <!-- Fin de la barra de navegación-->
 
     <!-- Titulo de la vista-->
-    <h3 style="margin-top: 1rem; margin-left: 1rem;">Tareas del proyecto - "nombre"</h3>
+    <h3 style="margin-top: 1rem; margin-left: 1rem;"> Tareas del proyecto - "nombre" </h3>
 
     <!-- Contenido de la vista-->
 
 
 </body>
+</html>

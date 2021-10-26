@@ -7,11 +7,3 @@
   font-size: 100%;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-
-#carpeta {
-  transition: all 300ms;
-}
-
-#carpeta:hover {
-  transform: scale(1.1);
-}
