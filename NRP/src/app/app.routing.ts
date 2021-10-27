@@ -7,6 +7,7 @@ import { InicioComponent } from "./components/inicio/inicio.component";
 import { RequisitoComponent } from './components/requisito/requisito.component';
 import { DescripcionTareaClienteComponent } from './components/descripcion-tarea-cliente/descripcion-tarea-cliente.component';
 import { CrearProyectoComponent } from './components/crear-proyecto/crear-proyecto.component';
+import { ProyectoComponent } from './components/proyecto/proyecto.component';
 
 const appRoutes : Routes = [
     {path : '', component : LoginComponent},
@@ -16,6 +17,7 @@ const appRoutes : Routes = [
     {path : 'inicio/:id', component : InicioComponent},
     {path: 'requisito', component: RequisitoComponent},
     {path: 'crear-proyecto', component: CrearProyectoComponent},
+    {path: 'proyecto', component: ProyectoComponent},
     {path: 'descripcion-tarea-cliente', component: DescripcionTareaClienteComponent},
     {path : '**', component : LoginComponent}
 ];

@@ -16,6 +16,7 @@ import { CrearProyectoComponent } from './components/crear-proyecto/crear-proyec
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { ProyectoComponent } from './components/proyecto/proyecto.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
     InicioComponent,
     RequisitoComponent,
     DescripcionTareaClienteComponent,
-    CrearProyectoComponent
+    CrearProyectoComponent,
+    ProyectoComponent
   ],
   imports: [
     BrowserModule,
