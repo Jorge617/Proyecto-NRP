@@ -9,6 +9,7 @@ import { CrearProyectoComponent } from './components/crear-proyecto/crear-proyec
 import { ProyectoComponent } from './components/proyecto/proyecto.component';
 import { InicioClienteComponent } from './components/inicio-cliente/inicio-cliente.component';
 import { ProyectoClienteComponent } from './components/proyecto-cliente/proyecto-cliente.component';
+import { CrearTareaComponent } from './components/crear-tarea/crear-tarea.component';
 
 const appRoutes : Routes = [
     {path : '', component : LoginComponent},
@@ -22,6 +23,7 @@ const appRoutes : Routes = [
     {path: 'descripcion-tarea-cliente', component: DescripcionTareaClienteComponent},
     {path: 'inicio-cliente', component: InicioClienteComponent},
     {path: 'proyecto-cliente', component: ProyectoClienteComponent},
+    {path: 'crear-tarea', component: CrearTareaComponent},
     {path : '**', component : LoginComponent}
 ];
 
