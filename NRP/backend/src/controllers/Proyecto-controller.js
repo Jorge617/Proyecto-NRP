@@ -73,6 +73,23 @@ proyectoController.postUsuarios = async (req, res) => {
     res.send("Lista actualizada");
 }
 
+
+
+proyectoController.deleteUsuarios = async (req, res) => {
+    var usuarios = [];
+    usuarios = req.body.usuarios
+
+    for(var i = 0; i < usuarios.length; i++){
+        await usuario.updateOne({_id : {$eq:usuarios[i]}} , {$pull : {proyectos:req.params.id} })
+
+    }
+    
+    await proyecto.updateOne({_id : {$eq:req.params.id}} , {$pull : {usuarios:usuarios} })
+
+
+    res.send("Lista actualizada");
+}
+
 proyectoController.postRequisitos = async (req, res) => {
     var requisitos = [];
     requisitos = req.body.usuarios
