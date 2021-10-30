@@ -1,1 +1,43 @@
-<p>inicio-cliente works!</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Pagina cliente principal</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body>
+    <div class="container">
+        <!--Inicio del menu-->
+        <menu></menu>
+        <!--Fin del menu-->
+
+        <!--Inicio del contenido de INICIO-->
+
+        <div class="row">
+            <div class="col">
+                <h1 class="text-black mt-3 ms-4">Proyectos</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <ul class="list-group list-group-flush ms-3">
+                    <li class="list-group-item">
+                        <a [routerLink]="['/proyecto']">Proyecto 1</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a [routerLink]="['/proyecto']">Proyecto 2</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a [routerLink]="['/proyecto']">Proyecto 3</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!--Fin del contenido de INICIO-->
+    </div>
+</body>
+
+</html>
