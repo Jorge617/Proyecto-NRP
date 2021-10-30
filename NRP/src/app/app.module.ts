@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { ProyectoComponent } from './components/proyecto/proyecto.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { ProyectoComponent } from './components/proyecto/proyecto.component';
     RequisitoComponent,
     DescripcionTareaClienteComponent,
     CrearProyectoComponent,
-    ProyectoComponent
+    ProyectoComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
