@@ -113,23 +113,91 @@
             aria-controls="contact"
             aria-selected="false"
           >
-            Usuarios
+           Clientes
           </button>
         </li>
       </ul>
+      <!--Inicio de la información del proyecto-->
       <div class="tab-content" id="myTabContent">
         <div
           class="tab-pane fade show active"
           id="home"
           role="tabpanel"
           aria-labelledby="home-tab"
-        ></div>
+        >
+        <div class="row">
+          <div class="col-9 m-3">
+            <h2>Descripción</h2>
+            <section class = "text-justify">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan facilisis dui eu maximus.
+              Donec volutpat finibus nunc, sodales tincidunt diam efficitur non. Integer pulvinar egestas volutpat.
+              Ut quam orci, tincidunt ut lectus vel, viverra malesuada augue. Vestibulum ante massa, molestie quis lorem ullamcorper,
+              finibus pellentesque turpis. Aliquam convallis turpis odio, eget tincidunt ipsum lobortis vel. Maecenas vitae dui luctus, 
+              posuere orci et, scelerisque leo. Sed rutrum nulla vitae consectetur maximus. Vivamus quis dui odio. 
+              Praesent vulputate aliquet ante sit amet aliquet. Duis convallis sollicitudin dui vitae placerat.
+              Proin ac commodo massa. Etiam eu tortor blandit, porttitor mi sed, vehicula turpis.
+            </section>
+            
+          </div>
+          <div class="col-2">
+            <div id="fechaInicioFin" class="row align-items-center mt-3 ms-4">
+              <div class="col">
+                <div class="col"></div>
+                <div class="col">
+                  Fecha comienzo
+                  <input
+                    matInput
+                    [matDatepicker]="datepicker"
+                    name="fechaInicio"
+                    #fechaInicio="ngModel"
+                    [(ngModel)]="proyecto.fechaInicio"
+                    placeholder="Elige una fecha"
+                    style="display: inline; width: 125px"
+                    required
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="datepicker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #datepicker></mat-datepicker>
+                </div>
+              </div>
+    
+              <div class="col">
+                <div class="col"></div>
+                <div class="col">
+                  Fecha fin
+                  <input
+                    matInput
+                    [matDatepicker]="picker"
+                    name="fechaFin"
+                    #fechaFin="ngModel"
+                    [(ngModel)]="proyecto.fechaFin"
+                    placeholder="Elige una fecha"
+                    style="display: inline; width: 125px"
+                    required
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </div>
+              </div>
+            </div>
+          </div>
+         
+        </div>
+       <!--Fin de la información del proyecto-->
+      </div>
+       <!--Inicio de las tareas del proyecto-->
         <div
           class="tab-pane fade"
           id="profile"
           role="tabpanel"
           aria-labelledby="profile-tab"
         >
+        <h2 class="m-3">Lista de tareas del proyecto</h2>
           <div class="row justify-content-end mt-3">
             <div class="col-1">
               <a [routerLink]="['/proyecto']"
@@ -141,16 +209,148 @@
                   height="55"
               /></a>
             </div>
+            <div class="row">
+              <div class="col-9">
+                <ul class="list-group list-group-flush ms-3">
+                  <li class="list-group-item">
+                    <a [routerLink]="['/descripcion-tarea-cliente']">Tarea 1</a>       
+                    <img
+                      id="addTarea"
+                      src="./assets/borrar-tarea.png"
+                      alt="Borrar usuario"
+                      width="40"
+                      height="40"
+                      style="cursor: pointer; margin-left: 88%;"
+  
+                  />
+                  </li>
+                  <li class="list-group-item">
+                    <a [routerLink]="['/proyecto']">Tarea 2</a>
+                    <img
+                    id="addTarea"
+                    src="./assets/borrar-tarea.png"
+                    alt="carpeta"
+                    width="40"
+                    height="40"
+                    style="cursor: pointer; margin-left: 88%;"
+  
+                />
+                  </li>
+                  <li class="list-group-item">
+                    <a [routerLink]="['/proyecto']">Tarea 3</a>
+                    <img
+                    id="addTarea"
+                    src="./assets/borrar-tarea.png"
+                    alt="carpeta"
+                    width="40"
+                    height="40"
+                    style="cursor: pointer; margin-left: 88%;"
+  
+                />
+                  </li>
+                </ul>
+              </div>
+            </div>
+                
+              
+            
           </div>
         </div>
+         <!--Fin de las tareas del proyecto-->
+
+          <!--Inicio de los clientes del proyecto-->
         <div
           class="tab-pane fade"
           id="contact"
           role="tabpanel"
           aria-labelledby="contact-tab"
         >
-          ...
+        <h2 class="m-3">Lista de clientes del proyecto</h2>
+        <div class="row justify-content-end mt-3">
+          <div class="col-1">
+            <a [routerLink]="['/proyecto']"
+              ><img
+                id="addUsuario"
+                src="./assets/add-user.png"
+                alt="carpeta"
+                width="55"
+                height="55"
+                (click) = "mostrarListaClientes()"
+            /></a>
+          </div>
+          <div class="row">
+            <div class="col-9">
+              <ul class="list-group list-group-flush ms-3">
+                <li class="list-group-item">
+                  <a [routerLink]="['/proyecto']">Cliente 1</a>       
+                  <img
+                    id="deleteUsuario"
+                    src="./assets/borrar-usuario.png"
+                    alt="Borrar usuario"
+                    width="40"
+                    height="40"
+                    style="cursor: pointer; margin-left: 88%;"
+
+                />
+                </li>
+                <li class="list-group-item">
+                  <a [routerLink]="['/proyecto']">Cliente 2</a>
+                  <img
+                  id="deleteUsuario"
+                  src="./assets/borrar-usuario.png"
+                  alt="carpeta"
+                  width="40"
+                  height="40"
+                  style="cursor: pointer; margin-left: 88%;"
+
+              />
+                </li>
+                <li class="list-group-item">
+                  <a [routerLink]="['/proyecto']">Cliente 3</a>
+                  <img
+                  id="deleteUsuario"
+                  src="./assets/borrar-usuario.png"
+                  alt="carpeta"
+                  width="40"
+                  height="40"
+                  style="cursor: pointer; margin-left: 88%;"
+
+              />
+                </li>
+              </ul>
+            </div>
+            <div id ="ListaClientes"class="col-3">
+              <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white mt-4" style="width: 380px;">
+              <div class="row">
+                <div class="col-8">
+                  <span class="fs-5 fw-semibold">Lista usuarios</span>
+                </div>
+                <div class="col-3">
+                  <img id ="cerrarLista" src="./assets/cancel.png" alt="cerrar lista"  width="25"
+                  height="25" style="cursor: pointer; margin-left: 88%;" (click) = "cerrarLista()">
+                </div>
+               
+               
+              </div>
+                <div class="list-group list-group-flush  scrollarea ">
+                  <div *ngFor="let usuario of arrUsuarios" class="row m-3">
+                    <div class="col-10">
+                      <strong>{{usuario.nombre}} </strong>   
+                    </div>
+                    <div class="col-2">
+                      <img id ="addUsuario" src="./assets/addU.png" alt="cerrar lista"  width="25"
+                      height="25" style="cursor: pointer;">  
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+
         </div>
+        </div>
+         <!--Fin de la información del proyecto-->
       </div>
 
       <!--Fin del contenido de INICIO-->
