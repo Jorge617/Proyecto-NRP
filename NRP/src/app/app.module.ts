@@ -18,6 +18,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { ProyectoComponent } from './components/proyecto/proyecto.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { InicioClienteComponent } from './components/inicio-cliente/inicio-cliente.component';
+import { ProyectoClienteComponent } from './components/proyecto-cliente/proyecto-cliente.component';
 
 
 @NgModule({
@@ -30,7 +32,9 @@ import { MenuComponent } from './components/menu/menu.component';
     DescripcionTareaClienteComponent,
     CrearProyectoComponent,
     ProyectoComponent,
-    MenuComponent
+    MenuComponent,
+    InicioClienteComponent,
+    ProyectoClienteComponent
   ],
   imports: [
     BrowserModule,
