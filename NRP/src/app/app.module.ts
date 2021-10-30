@@ -20,6 +20,7 @@ import { ProyectoComponent } from './components/proyecto/proyecto.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { InicioClienteComponent } from './components/inicio-cliente/inicio-cliente.component';
 import { ProyectoClienteComponent } from './components/proyecto-cliente/proyecto-cliente.component';
+import { CrearTareaComponent } from './components/crear-tarea/crear-tarea.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { ProyectoClienteComponent } from './components/proyecto-cliente/proyecto
     ProyectoComponent,
     MenuComponent,
     InicioClienteComponent,
-    ProyectoClienteComponent
+    ProyectoClienteComponent,
+    CrearTareaComponent
   ],
   imports: [
     BrowserModule,
