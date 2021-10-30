@@ -61,46 +61,119 @@
         <div class="col">
           <h1 class="text-black mt-3 ms-4">Nuevo proyecto</h1>
         </div>
+        <div class="col-1">
+          <a [routerLink]="['/inicio']"
+            ><img
+              class="mt-4"
+              src="./assets/flecha-hacia-atras.png"
+              alt="atras"
+              width="50"
+              height="50"
+          /></a>
+        </div>
       </div>
 
-      <!-- Fecha inicio y ficha fin-->
-      <div id="fechaInicioFin" class="row align-items-center">
-        <div class="col">
-          <div class="col"></div>
-          <div class="col">
-            Fecha comienzo
+      <form #formCrearProyecto="ngForm" (ngSubmit)="crearProyecto()">
+        <div class="row mt-3 ms-4">
+          <div class="col-3 mb-3">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Nombre</label
+            >
             <input
-              matInput
-              [matDatepicker]="datepicker"
-              placeholder="Elige una fecha"
-              style="display: inline; width: 125px"
+              type="email"
+              class="form-control"
+              id="exampleFormControlInput1"
+              name="nombre"
+              #nombre="ngModel"
+              [(ngModel)]="proyecto.nombre"
+              placeholder="Nombre"
+              required
             />
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="datepicker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #datepicker></mat-datepicker>
+          </div>
+          <div class="row">
+            <div class="col-5 mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label"
+                >Descripción del proyecto</label
+              >
+              <textarea
+                class="form-control"
+                id="exampleFormControlTextarea1"
+                name="descripcion"
+                #descripcion="ngModel"
+                [(ngModel)]="proyecto.descripcion"
+                rows="3"
+                required
+              ></textarea>
+            </div>
           </div>
         </div>
 
-        <div class="col">
-          <div class="col"></div>
+        <!-- Fecha inicio y ficha fin-->
+        <div id="fechaInicioFin" class="row align-items-center mt-3 ms-4">
           <div class="col">
-            Fecha fin
-            <input
-              matInput
-              [matDatepicker]="picker"
-              placeholder="Elige una fecha"
-              style="display: inline; width: 125px"
-            />
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <div class="col"></div>
+            <div class="col">
+              Fecha comienzo
+              <input
+                matInput
+                [matDatepicker]="datepicker"
+                name="fechaInicio"
+                #fechaInicio="ngModel"
+                [(ngModel)]="proyecto.fechaInicio"
+                placeholder="Elige una fecha"
+                style="display: inline; width: 125px"
+                required
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="datepicker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #datepicker></mat-datepicker>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="col"></div>
+            <div class="col">
+              Fecha fin
+              <input
+                matInput
+                [matDatepicker]="picker"
+                name="fechaFin"
+                #fechaFin="ngModel"
+                [(ngModel)]="proyecto.fechaFin"
+                placeholder="Elige una fecha"
+                style="display: inline; width: 125px"
+                required
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </div>
           </div>
         </div>
-      </div>
+        <div class="row justify-content-end mt-4">
+          <div class="col-3">
+            <button
+              type="button"
+              class="btn btn-danger ms-5"
+              [routerLink]="['/inicio']"
+            >
+              Cancelar
+            </button>
+            <button
+              class="btn btn-success ms-3"
+              type="submit"
+              [disabled]="!formCrearProyecto.form.valid"
+            >
+              Guardar
+            </button>
+          </div>
+        </div>
+      </form>
+
       <!--Fin del contenido de INICIO-->
     </div>
   </body>

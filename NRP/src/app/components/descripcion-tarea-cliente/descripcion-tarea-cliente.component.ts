@@ -14,7 +14,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class DescripcionTareaClienteComponent implements OnInit {
 
-  public usuario:Usuario = new Usuario("","","","","",0,false);
+  public usuario:Usuario = new Usuario("","","","","",0,false,[],"");
   public arrUsuarios:Usuario[] | undefined;
 
   constructor(private _usuarioService:UsuarioService,public router: Router) { 
