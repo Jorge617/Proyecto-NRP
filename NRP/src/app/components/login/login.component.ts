@@ -43,7 +43,11 @@ login(form:any){
 
       this._usuarioService.updateUsuario(this.usuario).subscribe();
       form.reset();
-      this.router.navigateByUrl('/inicio');
+      if (!this.usuario.esCliente) {
+        this.router.navigateByUrl('/inicio');
+      } else {
+        this.router.navigateByUrl('/inicio-cliente');
+      }
       }else{
         this.logueado = false;
         this.mensaje = data.error;

@@ -17,6 +17,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { ProyectoComponent } from './components/proyecto/proyecto.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { InicioClienteComponent } from './components/inicio-cliente/inicio-cliente.component';
+import { ProyectoClienteComponent } from './components/proyecto-cliente/proyecto-cliente.component';
+import { CrearTareaComponent } from './components/crear-tarea/crear-tarea.component';
 
 
 @NgModule({
@@ -28,7 +32,11 @@ import { ProyectoComponent } from './components/proyecto/proyecto.component';
     RequisitoComponent,
     DescripcionTareaClienteComponent,
     CrearProyectoComponent,
-    ProyectoComponent
+    ProyectoComponent,
+    MenuComponent,
+    InicioClienteComponent,
+    ProyectoClienteComponent,
+    CrearTareaComponent
   ],
   imports: [
     BrowserModule,
