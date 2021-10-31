@@ -166,7 +166,7 @@ proyectoController.getUsuariosDisponibles = async (req, res) => {
 
     for(var i = 0; i < usuarios.length; i++){
         
-        if(!usuariosProyecto.includes(usuarios[i]._id)){
+        if(!usuariosProyecto.includes(usuarios[i]._id) && !usuarios[i].propietario.includes(req.params.id)){
             resultado.push( await usuario.findById(usuarios[i]))
         }
     }
