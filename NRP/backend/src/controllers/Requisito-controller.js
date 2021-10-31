@@ -23,6 +23,13 @@ requisitoController.borrarRequisito = async (req, res) => {
     res.json('Requisito borrado');
 }
 
+requisitoController.deleteAll = async (req, res) => {
+    await requisito.remove({})
+    res.json("Delete completado");
+
+}
+
+
 requisitoController.getUsuarios = async (req, res ) =>{
     const {id} = req.params
     var getRequisito = await requisito.findById(id)

@@ -11,7 +11,6 @@ const usuarioSchema = new Schema({
         required : true
     },
     token : String,
-    importancia : Number,
     esCliente : Boolean,
     proyectos : [{type: Schema.ObjectId, ref: "Proyecto" }],
     propietario : [{type: Schema.ObjectId, ref: "Proyecto" }]
