@@ -1,7 +1,7 @@
 const proyectoController = {};
 const proyecto = require('../models/Proyecto.js');
 const usuario = require('../models/Usuario.js');
-
+const requisito = require('../models/Requisito.js');
 
 proyectoController.crearProyecto = async (req, res) => {
     const { nombre, fechaInicio, fechaFin, usuarios,descripcion, idUsuario} = req.body
@@ -45,9 +45,9 @@ proyectoController.updateProyecto = async (req, res) => {
 
     //PENDIENTE DE CAMBIOS
 
-    const { nombre, fechaInicio, fechaFin, usuarios } = req.body;
+    const { nombre, fechaInicio, fechaFin, descripcion } = req.body;
     await usuario.findByIdAndUpdate(req.params.id, {
-        nombre, fechaInicio, fechaFin, usuarios
+        nombre, fechaInicio, fechaFin, usuarios, descripcion
     });
 }
 
@@ -78,21 +78,41 @@ proyectoController.postUsuarios = async (req, res) => {
 proyectoController.deleteUsuarios = async (req, res) => {
     var usuarios = [];
     usuarios = req.body.usuarios
+    const proyect = await proyecto.findById(req.params.id);
+
 
     for(var i = 0; i < usuarios.length; i++){
         await usuario.updateOne({_id : {$eq:usuarios[i]}} , {$pull : {proyectos:req.params.id} })
-
+        proyect.usuarios.pull(usuarios[i])
     }
-    
-    await proyecto.updateOne({_id : {$eq:req.params.id}} , {$pull : {usuarios:usuarios} })
+   
 
+    await proyect.save()
+
+    res.send("Lista actualizada");
+}
+
+
+proyectoController.updateUsuarios = async (req, res) => {
+    var usuarios = [];
+    usuarios = req.body.usuarios
+    const proyect = await proyecto.findById(req.params.id);
+
+
+    for(var i = 0; i < usuarios.length; i++){
+        await usuario.updateOne({_id : {$eq:usuarios[i]}} , {$set : {proyectos:req.params.id} })
+        proyect.usuarios.pull(usuarios[i])
+    }
+   
+
+    await proyect.save()
 
     res.send("Lista actualizada");
 }
 
 proyectoController.postRequisitos = async (req, res) => {
     var requisitos = [];
-    requisitos = req.body.usuarios
+    requisitos = req.body.requisitos
     const proyect = await proyecto.findById(req.params.id);
     var aux = [];
     aux = proyect.requisitos;
@@ -103,6 +123,23 @@ proyectoController.postRequisitos = async (req, res) => {
     } catch (e) {
         print(e);
     }
+
+    res.send("Lista actualizada");
+}
+
+proyectoController.deleteRequisitos = async (req, res) => {
+    var requisitos = [];
+    requisitos = req.body.requisitos
+    const proyect = await proyecto.findById(req.params.id);
+
+
+    for(var i = 0; i < requisitos.length; i++){
+        await requisito.updateOne({_id : {$eq:requisitos[i]}} , {$pull : {proyectos:req.params.id} })
+        proyect.requisitos.pull(requisitos[i])
+    }
+   
+
+    await proyect.save()
 
     res.send("Lista actualizada");
 }
