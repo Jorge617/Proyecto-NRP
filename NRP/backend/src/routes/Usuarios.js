@@ -1,9 +1,10 @@
 const { Router } = require('express');
 const router = Router();
 const {registro, login, updateToken, getToken, getUsuarios, getUsuario, updateUsuario, borrarUsuario, getUsuarioByToken,
-       getProyectos, getProyectosPropietario, } = require('../controllers/Usuario-controller');
+       getProyectos, getProyectosPropietario, deleteAll } = require('../controllers/Usuario-controller');
 router.route('/').post(registro)
-                 .get(getUsuarios);
+                 .get(getUsuarios)
+                 .delete(deleteAll)
 
 router.route('/login').get(login);
 

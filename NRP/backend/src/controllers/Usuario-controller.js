@@ -87,6 +87,14 @@ usuarioController.getProyectos = async (req, res)=> {
     res.json(resultado);
 }
 
+usuarioController.deleteAll = async (req, res) => {
+    await usuario.remove({})
+    res.json("Delete completado");
+
+}
+
+
+
 usuarioController.getProyectosPropietario = async (req, res)=> {
     const getusuario = await usuario.findById(req.params.id);
     var lista = getusuario.propietario;
