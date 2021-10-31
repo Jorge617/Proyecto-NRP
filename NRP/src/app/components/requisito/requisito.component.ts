@@ -12,22 +12,22 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class RequisitoComponent implements OnInit {
 
-  public usuario:Usuario = new Usuario("","","","","",0,false,[],"");
-  
-  constructor(private _usuarioService:UsuarioService,public router: Router) { 
-    
+  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], []);
+
+  constructor(private _usuarioService: UsuarioService, public router: Router) {
+
   }
 
   ngOnInit(): void {
     this.getUserLogged();
   }
 
-  getUserLogged(){
+  getUserLogged() {
     this._usuarioService.getUserLogged(this.usuario);
-   
+
   }
 
-  cerrarSesion(){
+  cerrarSesion() {
     this._usuarioService.deleteTokenCookies();
     this.router.navigateByUrl("/login");
   }

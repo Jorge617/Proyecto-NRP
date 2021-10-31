@@ -1,0 +1,7 @@
+#addTarea, #deleteTarea, #deleteUsuario,#addUsuario {
+    transition: all 300ms;
+  }
+  
+  #addTarea:hover, #deleteTarea:hover, #deleteUsuario:hover,#addUsuario:hover {
+    transform: scale(1.1);
+  }

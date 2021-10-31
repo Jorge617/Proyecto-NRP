@@ -25,11 +25,11 @@
             </div>
         </div>
 
-        <form #formCrearProyecto="ngForm">
+        <form #formCrearTarea="ngForm">
             <div class="row mt-3 ms-4 ">
                 <div class="col-3 mb-3 ">
                     <label for="exampleFormControlInput1 " class="form-label ">Nombre de tarea </label>
-                    <input type="email " class="form-control " id="exampleFormControlInput1 " name="nombre " placeholder="Nombre " required />
+                    <input type="text " class="form-control " id="exampleFormControlInput1 " name="nombre " placeholder="Nombre " required />
                 </div>
                 <div class="row ">
                     <div class="col-5 mb-3 ">
@@ -37,6 +37,25 @@
                         <textarea class="form-control " id="exampleFormControlTextarea1 " name="descripcion " rows="3 " required></textarea>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-2">
+                        <label for="exampleFormControlInput1 " class="form-label ">Esfuerzo de la tarea </label>
+                        <select class="form-select" aria-label="Default select example">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option> 
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option> 
+                        </select>
+
+                    </div>
+                </div>
+
             </div>
 
             <!-- Fecha inicio y ficha fin-->
@@ -62,29 +81,50 @@
                 </div>
             </div>
 
-            <h2 class="m-3">Lista de clientes del proyecto</h2>
-            <div class="row justify-content-end mt-3">
+            <div class="row mt-5 ms-4 ">
+                <div class="col-2">
+                    <span>Añadir usuarios a la tarea</span>
+                </div>
                 <div class="col-1">
-                    <img id="addUsuario" src="./assets/add-user.png" alt="carpeta" width="55" height="55" (click)="mostrarListaClientes()" />
+                    <img id="addUsuario" src="./assets/add-user.png" alt="carpeta" width="55" height="55" style="cursor: pointer;" (click)="mostrarListaClientes()" />
                 </div>
                 <div class="row">
-                    <div id="ListaClientes" class="col-3">
+                    <div  class="col-7 ListaClientes">
                         <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white mt-4" style="width: 380px;">
                             <div class="row">
                                 <div class="col-8">
-                                    <span class="fs-5 fw-semibold">Lista usuarios</span>
+                                    <span class="fs-5 fw-semibold">Usuarios</span>
+                                </div>
+                            </div>
+                            <div class="list-group list-group-flush  scrollarea ">
+                                <div *ngFor="let usuario of arrUsuarios; let indice = index" class="row m-3">
+                                    <div class="col-10">
+                                        <strong>{{usuario.nombre}} </strong>
+                                    </div>
+                                    <div class="col-2">
+                                        <img id="addUsuario" src="./assets/addU.png" alt="cerrar lista" width="25" height="25" style="cursor: pointer;" (click)="addUsuario(indice)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3 ListaClientes">
+                        <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white mt-4" style="width: 380px;">
+                            <div class="row">
+                                <div class="col-8">
+                                    <span class="fs-5 fw-semibold">Usuarios añadidos</span>
                                 </div>
                                 <div class="col-3">
                                     <img id="cerrarLista" src="./assets/cancel.png" alt="cerrar lista" width="25" height="25" style="cursor: pointer; margin-left: 88%;" (click)="cerrarLista()">
                                 </div>
                             </div>
                             <div class="list-group list-group-flush  scrollarea ">
-                                <div *ngFor="let usuario of arrUsuarios" class="row m-3">
+                                <div *ngFor="let usuario of arrUsuariosAdd; let indice = index" class="row m-3">
                                     <div class="col-10">
                                         <strong>{{usuario.nombre}} </strong>
                                     </div>
                                     <div class="col-2">
-                                        <img id="addUsuario" src="./assets/addU.png" alt="cerrar lista" width="25" height="25" style="cursor: pointer;">
+                                        <img id="deleteUsuario" src="./assets/menos.png" alt="" width="25" height="25" style="cursor: pointer;" (click)="deleteUsuario(indice)">
                                     </div>
                                 </div>
                             </div>
@@ -97,10 +137,10 @@
 
             <div class="row justify-content-end mt-4 ">
                 <div class="col-3 ">
-                    <button type="button " class="btn btn-danger ms-5 " [routerLink]="[ '/inicio'] ">
+                    <button type="button " class="btn btn-danger ms-5 " [routerLink]="[ '/proyecto'] ">
               Cancelar
             </button>
-                    <button class="btn btn-success ms-3 " type="submit " [disabled]="!formCrearProyecto.form.valid ">
+                    <button class="btn btn-success ms-3 " type="submit " [disabled]="!formCrearTarea.form.valid ">
               Guardar
             </button>
                 </div>
