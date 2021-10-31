@@ -21,7 +21,7 @@
                 <h1 class="text-black mt-3 ms-4">Nueva Tarea</h1>
             </div>
             <div class="col-1">
-                <a [routerLink]="['/proyecto']"><img class="mt-4" src="./assets/flecha-hacia-atras.png" alt="atras" width="50" height="50" /></a>
+                <a [routerLink]="['/proyecto',proyecto._id]"><img class="mt-4" src="./assets/flecha-hacia-atras.png" alt="atras" width="50" height="50" /></a>
             </div>
         </div>
 
@@ -137,7 +137,7 @@
 
             <div class="row justify-content-end mt-4 ">
                 <div class="col-3 ">
-                    <button type="button " class="btn btn-danger ms-5 " [routerLink]="[ '/proyecto'] ">
+                    <button type="button " class="btn btn-danger ms-5 " [routerLink]="[ '/proyecto', proyecto._id] ">
               Cancelar
             </button>
                     <button class="btn btn-success ms-3 " type="submit " [disabled]="!formCrearTarea.form.valid ">
