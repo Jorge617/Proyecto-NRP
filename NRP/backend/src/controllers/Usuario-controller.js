@@ -1,7 +1,7 @@
 const usuarioController = {};
 
 const usuario = require('../models/Usuario.js');
-
+const proyecto = require('../models/Proyecto.js')
 
 usuarioController.registro = async (req, res) => {
     const { nombre, password, token } = req.body;
@@ -75,7 +75,28 @@ usuarioController.updateUsuario  = async (req, res) => {
     res.json('usuario Updated');
 }
 
+usuarioController.getProyectos = async (req, res)=> {
+  
+    const getusuario = await usuario.findById(req.params.id);
+    var lista = getusuario.proyectos;
+    var resultado = []
+    for(var i = 0; i < lista.length; i++){
+       resultado.push(await proyecto.findById(lista[i]))
+    }
 
+    res.json(resultado);
+}
+
+usuarioController.getProyectosPropietario = async (req, res)=> {
+    const getusuario = await usuario.findById(req.params.id);
+    var lista = getusuario.propietario;
+    var resultado = []
+    for(var i = 0; i < lista.length; i++){
+       await resultado.push(await proyecto.findById(lista[i]))
+    }
+    console.log(resultado)
+    res.json({proyectos:resultado});
+}
 
 
 module.exports = usuarioController;

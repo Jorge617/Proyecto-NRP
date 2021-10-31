@@ -8,7 +8,7 @@ proyectoController.crearProyecto = async (req, res) => {
     const nuevoProyecto = new proyecto({ nombre, fechaInicio, fechaFin, usuarios, descripcion });
     await nuevoProyecto.save();
 
-    await usuario.updateOne({_id:{$eq:idUsuario}}, {$set : {propietario:nuevoProyecto._id}})
+    await usuario.updateOne({_id:{$eq:idUsuario}}, {$push : {propietario:nuevoProyecto._id}})
 
     res.json({ message: `proyecto dado de alta ${nombre} ` });
 
@@ -33,6 +33,7 @@ proyectoController.deleteProyecto = async (req, res) => {
     const getProyecto = await proyecto.findById(req.params.id);
     var usuarios = getProyecto.usuarios
     for(var i = 0; i < usuarios.length; i++){
+        await usuario.updateOne({_id : {$eq:usuarios[i]}} , {$pull : {propietario:req.params.id} })
         await usuario.updateOne({_id : {$eq:usuarios[i]}} , {$pull : {proyectos:id} })
     }
 
