@@ -13,20 +13,24 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   providers: [UsuarioService, ProyectoService]
 })
 export class CrearTareaComponent implements OnInit {
-  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "");
+  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], []);
   public proyecto: Proyecto;
-  public arrUsuarios: Usuario[] | undefined;
+  public arrUsuarios: Usuario[];
+  public arrUsuariosAdd: Usuario[];
+
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>) {
     this.dateAdapter.setLocale('es-ES');
     this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "");
+    this.arrUsuarios = [];
+    this.arrUsuariosAdd = [];
   }
 
   ngOnInit(): void {
     this.getUserLogged();
-    $("#ListaClientes").hide();
-    this.getUsuarios()
+    $(".ListaClientes").hide();
+    this.getUsuarios();
   }
-  
+
   getUserLogged() {
     this._usuarioService.getUserLogged(this.usuario);
 
@@ -38,14 +42,32 @@ export class CrearTareaComponent implements OnInit {
   }
 
   mostrarListaClientes() {
-    $("#ListaClientes").fadeIn();
+    $(".ListaClientes").fadeIn();
 
 
   }
 
   cerrarLista() {
-    $("#ListaClientes").hide(500);
+    $(".ListaClientes").hide(500);
 
+  }
+
+  addUsuario(indice: number) {
+    this.arrUsuariosAdd.push(this.arrUsuarios[indice]);
+
+  }
+
+  deleteUsuario(indice: number) {
+    this.removeItemFromArr(this.arrUsuariosAdd, this.arrUsuariosAdd[indice]);
+    console.log("Usuario eliminado");
+  }
+
+  removeItemFromArr(arr: any, item: any) {
+    var i = arr.indexOf(item);
+
+    if (i !== -1) {
+      arr.splice(i, 1);
+    }
   }
 
   getUsuarios() {

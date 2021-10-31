@@ -18,7 +18,7 @@
 
         <div class="row">
             <div class="col">
-                <h1 class="text-black mt-3 ms-4">Nombre proyecto</h1>
+                <h1 class="text-black mt-3 ms-4">{{proyecto.nombre}}</h1>
             </div>
             <div class="col-1">
                 <a [routerLink]="['/inicio']"><img class="mt-4" src="./assets/flecha-hacia-atras.png" alt="atras" width="50" height="50" /></a>
@@ -38,7 +38,7 @@
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">
-           Clientes
+           Usuarios participantes
           </button>
             </li>
         </ul>
@@ -49,10 +49,7 @@
                     <div class="col-9 m-3">
                         <h2>Descripción</h2>
                         <section class="text-justify">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan facilisis dui eu maximus. Donec volutpat finibus nunc, sodales tincidunt diam efficitur non. Integer pulvinar egestas volutpat. Ut quam orci, tincidunt ut lectus vel, viverra malesuada
-                            augue. Vestibulum ante massa, molestie quis lorem ullamcorper, finibus pellentesque turpis. Aliquam convallis turpis odio, eget tincidunt ipsum lobortis vel. Maecenas vitae dui luctus, posuere orci et, scelerisque leo. Sed
-                            rutrum nulla vitae consectetur maximus. Vivamus quis dui odio. Praesent vulputate aliquet ante sit amet aliquet. Duis convallis sollicitudin dui vitae placerat. Proin ac commodo massa. Etiam eu tortor blandit, porttitor mi
-                            sed, vehicula turpis.
+                        {{proyecto.descripcion}}
                         </section>
 
                     </div>
@@ -62,7 +59,7 @@
                                 <div class="col"></div>
                                 <div class="col">
                                     Fecha comienzo
-                                    <input matInput [matDatepicker]="datepicker" name="fechaInicio" #fechaInicio="ngModel" [(ngModel)]="proyecto.fechaInicio" placeholder="Elige una fecha" style="display: inline; width: 125px" required />
+                                    <input matInput [matDatepicker]="datepicker" name="fechaInicio" placeholder="Elige una fecha" style="display: inline; width: 125px" required />
                                     <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
                                     <mat-datepicker #datepicker></mat-datepicker>
                                 </div>
@@ -72,14 +69,26 @@
                                 <div class="col"></div>
                                 <div class="col">
                                     Fecha fin
-                                    <input matInput [matDatepicker]="picker" name="fechaFin" #fechaFin="ngModel" [(ngModel)]="proyecto.fechaFin" placeholder="Elige una fecha" style="display: inline; width: 125px" required />
+                                    <input matInput [matDatepicker]="picker" name="fechaFin" placeholder="Elige una fecha" style="display: inline; width: 125px" required />
                                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                     <mat-datepicker #picker></mat-datepicker>
                                 </div>
                             </div>
                         </div>
                     </div>
-
+                    <div class ="row justify-content-end">
+                        <div class= "col-2 mt-5">
+                            <button
+                            type="button"
+                            class="btn btn-danger "
+                            (click) = "deleteProyecto()"
+                          >
+                            Borrar proyecto
+                          </button>
+                    </div>
+                   
+                 </div>
+                  
                 </div>
                 <!--Fin de la información del proyecto-->
             </div>
@@ -117,24 +126,24 @@
 
             <!--Inicio de los clientes del proyecto-->
             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                <h2 class="m-3">Lista de clientes del proyecto</h2>
+                <h2 class="m-3">Lista de usuarios participantes del proyecto</h2>
                 <div class="row justify-content-end mt-3">
                     <div class="col-1">
-                        <a [routerLink]="['/proyecto']"><img id="addUsuario" src="./assets/add-user.png" alt="carpeta" width="55" height="55" (click)="mostrarListaClientes()" /></a>
+                        <img id="addUsuario" src="./assets/add-user.png" alt="carpeta" width="55" height="55" (click)="mostrarListaClientes()" style="cursor: pointer;" />
                     </div>
                     <div class="row">
                         <div class="col-9">
                             <ul class="list-group list-group-flush ms-3">
                                 <li class="list-group-item">
-                                    <a [routerLink]="['/proyecto']">Cliente 1</a>
+                                    <a [routerLink]="['/proyecto']">Usuario 1</a>
                                     <img id="deleteUsuario" src="./assets/borrar-usuario.png" alt="Borrar usuario" width="40" height="40" style="cursor: pointer; margin-left: 88%;" />
                                 </li>
                                 <li class="list-group-item">
-                                    <a [routerLink]="['/proyecto']">Cliente 2</a>
+                                    <a [routerLink]="['/proyecto']">Usuario 2</a>
                                     <img id="deleteUsuario" src="./assets/borrar-usuario.png" alt="carpeta" width="40" height="40" style="cursor: pointer; margin-left: 88%;" />
                                 </li>
                                 <li class="list-group-item">
-                                    <a [routerLink]="['/proyecto']">Cliente 3</a>
+                                    <a [routerLink]="['/proyecto']">Usuario 3</a>
                                     <img id="deleteUsuario" src="./assets/borrar-usuario.png" alt="carpeta" width="40" height="40" style="cursor: pointer; margin-left: 88%;" />
                                 </li>
                             </ul>

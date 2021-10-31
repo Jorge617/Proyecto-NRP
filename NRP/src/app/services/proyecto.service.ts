@@ -18,14 +18,14 @@ export class ProyectoService {
 
     }
 
-    getProyectos() {
+    getProyectos(): Observable<any> {
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
-        return this._http.get(this.url + 'projectos', { headers: headers });
+        return this._http.get(this.url + 'proyectos', { headers: headers });
     }
 
     getProyecto(id: any): Observable<any> {
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
-        return this._http.get(this.url + 'projectos/' + id, { headers: headers });
+        return this._http.get(this.url + 'proyectos/' + id, { headers: headers });
     }
 
     crearProyecto(proyecto: Proyecto): Observable<any> {
@@ -36,7 +36,7 @@ export class ProyectoService {
 
     deleteProyecto(proyecto: Proyecto): Observable<any> {
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
-        return this._http.delete(this.url + "proyectos/" + proyecto.id, { headers: headers });
+        return this._http.delete(this.url + "proyectos/" + proyecto._id, { headers: headers });
     }
 }
 
