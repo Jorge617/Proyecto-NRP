@@ -17,7 +17,7 @@ proyectoController.crearProyecto = async (req, res) => {
 
 proyectoController.getProyectos = async (req, res) => {
     const proyectos = await proyecto.find();
-    res.json(proyectos);
+    res.json({proyectos});
 }
 
 
@@ -156,7 +156,17 @@ proyectoController.getRequisitos = async (req, res) => {
 }
 
 
+proyectoController.getUsuariosDisponibles = async (req, res) => {
+    const proyect = await proyecto.findById(req.params.id);
+    var usuarios = []
+    usuarios = await usuario.find();
 
+    for(var i = 0; i < usuarios.length; i++){
+        if()
+    }
+
+    res.send({ requisitos: proyect.requisitos })
+}
 
 
 
