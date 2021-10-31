@@ -159,13 +159,24 @@ proyectoController.getRequisitos = async (req, res) => {
 proyectoController.getUsuariosDisponibles = async (req, res) => {
     const proyect = await proyecto.findById(req.params.id);
     var usuarios = []
+    var usuariosProyecto = []
+    var resultado = []
+    usuariosProyecto = proyect.usuarios
     usuarios = await usuario.find();
 
+
+    console.log(usuariosProyecto)
+
     for(var i = 0; i < usuarios.length; i++){
-        if()
+        
+        if(usuariosProyecto.includes(usuarios[i]._id)){
+            console.log("ee")
+
+            resultado.push( await usuario.findById(usuarios[i]))
+        }
     }
 
-    res.send({ requisitos: proyect.requisitos })
+    res.send({ resultado})
 }
 
 
