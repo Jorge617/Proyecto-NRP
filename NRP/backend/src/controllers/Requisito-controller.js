@@ -29,6 +29,16 @@ requisitoController.deleteAll = async (req, res) => {
 
 }
 
+requisitoController.updateRequisito = async (req, res) => {
+    const {nombre, prioridad, coste} = req.body;
+
+    await requisito.updateOne({_id : {$eq:req.params.id}} , {$set : { nombre:nombre,
+                                                                      prioridad:prioridad,
+                                                                      coste:coste  } })
+
+    res.json("Put completado");
+}
+
 
 requisitoController.getUsuarios = async (req, res ) =>{
     const {id} = req.params
