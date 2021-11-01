@@ -147,8 +147,8 @@
                     <div class="row">
                         <div class="col-9">
                             <ul class="list-group list-group-flush ms-3">
-                                <li class="list-group-item">
-                                    <a [routerLink]="['/proyecto']">Usuario 1</a>
+                                <li *ngFor= "let usuarioProyecto of arrUsuariosNombre" class="list-group-item">
+                                    <a [routerLink]="['/proyecto']">{{usuarioProyecto}}</a>
                                     <img id="deleteUsuario" src="./assets/borrar-usuario.png" alt="Borrar usuario" width="40" height="40" style="cursor: pointer; margin-left: 88%;" />
                                 </li>
                                
@@ -167,7 +167,7 @@
 
                                 </div>
                                 <div class="list-group list-group-flush  scrollarea ">
-                                    <div *ngFor="let usuarioAdd of arrUsuarios" class="row m-3">
+                                    <div *ngFor="let usuarioAdd of arrUsuariosDisponibles" class="row m-3">
                                         <div class="col-10">
                                             <strong>{{usuarioAdd.nombre}} </strong>
                                           
