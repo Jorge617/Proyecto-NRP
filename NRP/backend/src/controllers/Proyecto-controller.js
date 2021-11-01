@@ -94,11 +94,11 @@ proyectoController.deleteUsuarios = async (req, res) => {
         await usuario.updateOne({ _id: { $eq: usuarios[i].usuario } }, { $pull: { proyectos: req.params.id } })
         try {
 
-            await proyect.updateOne({ $pull: { "usuarios": usuarios[i] }});
+            await proyect.updateOne({ $pull: { "usuarios": usuarios[i] } });
         } catch (e) {
             console.log(e);
         }
-        }
+    }
 
 
     await proyect.save()
@@ -176,27 +176,20 @@ proyectoController.getUsuariosDisponibles = async (req, res) => {
     var resultado = []
     usuariosProyecto = proyect.usuarios
     usuarios = await usuario.find();
+    var aux = []
 
-    
+    for (var i = 0; i < usuariosProyecto.length; i++) {
+        aux.push(String(usuariosProyecto[i].usuario))
+
+    }
     for (var i = 0; i < usuarios.length; i++) {
-        if(usuariosProyecto.length==0 && !(usuarios[i].propietario.includes(req.params.id)) && !resultado.includes(usuarios[i])){
-            resultado.push(await usuario.findById(usuarios[i]))
-    
-        }else{
-        for(var j = 0; j< usuariosProyecto.length; j++){
-
-            if (usuariosProyecto[j].usuario!=String(usuarios[i]._id) && !(usuarios[i].propietario.includes(req.params.id)) && !resultado.includes(usuarios[i])) {
-                resultado.push(await usuario.findById(usuarios[i]))
-            }
+        if (usuariosProyecto.length == 0 || (!(aux.includes(String(usuarios[i]._id))) && !(usuarios[i].propietario.includes(req.params.id)))) {
+            resultado.push(usuarios[i])
         }
 
-        
     }
-}
-
     res.send({ resultado })
 }
-
 
 
 
