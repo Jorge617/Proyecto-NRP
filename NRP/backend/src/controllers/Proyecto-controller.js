@@ -91,9 +91,14 @@ proyectoController.deleteUsuarios = async (req, res) => {
 
 
     for (var i = 0; i < usuarios.length; i++) {
-        await usuario.updateOne({ _id: { $eq: usuarios[i] } }, { $pull: { proyectos: req.params.id } })
-        proyect.usuarios.pull(usuarios[i])
-    }
+        await usuario.updateOne({ _id: { $eq: usuarios[i].usuario } }, { $pull: { proyectos: req.params.id } })
+        try {
+
+            await proyect.updateOne({ $pull: { "usuarios": usuarios[i] }});
+        } catch (e) {
+            console.log(e);
+        }
+        }
 
 
     await proyect.save()
