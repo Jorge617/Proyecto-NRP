@@ -20,7 +20,7 @@
           <h1 class="text-black mt-3 ms-4">Nuevo proyecto</h1>
         </div>
         <div class="col-1">
-          <a [routerLink]="['/inicio',usuario.id]"
+          <a [routerLink]="['/inicio',usuario._id]"
             ><img
               class="mt-4"
               src="./assets/flecha-hacia-atras.png"
@@ -117,7 +117,7 @@
             <button
               type="button"
               class="btn btn-danger ms-5"
-              [routerLink]="['/inicio',usuario.id]"
+              [routerLink]="['/inicio',usuario._id]"
             >
               Cancelar
             </button>

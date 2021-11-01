@@ -40,10 +40,10 @@ export class CrearProyectoComponent implements OnInit {
   }
 
   crearProyecto() {
-    this.proyecto.idUsuario = this.usuario.id;
+    this.proyecto.idUsuario = this.usuario._id;
     this._proyectoService.crearProyecto(this.proyecto).subscribe();
     console.log(this.proyecto.fechaInicio);
-    this.router.navigateByUrl('/inicio/' + this.usuario.id);
+    this.router.navigateByUrl('/inicio/' + this.usuario._id);
   }
 
 }

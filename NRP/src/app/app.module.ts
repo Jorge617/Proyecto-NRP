@@ -21,6 +21,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { InicioClienteComponent } from './components/inicio-cliente/inicio-cliente.component';
 import { ProyectoClienteComponent } from './components/proyecto-cliente/proyecto-cliente.component';
 import { CrearTareaComponent } from './components/crear-tarea/crear-tarea.component';
+import { AddUsuarioParticipanteComponent } from './components/add-usuario-participante/add-usuario-participante.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { CrearTareaComponent } from './components/crear-tarea/crear-tarea.compon
     MenuComponent,
     InicioClienteComponent,
     ProyectoClienteComponent,
-    CrearTareaComponent
+    CrearTareaComponent,
+    AddUsuarioParticipanteComponent
   ],
   imports: [
     BrowserModule,

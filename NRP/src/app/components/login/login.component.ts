@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
           this.logueado = true;
           let token = this._usuarioService.token();
           this._usuarioService.setTokenCookies(token.toString());
-          this.usuario.id = data.usuario._id;
+          this.usuario._id = data.usuario._id;
           this.usuario.token = token;
           this.usuario.importancia = data.usuario.importancia;
           this.usuario.esCliente = data.usuario.esCliente;
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
           this._usuarioService.updateUsuario(this.usuario).subscribe();
           form.reset();
           if (!this.usuario.esCliente) {
-            this.router.navigateByUrl('/inicio/' + this.usuario.id);
+            this.router.navigateByUrl('/inicio/' + this.usuario._id);
           } else {
             this.router.navigateByUrl('/inicio-cliente');
           }

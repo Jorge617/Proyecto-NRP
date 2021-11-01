@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Pagina cliente principal</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body>
+    <div class="container">
+
+        <!--Inicio del menu-->
+        <menu></menu>
+        <!--Fin del menu-->
+
+        <!--Inicio del contenido de INICIO-->
+        <div class="row">
+            <div class="col">
+                <h1 class="text-black mt-3 ms-4">{{proyecto.nombre}}</h1>
+            </div>
+            <div class="col-1">
+                <a [routerLink]="['/proyecto',proyecto._id]"><img class="mt-4" src="./assets/flecha-hacia-atras.png" alt="atras" width="50" height="50" /></a>
+            </div>
+        </div>
+        <h1>{{usuario.nombre}}</h1>
+        <!--Fin del contenido de INICIO-->
+    </div>
+</body>
+
+</html>

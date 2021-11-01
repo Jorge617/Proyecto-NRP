@@ -1,20 +1,18 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Usuario } from 'src/app/models/usuario';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { UsuarioService } from 'src/app/services/usuario.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Proyecto } from 'src/app/models/proyecto';
-import { DateAdapter } from '@angular/material/core';
+import { Usuario } from 'src/app/models/usuario';
 import { ProyectoService } from 'src/app/services/proyecto.service';
-
+import { DateAdapter } from '@angular/material/core';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
-  selector: 'app-proyecto',
-  templateUrl: './proyecto.component.html',
-  styleUrls: ['./proyecto.component.css'],
+  selector: 'app-add-usuario-participante',
+  templateUrl: './add-usuario-participante.component.html',
+  styleUrls: ['./add-usuario-participante.component.css'],
   providers: [UsuarioService, ProyectoService]
 })
-export class ProyectoComponent implements OnInit, DoCheck {
+export class AddUsuarioParticipanteComponent implements OnInit {
 
   public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], []);
   public proyecto: Proyecto;
@@ -27,55 +25,16 @@ export class ProyectoComponent implements OnInit, DoCheck {
   }
 
   ngOnInit(): void {
-    this.getUserLogged();
-
-    $("#ListaClientes").hide();
-
-    this.getUsuarios();
 
     this.route.params.subscribe(params => {
       this.getProyecto(params.id);
+
     });
 
-
+    this.route.params.subscribe(params => {
+      this.getUsuario(params.idUsuario);
+    });
   }
-  ngDoCheck() {
-    console.log("Cambio")
-  }
-
-  getUserLogged() {
-    this._usuarioService.getUserLogged(this.usuario);
-
-  }
-
-  cerrarSesion() {
-    this._usuarioService.deleteTokenCookies();
-    this.router.navigateByUrl("/login");
-  }
-
-  mostrarListaClientes() {
-    $("#ListaClientes").fadeIn();
-
-
-  }
-
-  cerrarLista() {
-    $("#ListaClientes").hide(500);
-
-  }
-
-  getUsuarios() {
-    this._usuarioService.getUsuarios().subscribe(
-
-      response => {
-        this.arrUsuarios = response.usuarios;
-      },
-      error => {
-        console.log(<any>error);
-      }
-    );
-  }
-
 
   getProyecto(id: any) {
     this._proyectoService.getProyecto(id).subscribe(
@@ -96,10 +55,21 @@ export class ProyectoComponent implements OnInit, DoCheck {
       }
     );
   }
-
-
-  deleteProyecto() {
-    this._proyectoService.deleteProyecto(this.proyecto).subscribe();
-    this.router.navigateByUrl("/inicio/" + this.usuario._id);
+  getUsuario(id: any) {
+    this._usuarioService.getUsuario(id).subscribe(
+      response => {
+        this.usuario._id = response._id;
+        this.usuario.nombre = response.nombre
+        this.usuario.password = response.password;
+        this.usuario.token = response.token;
+        this.usuario.importancia = response.importancia;
+        this.usuario.esCliente = response.esCliente;
+        this.usuario.proyectos = response.proyectos;
+        this.usuario.propietario = response.propietario
+      },
+      error => {
+        console.log(<any>error);
+      }
+    )
   }
 }

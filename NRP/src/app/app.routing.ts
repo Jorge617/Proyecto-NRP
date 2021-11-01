@@ -10,6 +10,7 @@ import { ProyectoComponent } from './components/proyecto/proyecto.component';
 import { InicioClienteComponent } from './components/inicio-cliente/inicio-cliente.component';
 import { ProyectoClienteComponent } from './components/proyecto-cliente/proyecto-cliente.component';
 import { CrearTareaComponent } from './components/crear-tarea/crear-tarea.component';
+import { AddUsuarioParticipanteComponent } from './components/add-usuario-participante/add-usuario-participante.component';
 
 const appRoutes: Routes = [
     { path: '', component: LoginComponent },
@@ -29,6 +30,7 @@ const appRoutes: Routes = [
     { path: 'proyecto-cliente:id', component: ProyectoClienteComponent },
     { path: 'crear-tarea', component: CrearTareaComponent },
     { path: 'crear-tarea/:id', component: CrearTareaComponent },
+    { path: 'add-usuario-participante/:id/:idUsuario', component: AddUsuarioParticipanteComponent },
     { path: '**', component: LoginComponent }
 ];
 

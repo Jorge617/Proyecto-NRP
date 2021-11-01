@@ -2,7 +2,7 @@ import { Proyecto } from "./proyecto";
 
 export class Usuario {
 	constructor(
-		public id: string,
+		public _id: string,
 		public nombre: string,
 		public password: string,
 		public r_password: string,

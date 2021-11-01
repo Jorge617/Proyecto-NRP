@@ -35,14 +35,13 @@ export class InicioComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    while (this.arrProyectosCreados.length > 0)
-      this.arrProyectosCreados.pop();
+    this.arrProyectosCreados = []
   }
 
 
   getUserLogged() {
     this._usuarioService.getUserLogged(this.usuario);
-    this.getProyectos(this.usuario.id);
+    this.getProyectos(this.usuario._id);
   }
 
   cerrarSesion() {

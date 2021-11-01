@@ -21,7 +21,7 @@
                 <h1 class="text-black mt-3 ms-4">{{proyecto.nombre}}</h1>
             </div>
             <div class="col-1">
-                <a [routerLink]="['/inicio',usuario.id]"><img class="mt-4" src="./assets/flecha-hacia-atras.png" alt="atras" width="50" height="50" /></a>
+                <a [routerLink]="['/inicio',usuario._id]"><img class="mt-4" src="./assets/flecha-hacia-atras.png" alt="atras" width="50" height="50" /></a>
             </div>
         </div>
 
@@ -80,7 +80,20 @@
                         <div class= "col-2 mt-5">
                             <button
                             type="button"
-                            class="btn btn-danger "
+                            class="btn btn-success "
+                            
+                          >
+                            Guardar proyecto
+                          </button>
+                    </div>
+                   
+                 </div>
+                    
+                    <div class ="row justify-content-end">
+                        <div class= "col-2 mt-2">
+                            <button
+                            type="button"
+                            class="btn btn-danger"
                             (click) = "deleteProyecto()"
                           >
                             Borrar proyecto
@@ -161,12 +174,13 @@
 
                                 </div>
                                 <div class="list-group list-group-flush  scrollarea ">
-                                    <div *ngFor="let usuario of arrUsuarios" class="row m-3">
+                                    <div *ngFor="let usuarioAdd of arrUsuarios" class="row m-3">
                                         <div class="col-10">
-                                            <strong>{{usuario.nombre}} </strong>
+                                            <strong>{{usuarioAdd.nombre}} </strong>
+                                          
                                         </div>
                                         <div class="col-2">
-                                            <img id="addUsuario" src="./assets/addU.png" alt="cerrar lista" width="25" height="25" style="cursor: pointer;">
+                                            <a [routerLink]="['/add-usuario-participante',proyecto._id,usuarioAdd._id]"><img id="addUsuario" src="./assets/addU.png" alt="cerrar lista" width="25" height="25" style="cursor: pointer;"></a>
                                         </div>
                                     </div>
                                 </div>

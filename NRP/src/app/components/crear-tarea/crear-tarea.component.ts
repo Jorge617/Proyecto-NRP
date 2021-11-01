@@ -98,7 +98,7 @@ export class CrearTareaComponent implements OnInit {
         this.proyecto.fechaFin = response.fechaFin;
         this.proyecto.usuarios = response.usuarios;
         this.proyecto.requisitos = response.requisitos;
-        this.proyecto.idUsuario = this.usuario.id;
+        this.proyecto.idUsuario = this.usuario._id;
 
       },
       error => {
