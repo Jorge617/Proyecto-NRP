@@ -97,6 +97,6 @@ export class ProyectoComponent implements OnInit {
 
   deleteProyecto() {
     this._proyectoService.deleteProyecto(this.proyecto).subscribe();
-    this.router.navigateByUrl("/inicio");
+    this.router.navigateByUrl("/inicio/" + this.usuario.id);
   }
 }

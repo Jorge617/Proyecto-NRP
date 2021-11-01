@@ -15,15 +15,20 @@ const appRoutes: Routes = [
     { path: '', component: LoginComponent },
     { path: 'registro', component: RegistroComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'inicio', component: InicioComponent },
+    { path: 'inicio/:id', component: InicioComponent },
     { path: 'requisito', component: RequisitoComponent },
+    { path: 'requisito/:id', component: RequisitoComponent },
     { path: 'crear-proyecto', component: CrearProyectoComponent },
+    { path: 'crear-proyecto/:id', component: CrearProyectoComponent },
     { path: 'proyecto', component: ProyectoComponent },
     { path: 'proyecto/:id', component: ProyectoComponent },
     { path: 'descripcion-tarea-cliente', component: DescripcionTareaClienteComponent },
+    { path: 'descripcion-tarea-cliente/:id', component: DescripcionTareaClienteComponent },
     { path: 'inicio-cliente', component: InicioClienteComponent },
     { path: 'proyecto-cliente', component: ProyectoClienteComponent },
+    { path: 'proyecto-cliente:id', component: ProyectoClienteComponent },
     { path: 'crear-tarea', component: CrearTareaComponent },
+    { path: 'crear-tarea/:id', component: CrearTareaComponent },
     { path: '**', component: LoginComponent }
 ];
 

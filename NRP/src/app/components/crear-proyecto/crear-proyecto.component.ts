@@ -43,7 +43,7 @@ export class CrearProyectoComponent implements OnInit {
     this.proyecto.idUsuario = this.usuario.id;
     this._proyectoService.crearProyecto(this.proyecto).subscribe();
     console.log(this.proyecto.fechaInicio);
-    this.router.navigateByUrl('/inicio');
+    this.router.navigateByUrl('/inicio/' + this.usuario.id);
   }
 
 }

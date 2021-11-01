@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Usuario } from 'src/app/models/usuario';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { ProyectoService } from 'src/app/services/proyecto.service';
 import { Proyecto } from 'src/app/models/proyecto';
@@ -16,29 +16,33 @@ import { Proyecto } from 'src/app/models/proyecto';
 export class InicioComponent implements OnInit, OnDestroy {
 
   public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], []);
-  public arrProyectos: Proyecto[];
+
   public arrProyectosCreados: Proyecto[];
   public arrProyectosParticipo: Proyecto[];
 
-  constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService) {
-    this.arrProyectos = [];
+  constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, public route: ActivatedRoute) {
+
     this.arrProyectosCreados = [];
     this.arrProyectosParticipo = [];
   }
 
   ngOnInit(): void {
     this.getUserLogged();
-    this.getProyectos();
+    this.route.params.subscribe(params => {
+      this.getProyectos(params.id);
+    });
+
   }
 
   ngOnDestroy() {
-
-    while (this.arrProyectos.length > 0)
-      this.arrProyectos.pop();
+    while (this.arrProyectosCreados.length > 0)
+      this.arrProyectosCreados.pop();
   }
+
 
   getUserLogged() {
     this._usuarioService.getUserLogged(this.usuario);
+    this.getProyectos(this.usuario.id);
   }
 
   cerrarSesion() {
@@ -46,11 +50,11 @@ export class InicioComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl("/login");
   }
 
-  getProyectos() {
-    this._proyectoService.getProyectos().subscribe(
+  getProyectos(id: string) {
+    this._usuarioService.getProyectos(id).subscribe(
 
       response => {
-        this.arrProyectos = response.proyectos;
+        this.arrProyectosCreados = response.proyectos;
       },
       error => {
         console.log(<any>error);

@@ -21,7 +21,7 @@
                 <h1 class="text-black mt-3 ms-4">{{proyecto.nombre}}</h1>
             </div>
             <div class="col-1">
-                <a [routerLink]="['/inicio']"><img class="mt-4" src="./assets/flecha-hacia-atras.png" alt="atras" width="50" height="50" /></a>
+                <a [routerLink]="['/inicio',usuario.id]"><img class="mt-4" src="./assets/flecha-hacia-atras.png" alt="atras" width="50" height="50" /></a>
             </div>
         </div>
 
@@ -97,7 +97,7 @@
                 <h2 class="m-3">Lista de tareas del proyecto</h2>
                 <div class="row justify-content-end mt-3">
                     <div class="col-1">
-                        <a [routerLink]="['/crear-tarea']"><img id="addTarea" src="./assets/add.png" alt="carpeta" width="55" height="55" /></a>
+                        <a [routerLink]="['/crear-tarea',proyecto._id]"><img id="addTarea" src="./assets/add.png" alt="carpeta" width="55" height="55" /></a>
                     </div>
                     <div class="row">
                         <div class="col-9">

@@ -29,7 +29,7 @@ export class RegistroComponent implements OnInit {
     this._usuarioService.registro(this.usuario).subscribe(
       data => {
         form.reset();
-        this.router.navigateByUrl('/inicio');
+        this.router.navigateByUrl('/login');
       },
       error => {
         console.log(<any>error);
