@@ -17,26 +17,27 @@ import { ProyectoService } from 'src/app/services/proyecto.service';
 export class ProyectoComponent implements OnInit {
 
   public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], []);
-  public proyecto: Proyecto;
-  public arrUsuarios: Usuario[] | undefined;
+  public proyecto: Proyecto; //Proyecto actual
+  public arrUsuariosProyecto: Usuario[] | any; //Usuarios que participan en el proyecto
+  public arrUsuariosNombre: any[]; //Los nombres de los usuarios que participan en el proyecto
+  public arrUsuariosDisponibles: Usuario[] | undefined; //Los usuarios que se pueden asignar a un proyecto
 
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>,
     public route: ActivatedRoute) {
     this.dateAdapter.setLocale('es-ES');
     this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "");
+    this.arrUsuariosNombre = [];
+    this.arrUsuariosDisponibles = [];
   }
 
   ngOnInit(): void {
     this.getUserLogged();
 
     $("#ListaClientes").hide();
-
-    this.getUsuarios();
-
     this.route.params.subscribe(params => {
       this.getProyecto(params.id);
+      this.getUsuariosDisponibles(params.id);
     });
-
 
   }
 
@@ -61,19 +62,6 @@ export class ProyectoComponent implements OnInit {
 
   }
 
-  getUsuarios() {
-    this._usuarioService.getUsuarios().subscribe(
-
-      response => {
-        this.arrUsuarios = response.usuarios;
-      },
-      error => {
-        console.log(<any>error);
-      }
-    );
-  }
-
-
   getProyecto(id: any) {
     this._proyectoService.getProyecto(id).subscribe(
 
@@ -86,7 +74,18 @@ export class ProyectoComponent implements OnInit {
         this.proyecto.usuarios = response.usuarios;
         this.proyecto.requisitos = response.requisitos;
         this.proyecto.idUsuario = this.usuario._id;
-
+        //Usuarios del proyecto
+        this.arrUsuariosProyecto = response.usuarios;
+        for (var i = 0; i < this.arrUsuariosProyecto.length; i++) {
+          this._usuarioService.getUsuario(this.arrUsuariosProyecto[i].usuario).subscribe(
+            response => {
+              this.arrUsuariosNombre.push(response.nombre);
+            },
+            error => {
+              console.log(<any>error);
+            }
+          );
+        }
       },
       error => {
         console.log(<any>error);
@@ -94,9 +93,19 @@ export class ProyectoComponent implements OnInit {
     );
   }
 
+  getUsuariosDisponibles(id: any) {
+    this._proyectoService.getUsuariosDisponibles(id).subscribe(
+      response => {
+        this.arrUsuariosDisponibles = response.resultado;
+      }, error => {
+        console.log(<any>error);
+      });
+  }
+
 
   deleteProyecto() {
     this._proyectoService.deleteProyecto(this.proyecto).subscribe();
     this.router.navigateByUrl("/inicio/" + this.usuario._id);
   }
+
 }

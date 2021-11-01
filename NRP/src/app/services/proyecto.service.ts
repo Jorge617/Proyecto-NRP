@@ -39,12 +39,20 @@ export class ProyectoService {
         return this._http.delete(this.url + "proyectos/" + proyecto._id, { headers: headers });
     }
 
-    postUsuarios(idProyecto: string, usuarios: any[]) {
+    postUsuarios(idProyecto: string, usuarios: any[]): Observable<any> {
         let params = JSON.stringify({ usuarios });
-        console.log(params);
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
-        console.log(this.url + "proyectos/" + idProyecto + "/usuarios");
         return this._http.post(this.url + "proyectos/" + idProyecto + "/usuarios", params, { headers: headers });
+    }
+
+    getUsuarios(idProyecto: string): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this._http.get(this.url + "proyectos/" + idProyecto + "/usuarios", { headers: headers });
+    }
+
+    getUsuariosDisponibles(idProyecto: string): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this._http.get(this.url + "proyectos/" + idProyecto + "/usuarios-disponibles", { headers: headers });
     }
 }
 
