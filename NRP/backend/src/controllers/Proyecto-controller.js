@@ -64,7 +64,7 @@ proyectoController.postUsuarios = async (req, res) => {
     usuarios = req.body.usuarios
 
     for (var i = 0; i < usuarios.length; i++) {
-        await usuario.updateOne({ _id: { $eq: usuarios[i] } }, { $push: { proyectos: req.params.id } })
+        await usuario.updateOne({ _id: { $eq: usuarios[i].usuario } }, { $push: { proyectos: req.params.id } })
 
     }
 
