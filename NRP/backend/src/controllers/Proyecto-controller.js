@@ -4,11 +4,11 @@ const usuario = require('../models/Usuario.js');
 const requisito = require('../models/Requisito.js');
 
 proyectoController.crearProyecto = async (req, res) => {
-    const { nombre, fechaInicio, fechaFin, usuarios,descripcion, idUsuario} = req.body
+    const { nombre, fechaInicio, fechaFin, usuarios, descripcion, idUsuario } = req.body
     const nuevoProyecto = new proyecto({ nombre, fechaInicio, fechaFin, usuarios, descripcion });
     await nuevoProyecto.save();
 
-    await usuario.updateOne({_id:{$eq:idUsuario}}, {$push : {propietario:nuevoProyecto._id}})
+    await usuario.updateOne({ _id: { $eq: idUsuario } }, { $push: { propietario: nuevoProyecto._id } })
 
     res.json({ message: `proyecto dado de alta ${nombre} ` });
 
@@ -23,7 +23,7 @@ proyectoController.deleteAll = async (req, res) => {
 
 proyectoController.getProyectos = async (req, res) => {
     const proyectos = await proyecto.find();
-    res.json({proyectos});
+    res.json({ proyectos });
 }
 
 
@@ -38,12 +38,12 @@ proyectoController.deleteProyecto = async (req, res) => {
 
     const getProyecto = await proyecto.findById(req.params.id);
     var usuarios = getProyecto.usuarios
-    for(var i = 0; i < usuarios.length; i++){
-        await usuario.updateOne({_id : {$eq:usuarios[i]}} , {$pull : {propietario:req.params.id} })
-        await usuario.updateOne({_id : {$eq:usuarios[i]}} , {$pull : {proyectos:id} })
+    for (var i = 0; i < usuarios.length; i++) {
+        await usuario.updateOne({ _id: { $eq: usuarios[i] } }, { $pull: { propietario: req.params.id } })
+        await usuario.updateOne({ _id: { $eq: usuarios[i] } }, { $pull: { proyectos: id } })
     }
 
-    
+
     await proyecto.findByIdAndDelete(id);
     res.json('proyecto borrado');
 }
@@ -63,17 +63,17 @@ proyectoController.postUsuarios = async (req, res) => {
     var usuarios = [];
     usuarios = req.body.usuarios
 
-    for(var i = 0; i < usuarios.length; i++){
-        await usuario.updateOne({_id : {$eq:usuarios[i]}} , {$push : {proyectos:req.params.id} })
+    for (var i = 0; i < usuarios.length; i++) {
+        await usuario.updateOne({ _id: { $eq: usuarios[i] } }, { $push: { proyectos: req.params.id } })
 
     }
-    
+
     const proyect = await proyecto.findById(req.params.id);
     var aux = [];
     aux = proyect.usuarios;
     var resultado = aux.concat(usuarios)
     try {
-        
+
         await proyect.updateOne({ "usuarios": resultado });
     } catch (e) {
         console.log(e);
@@ -90,11 +90,11 @@ proyectoController.deleteUsuarios = async (req, res) => {
     const proyect = await proyecto.findById(req.params.id);
 
 
-    for(var i = 0; i < usuarios.length; i++){
-        await usuario.updateOne({_id : {$eq:usuarios[i]}} , {$pull : {proyectos:req.params.id} })
+    for (var i = 0; i < usuarios.length; i++) {
+        await usuario.updateOne({ _id: { $eq: usuarios[i] } }, { $pull: { proyectos: req.params.id } })
         proyect.usuarios.pull(usuarios[i])
     }
-   
+
 
     await proyect.save()
 
@@ -108,11 +108,11 @@ proyectoController.updateUsuarios = async (req, res) => {
     const proyect = await proyecto.findById(req.params.id);
 
 
-    for(var i = 0; i < usuarios.length; i++){
-        await usuario.updateOne({_id : {$eq:usuarios[i]}} , {$set : {proyectos:req.params.id} })
+    for (var i = 0; i < usuarios.length; i++) {
+        await usuario.updateOne({ _id: { $eq: usuarios[i] } }, { $set: { proyectos: req.params.id } })
         proyect.usuarios.pull(usuarios[i])
     }
-   
+
 
     await proyect.save()
 
@@ -142,11 +142,11 @@ proyectoController.deleteRequisitos = async (req, res) => {
     const proyect = await proyecto.findById(req.params.id);
 
 
-    for(var i = 0; i < requisitos.length; i++){
-        await requisito.updateOne({_id : {$eq:requisitos[i]}} , {$pull : {proyectos:req.params.id} })
+    for (var i = 0; i < requisitos.length; i++) {
+        await requisito.updateOne({ _id: { $eq: requisitos[i] } }, { $pull: { proyectos: req.params.id } })
         proyect.requisitos.pull(requisitos[i])
     }
-   
+
 
     await proyect.save()
 
@@ -172,14 +172,14 @@ proyectoController.getUsuariosDisponibles = async (req, res) => {
     usuariosProyecto = proyect.usuarios
     usuarios = await usuario.find();
 
-    for(var i = 0; i < usuarios.length; i++){
-        
-        if(!usuariosProyecto.includes(usuarios[i]._id) && !usuarios[i].propietario.includes(req.params.id)){
-            resultado.push( await usuario.findById(usuarios[i]))
+    for (var i = 0; i < usuarios.length; i++) {
+
+        if (!usuariosProyecto.includes(usuarios[i]._id) && !usuarios[i].propietario.includes(req.params.id)) {
+            resultado.push(await usuario.findById(usuarios[i]))
         }
     }
 
-    res.send({ resultado})
+    res.send({ resultado })
 }
 
 

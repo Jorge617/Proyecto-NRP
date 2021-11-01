@@ -8,7 +8,7 @@ export class Proyecto {
 		public requisitos: Requisito[],
 		public fechaInicio: Date | string,
 		public fechaFin: Date | string,
-		public usuarios: any[],
+		public usuarios: [],
 		public descripcion: string,
 		public idUsuario: string | undefined
 

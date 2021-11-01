@@ -39,10 +39,12 @@ export class ProyectoService {
         return this._http.delete(this.url + "proyectos/" + proyecto._id, { headers: headers });
     }
 
-    postUsuarios(proyecto: Proyecto) {
-        let params = JSON.stringify(proyecto);
+    postUsuarios(idProyecto: string, usuarios: any[]) {
+        let params = JSON.stringify({ usuarios });
+        console.log(params);
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
-        return this._http.post(this.url + "proyectos/" + proyecto._id + "/usuarios", params, { headers: headers });
+        console.log(this.url + "proyectos/" + idProyecto + "/usuarios");
+        return this._http.post(this.url + "proyectos/" + idProyecto + "/usuarios", params, { headers: headers });
     }
 }
 

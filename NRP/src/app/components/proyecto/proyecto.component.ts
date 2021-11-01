@@ -14,7 +14,7 @@ import { ProyectoService } from 'src/app/services/proyecto.service';
   styleUrls: ['./proyecto.component.css'],
   providers: [UsuarioService, ProyectoService]
 })
-export class ProyectoComponent implements OnInit, DoCheck {
+export class ProyectoComponent implements OnInit {
 
   public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], []);
   public proyecto: Proyecto;
@@ -38,9 +38,6 @@ export class ProyectoComponent implements OnInit, DoCheck {
     });
 
 
-  }
-  ngDoCheck() {
-    console.log("Cambio")
   }
 
   getUserLogged() {

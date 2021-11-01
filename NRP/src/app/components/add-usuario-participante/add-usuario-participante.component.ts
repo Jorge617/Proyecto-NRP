@@ -82,13 +82,8 @@ export class AddUsuarioParticipanteComponent implements OnInit {
     )
   }
   anadirUsuarioProyecto() {
-    this.proyecto.usuarios = this.arrUsuarios;
-    this.arrUsuarios.push(this.usuario);
-    this.arrUsuarios.push(this.usuario.importancia);
-    console.log(this.arrUsuarios[0]);
-    console.log(this.arrUsuarios[1]);
-
-    this._proyectoService.postUsuarios(this.proyecto);
-    console.log("Añadido");
+    this.arrUsuarios.push({ "usuario": this.usuario._id, "importancia": this.usuario.importancia });
+    //console.log(this.arrUsuarios[0])
+    this._proyectoService.postUsuarios(this.proyecto._id, this.arrUsuarios);
   }
 }
