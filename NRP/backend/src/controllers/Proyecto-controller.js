@@ -62,12 +62,12 @@ proyectoController.updateProyecto = async (req, res) => {
 proyectoController.postUsuarios = async (req, res) => {
     var usuarios = [];
     usuarios = req.body.usuarios
-/*
+
     for(var i = 0; i < usuarios.length; i++){
         await usuario.updateOne({_id : {$eq:usuarios[i]}} , {$push : {proyectos:req.params.id} })
 
     }
-    */
+    
     const proyect = await proyecto.findById(req.params.id);
     var aux = [];
     aux = proyect.usuarios;
