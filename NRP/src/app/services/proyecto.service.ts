@@ -38,5 +38,11 @@ export class ProyectoService {
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
         return this._http.delete(this.url + "proyectos/" + proyecto._id, { headers: headers });
     }
+
+    postUsuarios(proyecto: Proyecto) {
+        let params = JSON.stringify(proyecto);
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this._http.post(this.url + "proyectos/" + proyecto._id + "/usuarios", params, { headers: headers });
+    }
 }
 

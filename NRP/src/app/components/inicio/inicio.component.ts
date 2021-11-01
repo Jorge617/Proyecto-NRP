@@ -41,7 +41,7 @@ export class InicioComponent implements OnInit, OnDestroy {
 
   getUserLogged() {
     this._usuarioService.getUserLogged(this.usuario);
-    this.getProyectos(this.usuario._id);
+
   }
 
   cerrarSesion() {

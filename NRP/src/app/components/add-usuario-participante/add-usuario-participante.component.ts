@@ -15,16 +15,20 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 export class AddUsuarioParticipanteComponent implements OnInit {
 
   public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], []);
+  public usuarioDelProyecto: Usuario = new Usuario("", "", "", "", "", 0, false, [], []);
   public proyecto: Proyecto;
-  public arrUsuarios: Usuario[] | undefined;
+  public arrUsuarios: any[];
 
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>,
     public route: ActivatedRoute) {
     this.dateAdapter.setLocale('es-ES');
     this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "");
+    this.arrUsuarios = []
   }
 
   ngOnInit(): void {
+
+    this.getUserLogged();
 
     this.route.params.subscribe(params => {
       this.getProyecto(params.id);
@@ -34,6 +38,11 @@ export class AddUsuarioParticipanteComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.getUsuario(params.idUsuario);
     });
+
+  }
+
+  getUserLogged() {
+    this._usuarioService.getUserLogged(this.usuarioDelProyecto);
   }
 
   getProyecto(id: any) {
@@ -47,7 +56,7 @@ export class AddUsuarioParticipanteComponent implements OnInit {
         this.proyecto.fechaFin = response.fechaFin;
         this.proyecto.usuarios = response.usuarios;
         this.proyecto.requisitos = response.requisitos;
-        this.proyecto.idUsuario = this.usuario._id;
+        this.proyecto.idUsuario = this.usuarioDelProyecto._id;
 
       },
       error => {
@@ -71,5 +80,15 @@ export class AddUsuarioParticipanteComponent implements OnInit {
         console.log(<any>error);
       }
     )
+  }
+  anadirUsuarioProyecto() {
+    this.proyecto.usuarios = this.arrUsuarios;
+    this.arrUsuarios.push(this.usuario);
+    this.arrUsuarios.push(this.usuario.importancia);
+    console.log(this.arrUsuarios[0]);
+    console.log(this.arrUsuarios[1]);
+
+    this._proyectoService.postUsuarios(this.proyecto);
+    console.log("Añadido");
   }
 }
