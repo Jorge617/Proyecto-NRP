@@ -179,13 +179,13 @@ proyectoController.getUsuariosDisponibles = async (req, res) => {
 
     
     for (var i = 0; i < usuarios.length; i++) {
-        if(usuariosProyecto.length==0 && !(usuarios[i].propietario.includes(req.params.id))){
+        if(usuariosProyecto.length==0 && !(usuarios[i].propietario.includes(req.params.id)) && !resultado.includes(usuarios[i])){
             resultado.push(await usuario.findById(usuarios[i]))
     
         }else{
         for(var j = 0; j< usuariosProyecto.length; j++){
 
-            if (usuariosProyecto.usuario!=String(usuarios[i]._id) && !(usuarios[i].propietario.includes(req.params.id)) && !resultado.contains(usuarios[i])) {
+            if (usuariosProyecto[j].usuario!=String(usuarios[i]._id) && !(usuarios[i].propietario.includes(req.params.id)) && !resultado.includes(usuarios[i])) {
                 resultado.push(await usuario.findById(usuarios[i]))
             }
         }
