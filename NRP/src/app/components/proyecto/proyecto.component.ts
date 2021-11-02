@@ -32,13 +32,11 @@ export class ProyectoComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserLogged();
-
     $("#ListaClientes").hide();
     this.route.params.subscribe(params => {
       this.getProyecto(params.id);
       this.getUsuariosDisponibles(params.id);
     });
-
   }
 
   getUserLogged() {
@@ -77,7 +75,9 @@ export class ProyectoComponent implements OnInit {
         //Usuarios del proyecto
         this.arrUsuariosProyecto = response.usuarios;
         for (var i = 0; i < this.arrUsuariosProyecto.length; i++) {
+
           this._usuarioService.getUsuario(this.arrUsuariosProyecto[i].usuario).subscribe(
+
             response => {
               this.arrUsuariosNombre.push(response.nombre);
             },
@@ -100,6 +100,16 @@ export class ProyectoComponent implements OnInit {
       }, error => {
         console.log(<any>error);
       });
+  }
+
+  deleteUsuarios(indice: any) {
+
+    var deleteUsuario = [];
+    deleteUsuario.push(this.arrUsuariosProyecto[indice]);
+
+    this._proyectoService.deleteUsuarios(this.proyecto._id, deleteUsuario).subscribe();
+    window.location.reload();
+
   }
 
 

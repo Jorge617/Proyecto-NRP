@@ -49,11 +49,31 @@ export class InicioComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl("/login");
   }
 
+  filtroProyectos() {
+    return this.arrProyectosCreados.filter(x => x != null);
+  }
+
+  proyectosNull(): boolean {
+    var resultado = 0;
+    var sonNulos = false;
+    for (var i = 0; i < this.arrProyectosCreados.length; i++) {
+      if (this.arrProyectosCreados[i] == null) {
+        resultado++;
+      }
+    }
+    if (resultado == this.arrProyectosCreados.length) {
+      sonNulos = true;
+    }
+
+    return sonNulos;
+  }
+
   getProyectos(id: string) {
     this._usuarioService.getProyectos(id).subscribe(
 
       response => {
         this.arrProyectosCreados = response.proyectos;
+
       },
       error => {
         console.log(<any>error);
