@@ -38,6 +38,9 @@ proyectoController.deleteProyecto = async (req, res) => {
 
     const getProyecto = await proyecto.findById(req.params.id);
     var usuarios = getProyecto.usuarios
+
+    await usuario.updateMany({ $pull: { propietario: req.params.id } })
+
     for (var i = 0; i < usuarios.length; i++) {
         await usuario.updateOne({ _id: { $eq: usuarios[i] } }, { $pull: { propietario: req.params.id } })
         await usuario.updateOne({ _id: { $eq: usuarios[i] } }, { $pull: { proyectos: id } })
