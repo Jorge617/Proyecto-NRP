@@ -85,5 +85,7 @@ export class AddUsuarioParticipanteComponent implements OnInit {
     this.arrUsuarios.push({ "usuario": this.usuario._id, "importancia": this.usuario.importancia });
     //console.log(this.arrUsuarios[0])
     this._proyectoService.postUsuarios(this.proyecto._id, this.arrUsuarios).subscribe();
+    this.router.navigateByUrl('/proyecto/' + this.proyecto._id);
+
   }
 }
