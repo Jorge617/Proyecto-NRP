@@ -87,6 +87,10 @@ export class AddUsuarioParticipanteComponent implements OnInit {
     //console.log(this.arrUsuarios[0])
     this._proyectoService.postUsuarios(this.proyecto._id, this.arrUsuarios).subscribe();
     this.router.navigateByUrl('/proyecto' + this.proyecto._id);
+    this.router.navigateByUrl('/proyecto/' + this.proyecto._id);
+    this.route.params.subscribe(params => {
+      this.router.navigateByUrl("proyecto/" + params.id);
+    });
 
   }
 }

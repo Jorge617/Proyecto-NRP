@@ -102,7 +102,6 @@ usuarioController.getProyectosPropietario = async (req, res)=> {
     for(var i = 0; i < lista.length; i++){
        await resultado.push(await proyecto.findById(lista[i]))
     }
-    console.log(resultado)
     res.json({proyectos:resultado});
 }
 

@@ -38,6 +38,9 @@ proyectoController.deleteProyecto = async (req, res) => {
 
     const getProyecto = await proyecto.findById(req.params.id);
     var usuarios = getProyecto.usuarios
+
+    await usuario.updateMany({ $pull: { propietario: req.params.id } })
+
     for (var i = 0; i < usuarios.length; i++) {
         await usuario.updateOne({ _id: { $eq: usuarios[i] } }, { $pull: { propietario: req.params.id } })
         await usuario.updateOne({ _id: { $eq: usuarios[i] } }, { $pull: { proyectos: id } })
@@ -71,15 +74,22 @@ proyectoController.postUsuarios = async (req, res) => {
     const proyect = await proyecto.findById(req.params.id);
     var aux = [];
     aux = proyect.usuarios;
-    var resultado = aux.concat(usuarios)
+    var resultado = []
     try {
+        for (var i = 0; i < usuarios.length; i++) {
 
-        await proyect.updateOne({ "usuarios": resultado });
+            if(!aux.includes(usuarios[i])){
+                await proyect.updateOne({ $push:{usuarios: usuarios[i]}});
+            }
+
+        }
+
+        
     } catch (e) {
         console.log(e);
     }
 
-    res.send("Lista actualizada");
+    res.send(resultado);
 }
 
 
