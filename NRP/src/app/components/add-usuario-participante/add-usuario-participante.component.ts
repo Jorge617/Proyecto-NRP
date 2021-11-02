@@ -5,6 +5,7 @@ import { Usuario } from 'src/app/models/usuario';
 import { ProyectoService } from 'src/app/services/proyecto.service';
 import { DateAdapter } from '@angular/material/core';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { threadId } from 'worker_threads';
 
 @Component({
   selector: 'app-add-usuario-participante',
@@ -85,7 +86,11 @@ export class AddUsuarioParticipanteComponent implements OnInit {
     this.arrUsuarios.push({ "usuario": this.usuario._id, "importancia": this.usuario.importancia });
     //console.log(this.arrUsuarios[0])
     this._proyectoService.postUsuarios(this.proyecto._id, this.arrUsuarios).subscribe();
+    this.router.navigateByUrl('/proyecto' + this.proyecto._id);
     this.router.navigateByUrl('/proyecto/' + this.proyecto._id);
+    this.route.params.subscribe(params => {
+      this.router.navigateByUrl("proyecto/" + params.id);
+    });
 
   }
 }
