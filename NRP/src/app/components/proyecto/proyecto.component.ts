@@ -1,5 +1,5 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, DoCheck, NgZone, OnInit } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Usuario } from 'src/app/models/usuario';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -22,21 +22,32 @@ export class ProyectoComponent implements OnInit {
   public arrUsuariosNombre: any[]; //Los nombres de los usuarios que participan en el proyecto
   public arrUsuariosDisponibles: Usuario[] | undefined; //Los usuarios que se pueden asignar a un proyecto
 
+
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>,
     public route: ActivatedRoute) {
     this.dateAdapter.setLocale('es-ES');
     this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "");
     this.arrUsuariosNombre = [];
     this.arrUsuariosDisponibles = [];
+
   }
 
+
+
   ngOnInit(): void {
+
     this.getUserLogged();
     $("#ListaClientes").hide();
+
     this.route.params.subscribe(params => {
       this.getProyecto(params.id);
+    });
+
+    this.route.params.subscribe(params => {
       this.getUsuariosDisponibles(params.id);
     });
+
+
   }
 
   getUserLogged() {
@@ -44,10 +55,6 @@ export class ProyectoComponent implements OnInit {
 
   }
 
-  cerrarSesion() {
-    this._usuarioService.deleteTokenCookies();
-    this.router.navigateByUrl("/login");
-  }
 
   mostrarListaClientes() {
     $("#ListaClientes").fadeIn();
@@ -74,6 +81,7 @@ export class ProyectoComponent implements OnInit {
         this.proyecto.idUsuario = this.usuario._id;
         //Usuarios del proyecto
         this.arrUsuariosProyecto = response.usuarios;
+
         for (var i = 0; i < this.arrUsuariosProyecto.length; i++) {
 
           this._usuarioService.getUsuario(this.arrUsuariosProyecto[i].usuario).subscribe(
@@ -117,5 +125,7 @@ export class ProyectoComponent implements OnInit {
     this._proyectoService.deleteProyecto(this.proyecto).subscribe();
     this.router.navigateByUrl("/inicio/" + this.usuario._id);
   }
+
+
 
 }
