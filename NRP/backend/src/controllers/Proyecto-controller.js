@@ -76,10 +76,7 @@ proyectoController.postUsuarios = async (req, res) => {
             if(!aux.includes(usuarios[i])){
                 await proyect.updateOne({ $push:{usuarios: usuarios[i]}});
             }
-
-        }
-
-        
+        }        
     } catch (e) {
         console.log(e);
     }
@@ -94,12 +91,18 @@ proyectoController.deleteUsuarios = async (req, res) => {
     usuarios = req.body.usuarios
     const proyect = await proyecto.findById(req.params.id);
 
+    var usuariosProyecto = []
+    usuariosProyecto = proyect.usuarios
+
 
     for (var i = 0; i < usuarios.length; i++) {
-        await usuario.updateOne({ _id: { $eq: usuarios[i].usuario } }, { $pull: { proyectos: req.params.id } })
+        await usuario.updateOne({ _id: { $eq: usuarios[i]._id } }, { $pull: { proyectos: req.params.id } })
         try {
-
-            await proyect.updateOne({ $pull: { "usuarios": usuarios[i] } });
+            for (var j = 0; j < usuariosProyecto.length; j++) {
+                if (usuariosProyecto[j].usuario == usuarios[i]._id) {
+                    await proyect.updateOne({ $pull: { "usuarios": usuariosProyecto[j] } });
+                }
+            }
         } catch (e) {
             console.log(e);
         }
@@ -108,7 +111,7 @@ proyectoController.deleteUsuarios = async (req, res) => {
 
     await proyect.save()
 
-    res.send("Lista actualizada");
+    res.send(usuariosProyecto);
 }
 
 
