@@ -167,9 +167,7 @@
                                 </div>
                                 
                                 <div class="list-group list-group-flush  scrollarea ">
-                                    <div *ngIf = "arrUsuariosDisponibles.length == 0" class="col ms-3 mt-3">
-                                        <h2>Todos los usuarios están asignados</h2>
-                                      </div>
+                                 
                                     <div *ngFor="let usuarioAdd of arrUsuariosDisponibles;" class="row m-3">
                                         <div class="col-10">
                                             <strong>{{usuarioAdd.nombre}} </strong>
