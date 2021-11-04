@@ -52,10 +52,20 @@
           <h1 class="text-black mt-3 ms-4">Proyectos en los que participo</h1>
         </div>
       </div>
-      <div *ngIf = "arrProyectosParticipo.length == 0" class="ms-3 text-center" >
-        <h2>No participas en ningún proyecto</h2>
+      <div class="row">
+        <div class="col">
+          <div *ngIf = "arrProyectosParticipo.length == 0" class="ms-3 text-center">
+            <h2>No participas en ningún proyecto</h2>
+          </div>
+          <ul class="list-group list-group-flush ms-3">
+              <li *ngFor = "let proyecto of arrProyectosParticipoNombre" class="list-group-item ">
+                <a [routerLink]="['/proyecto',proyecto._id]">
+                  {{proyecto.nombre}}
+                </a>
+                </li>
+            </ul>
+        </div>
       </div>
-     
 
       <!--Fin del contenido de INICIO-->
     </div>

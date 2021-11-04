@@ -25,6 +25,7 @@ const appRoutes: Routes = [
     { path: 'proyecto/:id', component: ProyectoComponent },
     { path: 'descripcion-tarea-cliente', component: DescripcionTareaClienteComponent },
     { path: 'descripcion-tarea-cliente/:id', component: DescripcionTareaClienteComponent },
+    { path: 'descripcion-tarea-cliente/:id,:idTarea', component: DescripcionTareaClienteComponent },
     { path: 'inicio-cliente', component: InicioClienteComponent },
     { path: 'proyecto-cliente', component: ProyectoClienteComponent },
     { path: 'proyecto-cliente:id', component: ProyectoClienteComponent },

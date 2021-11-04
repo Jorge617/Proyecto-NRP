@@ -116,17 +116,8 @@
                         <div class="col-9">
                             <ul class="list-group list-group-flush ms-3">
                                 <li class="list-group-item">
-                                    <a [routerLink]="['/descripcion-tarea-cliente']">Tarea 1</a>
+                                    <a [routerLink]="['/descripcion-tarea-cliente',proyecto._id]">Tarea 1</a>
                                     <img id="addTarea" src="./assets/borrar-tarea.png" alt="Borrar usuario" width="40" height="40" style="cursor: pointer; margin-left: 88%;" />
-                                </li>
-                                <li class="list-group-item">
-                                    <a [routerLink]="['/proyecto']">Tarea 2</a>
-                                    <img id="addTarea" src="./assets/borrar-tarea.png" alt="carpeta" width="40" height="40" style="cursor: pointer; margin-left: 88%;" />
-                                </li>
-                                <li class="list-group-item">
-                                    <a [routerLink]="['/proyecto']">Tarea 3</a>
-                                    <img id="addTarea" src="./assets/borrar-tarea.png" alt="carpeta" width="40" height="40" style="cursor: pointer; margin-left: 88%;" />
-                                </li>
                             </ul>
                         </div>
                     </div>
@@ -149,13 +140,13 @@
                     
 
                     <div class="row">
-                        <div *ngIf = "arrUsuariosNombre.length == 0" class="col-5 ms-3">
+                        <div *ngIf = "arrUsuariosProyecto.length == 0" class="col-5 ms-3">
                             <h2>- No hay ningún usuario añadido a tu proyecto</h2>
                           </div>
                         <div class="col-9">
-                            <ul class="list-group list-group-flush ms-3">
-                                <li *ngFor= "let usuarioProyecto of arrUsuariosNombre;let indice = index" class="list-group-item">
-                                    <a [routerLink]="['/proyecto']">{{usuarioProyecto}}</a>
+                            <ul class="list-group list-group-flush ms-3 scrollarea">
+                                <li *ngFor= "let usuarioProyecto of arrUsuariosProyecto;let indice = index" class="list-group-item">
+                                    <a [routerLink]="['/proyecto']">{{usuarioProyecto.usuario}}</a>
                                     <img id="deleteUsuario" src="./assets/borrar-usuario.png" alt="Borrar usuario" width="40" height="40" style="cursor: pointer; margin-left: 88%;" (click) = "deleteUsuarios(indice)" />
                                 </li>
                                
@@ -176,6 +167,9 @@
                                 </div>
                                 
                                 <div class="list-group list-group-flush  scrollarea ">
+                                    <div *ngIf = "arrUsuariosDisponibles.length == 0" class="col ms-3 mt-3">
+                                        <h2>Todos los usuarios están asignados</h2>
+                                      </div>
                                     <div *ngFor="let usuarioAdd of arrUsuariosDisponibles;" class="row m-3">
                                         <div class="col-10">
                                             <strong>{{usuarioAdd.nombre}} </strong>

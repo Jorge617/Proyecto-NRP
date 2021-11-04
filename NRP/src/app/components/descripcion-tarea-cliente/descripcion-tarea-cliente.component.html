@@ -2,82 +2,88 @@
 <html lang="en">
 
 <head>
-    <title>Pagina de descripcion de lo que hace el requisito</title>
+    <title>Pagina crear tarea jefe de proyecto</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
     <div class="container">
-  <!--Inicio del menu-->
-  <menu></menu>
-  <!--Fin del menu-->
 
-      <!-- Titulo de la vista-->
-      <div class="row-12">
-        <div class="col-5 justify-content-lg-end">
-          <h2>Tarea "nombre"</h2>
-        </div>
+        <!--Inicio del menu-->
+        <menu></menu>
+        <!--Fin del menu-->
+
+        <!--Inicio del contenido de INICIO-->
+
+        <div class="row">
+          <div class="col">
+              <h1 class="text-black mt-3 ms-4">Nombre tarea</h1>
+          </div>
+          <div class="col-1">
+              <a [routerLink]="['/proyecto',proyecto._id]"><img class="mt-4" src="./assets/flecha-hacia-atras.png" alt="atras" width="50" height="50" /></a>
+          </div>
       </div>
-
-      <!-- Contenido de la vista-->
-
-      <div id="descripcionRequisito">
-        <div class="mb-3">
-          <label for="exampleFormControlTextarea1" class="form-label"
-            >DESCRIPCIÓN
-          </label>
-          <textarea
-            class="form-control"
-            id="exampleFormControlTextarea1"
-            rows="3"
-          ></textarea>
+    
+        <div class="row mt-3 ms-4 ">
+            <div class="col-3 mb-3 ">
+                <label for="exampleFormControlInput1 " class="form-label ">Nombre de tarea </label>
+                <input type="text " class="form-control " id="exampleFormControlInput1 " name="nombre " placeholder="Nombre " required />
+            </div>
+            <div class="col-3 mb-3 ">
+              <label for="exampleFormControlInput1 " class="form-label ">Responsable de la tarea </label>
+              <input type="text " class="form-control " id="exampleFormControlInput1 " name="nombre " placeholder="Nombre " required />
+          </div>
+            <div class="row ">
+                <div class="col-5 mb-3 ">
+                    <label for="exampleFormControlTextarea1 " class="form-label ">Descripción de la tarea </label>
+                    <textarea class="form-control " id="exampleFormControlTextarea1 " name="descripcion " rows="3 " required></textarea>
+                </div>
+            </div>
+            
         </div>
-      </div>
 
-        <!-- Fecha inicio y fecha fin-->
-        <div id="fechaInicioFin" class="row align-items-center">
-            <div class="col-6 form-check" style="margin-left: 1rem;">
-                <input class="form-check-input" type="checkbox" id="gridCheck">
-                <label class="form-check-label" for="gridCheck">Terminar</label>
+        <!-- Fecha inicio y ficha fin-->
+        <div id="fechaInicioFin " class="row align-items-center mt-3 ms-4 ">
+            <div class="col ">
+                <div class="col "></div>
+                <div class="col ">
+                    Fecha comienzo
+                    <input matInput [matDatepicker]="datepicker " name="fechaInicio " placeholder="Elige una fecha " style="display: inline; width: 125px " required />
+                    <mat-datepicker-toggle matSuffix [for]="datepicker "></mat-datepicker-toggle>
+                    <mat-datepicker #datepicker></mat-datepicker>
+                </div>
             </div>
 
-            <div class="col"> 
-            <div class="col"> </div>
-            <div class="col">
-                Comienzo:
-                <input matInput [matDatepicker]="datepicker" placeholder="Elige una fecha" style="display: inline; width: 125px;">
-                <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
-                <mat-datepicker #datepicker></mat-datepicker>  
-                </div>  
-           
-            </div>
-   
-            <div class="col"> 
-                <div class="col"> </div>
-                 <div class="col">
-                    Fin:
-                    <input matInput [matDatepicker]="picker" placeholder="Elige una fecha" style="display: inline; width: 125px;">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <div class="col ">
+                <div class="col "></div>
+                <div class="col ">
+                    Fecha fin
+                    <input matInput [matDatepicker]="picker " name="fechaFin " placeholder="Elige una fecha " style="display: inline; width: 125px " required />
+                    <mat-datepicker-toggle matSuffix [for]="picker "></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </div>
             </div>
         </div>
-        <!-- Fin de las fecha inicio y fecha fin-->
 
-        <div class="row">
-            <h2>Compañeros de la tarea</h2>
-            <div class="row">
-                <ul class="list-group list-group-flush ms-3">
-                    <li *ngFor="let usuario of arrUsuarios" class="list-group-item">
-                         {{usuario.nombre}}
-                         {{usuario.token}}
-                    </li>
-                  </ul>
-            </div>
-        </div>
+
+
+        <div class="row justify-content-end mt-4 ">
+          <div class="col-3 ">
+              <button type="button " class="btn btn-danger ms-5 " [routerLink]="[ '/proyecto', proyecto._id] ">
+      Borrar tarea
+      </button>
+      <div class="col-8 mt-2">
+           <button type="button " class="btn btn-success ms-5 " [routerLink]="[ '/proyecto', proyecto._id] ">
+               Guardar tarea
+                </button>
+       
+          </div>
+      </div>
+</div>
+
+        <!--Fin del contenido de INICIO-->
     </div>
-  </body>
+</body>
+
 </html>

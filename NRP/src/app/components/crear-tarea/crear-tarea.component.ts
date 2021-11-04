@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DateAdapter } from '@angular/material/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Proyecto } from 'src/app/models/proyecto';
+import { Requisito } from 'src/app/models/requisito';
 import { Usuario } from 'src/app/models/usuario';
 import { ProyectoService } from 'src/app/services/proyecto.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -17,6 +18,7 @@ export class CrearTareaComponent implements OnInit {
   public proyecto: Proyecto;
   public arrUsuarios: Usuario[];
   public arrUsuariosAdd: Usuario[];
+  public requisito: Requisito;
 
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>,
     public route: ActivatedRoute) {
@@ -24,11 +26,13 @@ export class CrearTareaComponent implements OnInit {
     this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "");
     this.arrUsuarios = [];
     this.arrUsuariosAdd = [];
+    this.requisito = new Requisito("", "", [this.usuario, 0], 0);
   }
 
   ngOnInit(): void {
     this.getUserLogged();
     $(".ListaClientes").hide();
+    $(".ListaAñadido").hide();
     this.getUsuarios();
 
     this.route.params.subscribe(params => {
@@ -53,17 +57,23 @@ export class CrearTareaComponent implements OnInit {
   }
 
   cerrarLista() {
-    $(".ListaClientes").hide(500);
+    $(".ListaClientes").hide(1000);
+    $(".ListaAñadido").hide(1000);
+
 
   }
 
   addUsuario(indice: number) {
     this.arrUsuariosAdd.push(this.arrUsuarios[indice]);
+    $(".ListaAñadido").fadeIn();
+    $(".ListaClientes").hide(500);
 
   }
 
   deleteUsuario(indice: number) {
     this.removeItemFromArr(this.arrUsuariosAdd, this.arrUsuariosAdd[indice]);
+    $(".ListaClientes").fadeIn(500);
+    $(".ListaAñadido").hide();
     console.log("Usuario eliminado");
   }
 

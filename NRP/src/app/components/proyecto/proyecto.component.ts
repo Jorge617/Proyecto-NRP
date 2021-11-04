@@ -20,7 +20,7 @@ export class ProyectoComponent implements OnInit {
   public proyecto: Proyecto; //Proyecto actual
   public arrUsuariosProyecto: Usuario[] | any; //Usuarios que participan en el proyecto
   public arrUsuariosNombre: any[]; //Los nombres de los usuarios que participan en el proyecto
-  public arrUsuariosDisponibles: Usuario[] | undefined; //Los usuarios que se pueden asignar a un proyecto
+  public arrUsuariosDisponibles: Usuario[]; //Los usuarios que se pueden asignar a un proyecto
 
 
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>,
@@ -81,24 +81,31 @@ export class ProyectoComponent implements OnInit {
         this.proyecto.idUsuario = this.usuario._id;
         //Usuarios del proyecto
         this.arrUsuariosProyecto = response.usuarios;
-
-        for (var i = 0; i < this.arrUsuariosProyecto.length; i++) {
-
-          this._usuarioService.getUsuario(this.arrUsuariosProyecto[i].usuario).subscribe(
-
-            response => {
-              this.arrUsuariosNombre.push(response.nombre);
-            },
-            error => {
-              console.log(<any>error);
-            }
-          );
-        }
+        //this.getUsuariosParticipantes();
       },
       error => {
         console.log(<any>error);
       }
+
     );
+
+  }
+
+  getUsuariosParticipantes() {
+    for (var i = 0; i < this.arrUsuariosProyecto.length; i++) {
+
+      this._usuarioService.getUsuario(this.arrUsuariosProyecto[i].usuario).subscribe(
+
+        response => {
+
+          this.arrUsuariosNombre.push(response.nombre);
+          console.log(response.nombre);
+        },
+        error => {
+          console.log(<any>error);
+        }
+      );
+    }
   }
 
   getUsuariosDisponibles(id: any) {

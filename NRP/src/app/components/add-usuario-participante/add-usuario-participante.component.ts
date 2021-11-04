@@ -29,7 +29,7 @@ export class AddUsuarioParticipanteComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.getUserLogged();
+
 
     this.route.params.subscribe(params => {
       this.getProyecto(params.id);

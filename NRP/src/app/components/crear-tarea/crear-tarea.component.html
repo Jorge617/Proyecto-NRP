@@ -37,24 +37,13 @@
                         <textarea class="form-control " id="exampleFormControlTextarea1 " name="descripcion " rows="3 " required></textarea>
                     </div>
                 </div>
-                <div class="row">
+                <div class="mt-3 row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Esfuerzo de la tarea</label>
                     <div class="col-2">
-                        <label for="exampleFormControlInput1 " class="form-label ">Esfuerzo de la tarea </label>
-                        <select class="form-select" aria-label="Default select example">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option> 
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option> 
-                        </select>
-
-                    </div>
+                        <input class="form-control" type="number" name="coste" #coste="ngModel" [(ngModel)] = "requisito.coste" required placeholder="[1 - 10]">
+                  </div>
                 </div>
+              
 
             </div>
 
@@ -95,6 +84,9 @@
                                 <div class="col-8">
                                     <span class="fs-5 fw-semibold">Usuarios</span>
                                 </div>
+                                <div class="col-3">
+                                    <img id="cerrarLista" src="./assets/cancel.png" alt="cerrar lista" width="25" height="25" style="cursor: pointer; margin-left: 88%;" (click)="cerrarLista()">
+                                </div>
                             </div>
                             <div class="list-group list-group-flush  scrollarea ">
                                 <div *ngFor="let usuario of arrUsuarios; let indice = index" class="row m-3">
@@ -108,15 +100,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-3 ListaClientes">
+                    <div class="col-3 ListaAñadido">
                         <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white mt-4" style="width: 380px;">
                             <div class="row">
                                 <div class="col-8">
                                     <span class="fs-5 fw-semibold">Usuario seleccionado</span>
                                 </div>
-                                <div class="col-3">
-                                    <img id="cerrarLista" src="./assets/cancel.png" alt="cerrar lista" width="25" height="25" style="cursor: pointer; margin-left: 88%;" (click)="cerrarLista()">
-                                </div>
+    
                             </div>
                             <div class="list-group list-group-flush  scrollarea ">
                                 <div *ngFor="let usuario of arrUsuariosAdd; let indice = index" class="row m-3">

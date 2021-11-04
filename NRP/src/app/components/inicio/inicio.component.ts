@@ -5,6 +5,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { ProyectoService } from 'src/app/services/proyecto.service';
 import { Proyecto } from 'src/app/models/proyecto';
+import { parseI18nMeta } from '@angular/compiler/src/render3/view/i18n/meta';
 
 @Component({
   selector: 'app-inicio',
@@ -13,17 +14,19 @@ import { Proyecto } from 'src/app/models/proyecto';
   providers: [UsuarioService, ProyectoService]
 
 })
-export class InicioComponent implements OnInit, OnDestroy {
+export class InicioComponent implements OnInit {
 
   public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], []);
 
   public arrProyectosCreados: Proyecto[];
   public arrProyectosParticipo: Proyecto[];
+  public arrProyectosParticipoNombre: Proyecto[];
 
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, public route: ActivatedRoute) {
 
     this.arrProyectosCreados = [];
     this.arrProyectosParticipo = [];
+    this.arrProyectosParticipoNombre = [];
   }
 
   ngOnInit(): void {
@@ -31,17 +34,14 @@ export class InicioComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(params => {
       this.getProyectos(params.id);
     });
-
+    this.route.params.subscribe(params => {
+      this.getProyectosParticipo(params.id)
+    });
   }
-
-  ngOnDestroy() {
-    this.arrProyectosCreados = []
-  }
-
 
   getUserLogged() {
     this._usuarioService.getUserLogged(this.usuario);
-
+    console.log(this.usuario);
   }
 
   cerrarSesion() {
@@ -79,5 +79,18 @@ export class InicioComponent implements OnInit, OnDestroy {
         console.log(<any>error);
       }
     );
+  }
+  getProyectosParticipo(id: any) {
+    this._usuarioService.getUsuario(id).subscribe(response => {
+      this.arrProyectosParticipo = response.proyectos;
+      for (var i = 0; i < this.arrProyectosParticipo.length; i++) {
+        this._proyectoService.getProyecto(this.arrProyectosParticipo[i]).subscribe(response => {
+          this.arrProyectosParticipoNombre.push(response);
+        });
+
+      }
+    }, error => {
+      console.log(<any>error);
+    })
   }
 }
