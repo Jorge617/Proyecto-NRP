@@ -195,6 +195,21 @@ proyectoController.getUsuariosDisponibles = async (req, res) => {
     res.send({ resultado })
 }
 
+proyectoController.getUsuariosInfo = async (req, res) => {
+    const proyect = await proyecto.findById(req.params.id);
+    var usuarios = []
+    usuarios = proyect.usuarios
+
+    var resultado = [];
+
+    for(var i = 0; i < usuarios.length; i++){
+        resultado.push( await usuario.findById(usuarios[i].usuario))
+    }
+
+    res.send(resultado)
+}
+
 
 
 module.exports = proyectoController;
+
