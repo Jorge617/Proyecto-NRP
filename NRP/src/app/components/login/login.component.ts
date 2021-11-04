@@ -43,11 +43,9 @@ export class LoginComponent implements OnInit {
 
           this._usuarioService.updateUsuario(this.usuario).subscribe();
           form.reset();
-          if (!this.usuario.esCliente) {
-            this.router.navigateByUrl('/inicio/' + this.usuario._id);
-          } else {
-            this.router.navigateByUrl('/inicio-cliente');
-          }
+
+          this.router.navigateByUrl('/inicio/' + this.usuario._id);
+
         } else {
           this.logueado = false;
           this.mensaje = data.error;

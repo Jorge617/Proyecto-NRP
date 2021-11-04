@@ -140,13 +140,11 @@
                     
 
                     <div class="row">
-                        <div *ngIf = "arrUsuariosProyecto.length == 0" class="col-5 ms-3">
-                            <h2>- No hay ningún usuario añadido a tu proyecto</h2>
-                          </div>
+        
                         <div class="col-9">
                             <ul class="list-group list-group-flush ms-3 scrollarea">
                                 <li *ngFor= "let usuarioProyecto of arrUsuariosProyecto;let indice = index" class="list-group-item">
-                                    <a [routerLink]="['/proyecto']">{{usuarioProyecto.usuario}}</a>
+                                    <a [routerLink]="['/proyecto']">{{usuarioProyecto.nombre}}</a>
                                     <img id="deleteUsuario" src="./assets/borrar-usuario.png" alt="Borrar usuario" width="40" height="40" style="cursor: pointer; margin-left: 88%;" (click) = "deleteUsuarios(indice)" />
                                 </li>
                                

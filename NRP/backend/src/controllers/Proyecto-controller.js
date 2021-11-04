@@ -73,13 +73,13 @@ proyectoController.postUsuarios = async (req, res) => {
     try {
         for (var i = 0; i < usuarios.length; i++) {
 
-            if(!aux.includes(usuarios[i])){
-                await proyect.updateOne({ $push:{usuarios: usuarios[i]}});
+            if (!aux.includes(usuarios[i])) {
+                await proyect.updateOne({ $push: { usuarios: usuarios[i] } });
             }
 
         }
 
-        
+
     } catch (e) {
         console.log(e);
     }
@@ -202,8 +202,8 @@ proyectoController.getUsuariosInfo = async (req, res) => {
 
     var resultado = [];
 
-    for(var i = 0; i < usuarios.length; i++){
-        resultado.push( await usuario.findById(usuarios[i].usuario))
+    for (var i = 0; i < usuarios.length; i++) {
+        resultado.push(await usuario.findById(usuarios[i].usuario))
     }
 
     res.send(resultado)

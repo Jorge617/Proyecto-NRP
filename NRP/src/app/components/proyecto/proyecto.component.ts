@@ -47,6 +47,10 @@ export class ProyectoComponent implements OnInit {
       this.getUsuariosDisponibles(params.id);
     });
 
+    this.route.params.subscribe(params => {
+      this.getUsuariosInfo(params.id);
+    });
+
 
   }
 
@@ -79,15 +83,20 @@ export class ProyectoComponent implements OnInit {
         this.proyecto.usuarios = response.usuarios;
         this.proyecto.requisitos = response.requisitos;
         this.proyecto.idUsuario = this.usuario._id;
-        //Usuarios del proyecto
-        this.arrUsuariosProyecto = response.usuarios;
-        // this.getUsuariosParticipantes();
       },
       error => {
         console.log(<any>error);
       }
 
     );
+
+  }
+
+  getUsuariosInfo(id: any) {
+    this._proyectoService.getUsuariosInfo(id).subscribe(response => {
+      this.arrUsuariosProyecto = response;
+    })
+
 
   }
 
@@ -106,9 +115,8 @@ export class ProyectoComponent implements OnInit {
 
     var deleteUsuario = [];
     deleteUsuario.push(this.arrUsuariosProyecto[indice]);
-
     this._proyectoService.deleteUsuarios(this.proyecto._id, deleteUsuario).subscribe();
-    window.location.reload();
+
 
   }
 
