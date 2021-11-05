@@ -26,7 +26,7 @@ export class CrearTareaComponent implements OnInit {
     this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "");
     this.arrUsuarios = [];
     this.arrUsuariosAdd = [];
-    this.requisito = new Requisito("", "", [this.usuario, 0], 0);
+    this.requisito = new Requisito("", "", "", "", "", [], 0);
   }
 
   ngOnInit(): void {
@@ -52,7 +52,6 @@ export class CrearTareaComponent implements OnInit {
 
   mostrarListaClientes() {
     $(".ListaClientes").fadeIn();
-
 
   }
 
@@ -116,4 +115,15 @@ export class CrearTareaComponent implements OnInit {
       }
     );
   }
+
+  crearRequisito() {
+    this.requisito.prioridad.push({ "usuario": this.arrUsuariosAdd[0], "valor": 0 });
+    this.proyecto.requisitos.push(this.requisito);
+    this._proyectoService.updateProyecto(this.proyecto).subscribe(response => {
+      this.router.navigateByUrl("proyecto/" + this.proyecto._id);
+    });
+
+
+  }
+
 }

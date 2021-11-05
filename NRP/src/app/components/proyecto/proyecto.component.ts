@@ -116,7 +116,7 @@ export class ProyectoComponent implements OnInit {
     var deleteUsuario = [];
     deleteUsuario.push(this.arrUsuariosProyecto[indice]);
     this._proyectoService.deleteUsuarios(this.proyecto._id, deleteUsuario).subscribe();
-
+    window.location.reload();
 
   }
 

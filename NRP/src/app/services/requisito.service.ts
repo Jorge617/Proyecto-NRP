@@ -6,6 +6,7 @@ import { Usuario } from '../models/usuario';
 import { param } from 'jquery';
 import { CookieService } from 'ngx-cookie-service';
 import { Proyecto } from '../models/proyecto';
+import { Requisito } from '../models/requisito';
 
 
 
@@ -22,8 +23,10 @@ export class RequisitoService {
 
     }
 
-    crearRequisito() {
-
+    crearRequisito(requisito: Requisito) {
+        let params = JSON.stringify(requisito);
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this._http.post(this.url + "requisitos", params, { headers: headers });
     }
 
     deleteAll() {
