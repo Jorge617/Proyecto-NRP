@@ -16,7 +16,6 @@ requisitoController.crearRequisito = async (req, res)=> {
     const nuevoRequisito = new requisito({nombre, prioridad, coste});
     await nuevoRequisito.save();
 
-    console.log(prioridad)
     await proyecto.updateOne({ _id: { $eq: idProyecto } }, { $push: { requisitos: nuevoRequisito._id } })
 
     

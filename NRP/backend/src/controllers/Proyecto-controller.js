@@ -262,7 +262,8 @@ proyectoController.calcularPrioridad = async (req, res) =>{
     coste = 0;
     for(var i = 0; i < ordenPrioridad.length; i++){
         if(coste+(ordenPrioridad[i].coste)<=limite){
-            resultado.push({"idRequisito":ordenPrioridad[i].idRequisito, "importancia":ordenPrioridad[i].importancia, "coste":ordenPrioridad[i].coste});
+            var aux = await requisito.findById(ordenPrioridad[i].idRequisito)
+            resultado.push({"requisito": aux, "importancia":ordenPrioridad[i].importancia, "coste":ordenPrioridad[i].coste});
             coste+= ordenPrioridad[i].coste
         }
     }
