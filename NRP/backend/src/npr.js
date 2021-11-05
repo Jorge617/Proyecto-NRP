@@ -23,7 +23,7 @@ async function calcularPrioridad() {
         }
         ordenPrioridad.push([requisitos[i]._id, suma]);
 
-        ordenPrioridad.sort(function (a, b) { return b - a });
+        ordenPrioridad.sort(function(a, b) { return b - a });
         console.log(ordenPrioridad);
     }
 
