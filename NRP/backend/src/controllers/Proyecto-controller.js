@@ -138,7 +138,6 @@ proyectoController.postRequisitos = async (req, res) => {
     const proyect = await proyecto.findById(req.params.id);
     var aux = [];
     aux = proyect.requisitos;
-    var resultado = aux.concat(requisitos)
 
     try {
         await proyect.updateOne({ "requisitos": requisitos });
@@ -173,7 +172,13 @@ proyectoController.getUsuarios = async (req, res) => {
 
 proyectoController.getRequisitos = async (req, res) => {
     const proyect = await proyecto.findById(req.params.id);
-    res.send({ requisitos: proyect.requisitos })
+
+    var req = []
+
+    for(var i = 0; i < proyect.requisitos.length; i++){
+        req.push(await requisito.findById(proyect.requisitos[i]))
+    }
+    res.send({ requisitos: req })
 }
 
 
@@ -212,6 +217,61 @@ proyectoController.getUsuariosInfo = async (req, res) => {
     res.send(resultado)
 }
 
+
+proyectoController.calcularPrioridad = async (req, res) =>{
+    const proyect = await proyecto.findById(req.params.id);
+
+    const {limite} = req.body;
+    var coste = 0;
+    var requisitos = []
+
+    var ordenPrioridad = [];
+
+    var usuarios = []
+    usuarios = proyect.usuarios
+
+
+    for(var i = 0; i < proyect.requisitos.length; i++){
+        requisitos.push(await requisito.findById(proyect.requisitos[i]))
+    }
+
+
+
+    for (var i = 0; i < requisitos.length; i++) {
+        suma = 0;
+
+        for (var j = 0; j < requisitos[i].prioridad.length; j++) {
+            var aux = usuarios.find(element => String(element.usuario) == String(requisitos[i].prioridad[j].usuario))
+
+
+            if(aux!=undefined){
+
+                suma += aux.importancia * requisitos[i].prioridad[j].valor
+            }
+        }
+
+            ordenPrioridad.push({"importancia":suma, "idRequisito":requisitos[i]._id, "coste":requisitos[i].coste});
+
+
+    }
+    ordenPrioridad.sort(function(a, b) { return b.importancia - a.importancia });
+
+
+    var resultado = []
+
+    coste = 0;
+    for(var i = 0; i < ordenPrioridad.length; i++){
+        if(coste+(ordenPrioridad[i].coste)<=limite){
+            resultado.push({"idRequisito":ordenPrioridad[i].idRequisito, "importancia":ordenPrioridad[i].importancia, "coste":ordenPrioridad[i].coste});
+            coste+= ordenPrioridad[i].coste
+        }
+    }
+    
+    
+    res.send(resultado);
+
+
+}
 
 
 module.exports = proyectoController;

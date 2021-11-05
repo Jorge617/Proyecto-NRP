@@ -2,7 +2,7 @@ const { Router } = require('express');
 const router = Router();
 const{crearProyecto, getProyectos, getProyecto, deleteProyecto, updateProyecto,
       postUsuarios, getUsuarios, postRequisitos, getRequisitos,deleteUsuarios, deleteRequisitos,
-       getUsuariosDisponibles, getUsuariosInfo, deleteAll} = require('../controllers/Proyecto-controller');
+       getUsuariosDisponibles, getUsuariosInfo, calcularPrioridad, deleteAll} = require('../controllers/Proyecto-controller');
 
 router.route('/').post(crearProyecto)
                  .get(getProyectos)
@@ -22,6 +22,7 @@ router.route('/:id/requisitos').post(postRequisitos)
  router.route('/:id/usuarios-disponibles').get(getUsuariosDisponibles)
  router.route('/:id/usuarios-importancia').get(getUsuarios)
 
+ router.route('/:id/prioridad').get(calcularPrioridad)
 
                               
 module.exports = router;
