@@ -4,7 +4,7 @@ const requisitoSchema = new Schema({
     nombre : {
         type : String,
         required : true,
-        unique : true
+        unique : false
     },
     prioridad: [{
         usuario: { type: Schema.ObjectId, ref: "Usuario" },

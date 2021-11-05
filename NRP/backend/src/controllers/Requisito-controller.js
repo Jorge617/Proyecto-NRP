@@ -2,7 +2,7 @@ const requisitoController = {};
 
 const requisito = require('../models/Requisito.js');
 const usuario = require('../models/Usuario.js')
-
+const proyecto = require('../models/Proyecto.js')
 requisitoController.getRequisitos = async (req, res)=> {
     const requisitos = await requisito.find();
     res.json(requisitos);
@@ -12,9 +12,13 @@ requisitoController.getRequisito = async (req, res)=> {
     res.json(getrequisito);
 }
 requisitoController.crearRequisito = async (req, res)=> {
-    const {nombre, prioridad, coste} = req.body;
+    const {nombre, prioridad, coste, idProyecto} = req.body;
     const nuevoRequisito = new requisito({nombre, prioridad, coste});
     await nuevoRequisito.save();
+
+    await proyecto.updateOne({ _id: { $eq: idProyecto } }, { $push: { requisitos: nuevoRequisito._id } })
+
+    
     res.json({message : `Requisito dado de alta ${nombre} ${prioridad} ${coste} `});
 }
 requisitoController.borrarRequisito = async (req, res) => {
