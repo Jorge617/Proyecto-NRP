@@ -50,6 +50,11 @@ export class ProyectoService {
         return this._http.get(this.url + "proyectos/" + idProyecto + "/usuarios", { headers: headers });
     }
 
+    getUsuariosInfo(idProyecto: string): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this._http.get(this.url + "proyectos/" + idProyecto + "/usuarios", { headers: headers });
+    }
+
     getUsuariosDisponibles(idProyecto: string): Observable<any> {
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
         return this._http.get(this.url + "proyectos/" + idProyecto + "/usuarios-disponibles", { headers: headers });

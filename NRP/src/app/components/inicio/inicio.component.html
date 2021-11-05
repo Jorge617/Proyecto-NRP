@@ -59,7 +59,7 @@
           </div>
           <ul class="list-group list-group-flush ms-3">
               <li *ngFor = "let proyecto of arrProyectosParticipoNombre" class="list-group-item ">
-                <a [routerLink]="['/proyecto',proyecto._id]">
+                <a [routerLink]="['/proyecto-cliente',proyecto._id]">
                   {{proyecto.nombre}}
                 </a>
                 </li>

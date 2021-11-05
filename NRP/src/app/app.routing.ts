@@ -7,10 +7,10 @@ import { RequisitoComponent } from './components/requisito/requisito.component';
 import { DescripcionTareaClienteComponent } from './components/descripcion-tarea-cliente/descripcion-tarea-cliente.component';
 import { CrearProyectoComponent } from './components/crear-proyecto/crear-proyecto.component';
 import { ProyectoComponent } from './components/proyecto/proyecto.component';
-import { InicioClienteComponent } from './components/inicio-cliente/inicio-cliente.component';
 import { ProyectoClienteComponent } from './components/proyecto-cliente/proyecto-cliente.component';
 import { CrearTareaComponent } from './components/crear-tarea/crear-tarea.component';
 import { AddUsuarioParticipanteComponent } from './components/add-usuario-participante/add-usuario-participante.component';
+import { InicioClienteComponent } from './components/inicio-cliente/inicio-cliente.component';
 
 const appRoutes: Routes = [
     { path: '', component: LoginComponent },
@@ -28,7 +28,7 @@ const appRoutes: Routes = [
     { path: 'descripcion-tarea-cliente/:id,:idTarea', component: DescripcionTareaClienteComponent },
     { path: 'inicio-cliente', component: InicioClienteComponent },
     { path: 'proyecto-cliente', component: ProyectoClienteComponent },
-    { path: 'proyecto-cliente:id', component: ProyectoClienteComponent },
+    { path: 'proyecto-cliente/:id', component: ProyectoClienteComponent },
     { path: 'crear-tarea', component: CrearTareaComponent },
     { path: 'crear-tarea/:id', component: CrearTareaComponent },
     { path: 'add-usuario-participante/:id/:idUsuario', component: AddUsuarioParticipanteComponent },
