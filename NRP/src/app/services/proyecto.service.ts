@@ -77,5 +77,10 @@ export class ProyectoService {
         return this._http.delete(this.url + "proyectos/" + idProyecto + "/usuarios", options);
 
     }
+
+    getRequisitos(idProyecto: string): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this._http.get(this.url + "proyectos/" + idProyecto + "/requisitos", { headers: headers }); 
+    }
 }
 

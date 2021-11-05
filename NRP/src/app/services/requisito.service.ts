@@ -19,11 +19,12 @@ export class RequisitoService {
 
     }
 
-    getRequisitos() {
-
+    getRequisitos():Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json'); 
+        return this._http.get(this.url + "requisitos" , {headers: headers}); 
     }
 
-    crearRequisito(requisito: Requisito) {
+    crearRequisito(requisito: Requisito):Observable<any> {
         let params = JSON.stringify(requisito);
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
         return this._http.post(this.url + "requisitos", params, { headers: headers });
@@ -33,8 +34,9 @@ export class RequisitoService {
 
     }
 
-    getRequisito() {
-
+    getRequisito(id: any):Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json'); 
+        return this._http.get(this.url + "requisitos/" + id, {headers: headers});
     }
 
     borrarRequisito() {

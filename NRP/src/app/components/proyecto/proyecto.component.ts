@@ -6,13 +6,16 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import { Proyecto } from 'src/app/models/proyecto';
 import { DateAdapter } from '@angular/material/core';
 import { ProyectoService } from 'src/app/services/proyecto.service';
+import { Requisito } from 'src/app/models/requisito';
+import { RequisitoService } from '../../services/requisito.service';
+import { param } from 'jquery';
 
 
 @Component({
   selector: 'app-proyecto',
   templateUrl: './proyecto.component.html',
   styleUrls: ['./proyecto.component.css'],
-  providers: [UsuarioService, ProyectoService]
+  providers: [UsuarioService, ProyectoService, RequisitoService]
 })
 export class ProyectoComponent implements OnInit {
 
@@ -21,14 +24,17 @@ export class ProyectoComponent implements OnInit {
   public arrUsuariosProyecto: Usuario[] | any; //Usuarios que participan en el proyecto
   public arrUsuariosNombre: any[]; //Los nombres de los usuarios que participan en el proyecto
   public arrUsuariosDisponibles: Usuario[] | undefined; //Los usuarios que se pueden asignar a un proyecto
-
+  public arrTareasProyecto: Requisito[];
+  public arrTareaProyectoNombre: string[];
 
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>,
-    public route: ActivatedRoute) {
+    public route: ActivatedRoute, private _requisitoService: RequisitoService) {
     this.dateAdapter.setLocale('es-ES');
     this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "");
     this.arrUsuariosNombre = [];
     this.arrUsuariosDisponibles = [];
+    this.arrTareasProyecto = [];
+    this.arrTareaProyectoNombre = [];
 
   }
 
@@ -51,6 +57,9 @@ export class ProyectoComponent implements OnInit {
       this.getUsuariosInfo(params.id);
     });
 
+    this.route.params.subscribe(params => {
+      this.getRequisitos(params.id);
+    });
 
   }
 
@@ -126,6 +135,22 @@ export class ProyectoComponent implements OnInit {
     this.router.navigateByUrl("/inicio/" + this.usuario._id);
   }
 
+  getRequisitos(idProyecto: any) {
+    this._proyectoService.getRequisitos(idProyecto).subscribe(
+      response => {
+        this.arrTareasProyecto = response.requisitos;
+        for (var i = 0; i < this.arrTareasProyecto.length; i++) {
+          this._requisitoService.getRequisito(this.arrTareasProyecto[i]._id).subscribe( 
+            response => {
+              this.arrTareaProyectoNombre.push(response.nombre);
+            }, error => {
+              console.log(<any>error);
+            });
+        }
+      }, error => {
+        console.log(<any>error);
+      });
+  }
 
 
 }
