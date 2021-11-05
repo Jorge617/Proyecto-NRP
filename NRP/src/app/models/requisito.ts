@@ -8,7 +8,8 @@ export class Requisito {
 		public fechaInicio: string,
 		public fechaFin: string,
 		public prioridad: any[],
-		public coste: number
+		public coste: number,
+		public idProyecto: string
 
 	) { }
 }
