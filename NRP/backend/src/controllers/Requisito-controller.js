@@ -59,4 +59,28 @@ requisitoController.getUsuarios = async (req, res ) =>{
     res.json({usuarios:listaUsuarios})
 }
 
+
+
+requisitoController.getUsuariosDisponibles = async (req, res) => {
+    const proyect = await proyecto.findById(req.body.idProyecto);
+    var usuariosProyecto = []
+    var resultado = []
+    usuariosProyecto = proyect.usuarios
+    var aux = []
+    const getrequisito = await requisito.findById(req.params.id)
+
+    var usuariosRequisitos = getrequisito.prioridad
+
+    for (var i = 0; i < usuariosRequisitos.length; i++) {
+        aux.push(String(usuariosRequisitos[i].usuario))
+    }
+    for (var i = 0; i < usuariosProyecto.length; i++) {
+        if ((usuariosProyecto.length == 0) || (!(aux.includes(String(usuariosProyecto[i].usuario))))) {
+            resultado.push(await usuario.findById(usuariosProyecto[i].usuario))
+        }
+
+    }
+    res.send({ resultado })
+}
+
 module.exports = requisitoController;
