@@ -2,7 +2,7 @@ const usuarioController = {};
 
 const usuario = require('../models/Usuario.js');
 const proyecto = require('../models/Proyecto.js')
-
+const requisito = require('../models/Requisito.js')
 usuarioController.registro = async (req, res) => {
     const { nombre, password, token } = req.body;
     const importancia = 0;
@@ -103,6 +103,23 @@ usuarioController.getProyectosPropietario = async (req, res)=> {
        await resultado.push(await proyecto.findById(lista[i]))
     }
     res.json({proyectos:resultado});
+}
+
+usuarioController.getRequisitosProyecto = async (req, res)=> {
+    const getusuario = await usuario.findById(req.params.id);
+    const id = req.params.id
+    const{idProyecto} = req.body
+    
+    var requisitos = await proyecto.findById(idProyecto)
+    var resultado = []
+    for(var i = 0; i < requisitos.requisitos.length; i++){
+        var aux = await requisito.findById(requisitos.requisitos[i])
+
+        if(String(aux.prioridad[0].usuario) == String(id)){
+            resultado.push(aux)
+        }
+    }
+    res.json(resultado);
 }
 
 
