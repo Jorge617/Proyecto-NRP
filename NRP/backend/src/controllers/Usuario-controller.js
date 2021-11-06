@@ -105,18 +105,17 @@ usuarioController.getProyectosPropietario = async (req, res)=> {
     res.json({proyectos:resultado});
 }
 
-usuarioController.getRequisitosProyecto = async (req, res)=> {
+usuarioController.getRequisitosProyecto = async (req, res) => {
     const getusuario = await usuario.findById(req.params.id);
     const id = req.params.id
-    const{idProyecto} = req.body
-    
-    var requisitos = await proyecto.findById(idProyecto)
+
+    var requisitos = await proyecto.findById(req.query.idProyecto);
     var resultado = []
-    for(var i = 0; i < requisitos.requisitos.length; i++){
+    for (var i = 0; i < requisitos.requisitos.length; i++) {
         var aux = await requisito.findById(requisitos.requisitos[i])
-        for(var j = 0; j< aux.prioridad.length; j++){
-            
-            if(String(aux.prioridad[j].usuario) == String(id)){
+        for (var j = 0; j < aux.prioridad.length; j++) {
+
+            if (String(aux.prioridad[j].usuario) == String(id)) {
                 resultado.push(aux)
             }
         }
