@@ -114,9 +114,11 @@ usuarioController.getRequisitosProyecto = async (req, res)=> {
     var resultado = []
     for(var i = 0; i < requisitos.requisitos.length; i++){
         var aux = await requisito.findById(requisitos.requisitos[i])
-
-        if(String(aux.prioridad[0].usuario) == String(id)){
-            resultado.push(aux)
+        for(var j = 0; j< aux.prioridad.length; j++){
+            
+            if(String(aux.prioridad[j].usuario) == String(id)){
+                resultado.push(aux)
+            }
         }
     }
     res.json(resultado);
