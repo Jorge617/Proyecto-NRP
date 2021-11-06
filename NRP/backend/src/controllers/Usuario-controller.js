@@ -108,9 +108,8 @@ usuarioController.getProyectosPropietario = async (req, res) => {
 usuarioController.getRequisitosProyecto = async (req, res) => {
     const getusuario = await usuario.findById(req.params.id);
     const id = req.params.id
-    const { idProyecto } = req.body
 
-    var requisitos = await proyecto.findById(idProyecto)
+    var requisitos = await proyecto.findById(req.query.idProyecto);
     var resultado = []
     for (var i = 0; i < requisitos.requisitos.length; i++) {
         var aux = await requisito.findById(requisitos.requisitos[i])
