@@ -49,7 +49,7 @@
                     <div class="col-9 m-3">
                         <h2>Descripción</h2>
                         <section class="text-justify">
-                        {{proyecto.descripcion}}
+                            {{proyecto.descripcion}}
                         </section>
 
                     </div>
@@ -76,32 +76,24 @@
                             </div>
                         </div>
                     </div>
-                    <div class ="row justify-content-end">
-                        <div class= "col-2 mt-5">
-                            <button
-                            type="button"
-                            class="btn btn-success "
-                            
-                          >
+                    <div class="row justify-content-end">
+                        <div class="col-2 mt-5">
+                            <button type="button" class="btn btn-success ">
                             Guardar proyecto
                           </button>
+                        </div>
+
                     </div>
-                   
-                 </div>
-                    
-                    <div class ="row justify-content-end">
-                        <div class= "col-2 mt-2">
-                            <button
-                            type="button"
-                            class="btn btn-danger"
-                            (click) = "deleteProyecto()"
-                          >
+
+                    <div class="row justify-content-end">
+                        <div class="col-2 mt-2">
+                            <button type="button" class="btn btn-danger" (click)="deleteProyecto()">
                             Borrar proyecto
                           </button>
+                        </div>
+
                     </div>
-                   
-                 </div>
-                  
+
                 </div>
                 <!--Fin de la información del proyecto-->
             </div>
@@ -115,8 +107,8 @@
                     <div class="row">
                         <div class="col-9">
                             <ul class="list-group list-group-flush ms-3">
-                                <li class="list-group-item">
-                                    <a [routerLink]="['/descripcion-tarea-cliente',proyecto._id]">Tarea 1</a>
+                                <li *ngFor="let tarea of arrTareaProyectoNombre" class="list-group-item">
+                                    <a [routerLink]="['/descripcion-tarea-cliente',proyecto._id]">{{tarea}}</a>
                                     <img id="addTarea" src="./assets/borrar-tarea.png" alt="Borrar usuario" width="40" height="40" style="cursor: pointer; margin-left: 88%;" />
                             </ul>
                         </div>
@@ -137,20 +129,20 @@
                     </div>
 
 
-                    
+
 
                     <div class="row">
-        
+
                         <div class="col-9">
                             <ul class="list-group list-group-flush ms-3 scrollarea">
-                                <li *ngFor= "let usuarioProyecto of arrUsuariosProyecto;let indice = index" class="list-group-item">
+                                <li *ngFor="let usuarioProyecto of arrUsuariosProyecto;let indice = index" class="list-group-item">
                                     <a [routerLink]="['/proyecto']">{{usuarioProyecto.nombre}}</a>
-                                    <img id="deleteUsuario" src="./assets/borrar-usuario.png" alt="Borrar usuario" width="40" height="40" style="cursor: pointer; margin-left: 88%;" (click) = "deleteUsuarios(indice)" />
+                                    <img id="deleteUsuario" src="./assets/borrar-usuario.png" alt="Borrar usuario" width="40" height="40" style="cursor: pointer; margin-left: 88%;" (click)="deleteUsuarios(indice)" />
                                 </li>
-                               
+
                             </ul>
                         </div>
-                        
+
                         <div id="ListaClientes" class="col-3">
                             <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white mt-4" style="width: 380px;">
                                 <div class="row">
@@ -163,13 +155,13 @@
 
 
                                 </div>
-                                
+
                                 <div class="list-group list-group-flush  scrollarea ">
-                                 
+
                                     <div *ngFor="let usuarioAdd of arrUsuariosDisponibles;" class="row m-3">
                                         <div class="col-10">
                                             <strong>{{usuarioAdd.nombre}} </strong>
-                                          
+
                                         </div>
                                         <div class="col-2">
                                             <a [routerLink]="['/add-usuario-participante',proyecto._id,usuarioAdd._id]"><img id="addUsuario" src="./assets/addU.png" alt="cerrar lista" width="25" height="25" style="cursor: pointer;"></a>

@@ -5,13 +5,14 @@ import { Proyecto } from 'src/app/models/proyecto';
 import { Requisito } from 'src/app/models/requisito';
 import { Usuario } from 'src/app/models/usuario';
 import { ProyectoService } from 'src/app/services/proyecto.service';
+import { RequisitoService } from 'src/app/services/requisito.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-crear-tarea',
   templateUrl: './crear-tarea.component.html',
   styleUrls: ['./crear-tarea.component.css'],
-  providers: [UsuarioService, ProyectoService]
+  providers: [UsuarioService, ProyectoService, RequisitoService]
 })
 export class CrearTareaComponent implements OnInit {
   public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], []);
@@ -21,12 +22,12 @@ export class CrearTareaComponent implements OnInit {
   public requisito: Requisito;
 
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>,
-    public route: ActivatedRoute) {
+    public route: ActivatedRoute, private _requisitoService: RequisitoService) {
     this.dateAdapter.setLocale('es-ES');
     this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "");
     this.arrUsuarios = [];
     this.arrUsuariosAdd = [];
-    this.requisito = new Requisito("", "", [this.usuario, 0], 0);
+    this.requisito = new Requisito("", "", "", "", "", [], 0, "");
   }
 
   ngOnInit(): void {
@@ -52,7 +53,6 @@ export class CrearTareaComponent implements OnInit {
 
   mostrarListaClientes() {
     $(".ListaClientes").fadeIn();
-
 
   }
 
@@ -116,4 +116,14 @@ export class CrearTareaComponent implements OnInit {
       }
     );
   }
+
+  crearRequisito() {
+    this.requisito.prioridad.push({ "usuario": this.arrUsuariosAdd[0], "valor": 0 });
+    this.requisito.idProyecto = this.proyecto._id;
+    this.proyecto.requisitos.push(this.requisito);
+    this._requisitoService.crearRequisito(this.requisito).subscribe();
+    this.router.navigateByUrl("proyecto/" + this.proyecto._id);
+
+  }
+
 }

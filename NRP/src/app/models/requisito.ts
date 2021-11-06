@@ -1,11 +1,15 @@
 import { Usuario } from "./usuario";
 
-export class Requisito{
+export class Requisito {
 	constructor(
 		public _id: string,
 		public nombre: string,
-        public prioridad: [Usuario, Number],
-		public coste: number
-		
-	){}
+		public descripcion: string,
+		public fechaInicio: string,
+		public fechaFin: string,
+		public prioridad: any[],
+		public coste: number,
+		public idProyecto: string
+
+	) { }
 }
