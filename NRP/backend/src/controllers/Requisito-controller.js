@@ -83,4 +83,15 @@ requisitoController.getUsuariosDisponibles = async (req, res) => {
     res.send({ resultado })
 }
 
+
+requisitoController.postUsuarios = async (req, res ) =>{
+    var prioridad = req.body.prioridad
+    await requisito.updateOne({ _id: { $eq: req.params.id } }, { $push: { prioridad: prioridad } })
+
+
+    
+    res.json(prioridad)
+}
+
+
 module.exports = requisitoController;
