@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   public mensaje: string;
 
   constructor(private _usuarioService: UsuarioService, public router: Router) {
-    this.usuario = new Usuario("", "", "", "", "", 0, false, [], []);
+    this.usuario = new Usuario("", "", "", "", "", 0, false, [], "", []);
     this.mensaje = "";
     this.logueado = false;
   }

@@ -10,6 +10,7 @@ export class Usuario {
 		public importancia: Number,
 		public esCliente: boolean,
 		public proyectos: Proyecto[],
+		public idProyecto: string,
 		public propietario: String[]
 
 	) { }

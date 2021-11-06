@@ -12,7 +12,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class RequisitoComponent implements OnInit {
 
-  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], []);
+  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", []);
 
   constructor(private _usuarioService: UsuarioService, public router: Router) {
 

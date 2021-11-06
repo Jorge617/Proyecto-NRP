@@ -17,7 +17,7 @@ import { ProyectoService } from 'src/app/services/proyecto.service';
 })
 export class DescripcionTareaClienteComponent implements OnInit {
 
-  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], []);
+  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", []);
   public arrUsuarios: Usuario[] | undefined;
   public proyecto: Proyecto; //Proyecto actual
 

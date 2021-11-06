@@ -29,12 +29,12 @@ const appRoutes: Routes = [
     { path: 'descripcion-tarea-cliente/:id,:idTarea', component: DescripcionTareaClienteComponent },
     { path: 'inicio-cliente', component: InicioClienteComponent },
     { path: 'proyecto-cliente', component: ProyectoClienteComponent },
-    { path: 'proyecto-cliente/:id', component: ProyectoClienteComponent },
+    { path: 'proyecto-cliente/:id/:idUsuario', component: ProyectoClienteComponent },
     { path: 'crear-tarea', component: CrearTareaComponent },
     { path: 'crear-tarea/:id', component: CrearTareaComponent },
     { path: 'add-usuario-participante/:id/:idUsuario', component: AddUsuarioParticipanteComponent },
-    { path: 'gestionar-tarea', component: GestionarTareaComponent},
-    { path: 'gestionar-tarea/:id', component: GestionarTareaComponent},
+    { path: 'gestionar-tarea', component: GestionarTareaComponent },
+    { path: 'gestionar-tarea/:id', component: GestionarTareaComponent },
     { path: '**', component: LoginComponent }
 ];
 

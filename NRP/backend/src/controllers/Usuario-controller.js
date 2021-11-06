@@ -19,42 +19,42 @@ usuarioController.login = async (req, res) => {
         if (usuarioLogeado.password == password) {
             res.json({ resultado: true, usuario: usuarioLogeado });
         } else if (usuarioLogeado.password != password) {
-            res.json({ resultado: false,  error: "password" });
+            res.json({ resultado: false, error: "password" });
         }
     } else {
-        res.json({ resultado: false,  error: "usuario" });
+        res.json({ resultado: false, error: "usuario" });
     }
 
 }
 
 
-usuarioController.getUsuarios = async (req, res)=> {
+usuarioController.getUsuarios = async (req, res) => {
     const usuarios = await usuario.find();
-    res.json({usuarios});
+    res.json({ usuarios });
 }
 
-usuarioController.getUsuarioByToken =  async (req, res) => {
+usuarioController.getUsuarioByToken = async (req, res) => {
     const token = req.params;
     const usuarioByToken = await usuario.findOne(token);
-    res.json({usuarioByToken});
+    res.json({ usuarioByToken });
 }
 
-usuarioController.getToken =  async (req, res) => {
+usuarioController.getToken = async (req, res) => {
     const tokenUsuario = await usuario.findById(req.params.id);
-    res.json({token:tokenUsuario.token});
+    res.json({ token: tokenUsuario.token });
 }
 
 
 usuarioController.updateToken = async (req, res) => {
-    const {token} = req.body;
+    const { token } = req.body;
     await usuario.findByIdAndUpdate(req.params.id, {
-       token
+        token
     });
     res.json('Usuario Updated');
 }
 
 
-usuarioController.getUsuario = async (req, res)=> {
+usuarioController.getUsuario = async (req, res) => {
     const getusuario = await usuario.findById(req.params.id);
     res.json(getusuario);
 }
@@ -65,23 +65,23 @@ usuarioController.borrarUsuario = async (req, res) => {
     res.json('usuario borrado');
 }
 
-usuarioController.updateUsuario  = async (req, res) => {
-    
-    const {nombre, password, token, importancia, esCliente} = req.body;
+usuarioController.updateUsuario = async (req, res) => {
+
+    const { nombre, password, token, importancia, esCliente } = req.body;
 
     await usuario.findByIdAndUpdate(req.params.id, {
-        nombre,  password, token, importancia, esCliente
+        nombre, password, token, importancia, esCliente
     });
     res.json('usuario Updated');
 }
 
-usuarioController.getProyectos = async (req, res)=> {
-  
+usuarioController.getProyectos = async (req, res) => {
+
     const getusuario = await usuario.findById(req.params.id);
     var lista = getusuario.proyectos;
     var resultado = []
-    for(var i = 0; i < lista.length; i++){
-       resultado.push(await proyecto.findById(lista[i]))
+    for (var i = 0; i < lista.length; i++) {
+        resultado.push(await proyecto.findById(lista[i]))
     }
 
     res.json(resultado);
@@ -95,28 +95,28 @@ usuarioController.deleteAll = async (req, res) => {
 
 
 
-usuarioController.getProyectosPropietario = async (req, res)=> {
+usuarioController.getProyectosPropietario = async (req, res) => {
     const getusuario = await usuario.findById(req.params.id);
     var lista = getusuario.propietario;
     var resultado = []
-    for(var i = 0; i < lista.length; i++){
-       await resultado.push(await proyecto.findById(lista[i]))
+    for (var i = 0; i < lista.length; i++) {
+        await resultado.push(await proyecto.findById(lista[i]))
     }
-    res.json({proyectos:resultado});
+    res.json({ proyectos: resultado });
 }
 
-usuarioController.getRequisitosProyecto = async (req, res)=> {
+usuarioController.getRequisitosProyecto = async (req, res) => {
     const getusuario = await usuario.findById(req.params.id);
     const id = req.params.id
-    const{idProyecto} = req.body
-    
+    const { idProyecto } = req.body
+
     var requisitos = await proyecto.findById(idProyecto)
     var resultado = []
-    for(var i = 0; i < requisitos.requisitos.length; i++){
+    for (var i = 0; i < requisitos.requisitos.length; i++) {
         var aux = await requisito.findById(requisitos.requisitos[i])
-        for(var j = 0; j< aux.prioridad.length; j++){
-            
-            if(String(aux.prioridad[j].usuario) == String(id)){
+        for (var j = 0; j < aux.prioridad.length; j++) {
+
+            if (String(aux.prioridad[j].usuario) == String(id)) {
                 resultado.push(aux)
             }
         }

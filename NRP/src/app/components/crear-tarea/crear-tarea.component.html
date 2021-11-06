@@ -84,12 +84,10 @@
                                 <div class="col-8">
                                     <span class="fs-5 fw-semibold">Usuarios</span>
                                 </div>
-                                <div class="col-3">
-                                    <img id="cerrarLista" src="./assets/cancel.png" alt="cerrar lista" width="25" height="25" style="cursor: pointer; margin-left: 88%;" (click)="cerrarLista()">
-                                </div>
+                             
                             </div>
                             <div class="list-group list-group-flush  scrollarea ">
-                                <div *ngFor="let usuario of arrUsuarios; let indice = index" class="row m-3">
+                                <div *ngFor="let usuario of arrUsuariosProyecto; let indice = index" class="row m-3">
                                     <div class="col-10">
                                         <strong>{{usuario.nombre}} </strong>
                                     </div>
@@ -100,11 +98,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-3 ListaAñadido">
+                    <div class="col-3 ListaClientes">
                         <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white mt-4" style="width: 380px;">
                             <div class="row">
-                                <div class="col-8">
-                                    <span class="fs-5 fw-semibold">Usuario seleccionado</span>
+                                <div class="col-6">
+                                    <span class="fs-5 fw-semibold">Usuarios seleccionados</span>
+                                </div>
+                                <div class="col-3">
+                                    <img id="eliminarUsuarios" src="./assets/quitar-usuario.png" alt="cerrar lista" width="40" height="40" style="cursor: pointer; margin-left: 88%;" (click)="deleteUsuario()">
+                                </div>
+                                <div class="col-3">
+                                    <img id="cerrarLista" src="./assets/cancel.png" alt="cerrar lista" width="25" height="25" style="cursor: pointer; margin-left: 88%;" (click)="cerrarLista()">
                                 </div>
     
                             </div>
@@ -113,9 +117,7 @@
                                     <div class="col-10">
                                         <strong>{{usuario.nombre}} </strong>
                                     </div>
-                                    <div class="col-2">
-                                        <img id="deleteUsuario" src="./assets/menos.png" alt="" width="25" height="25" style="cursor: pointer;" (click)="deleteUsuario(indice)">
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>

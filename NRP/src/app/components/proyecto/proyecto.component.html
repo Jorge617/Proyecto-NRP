@@ -107,8 +107,8 @@
                     <div class="row">
                         <div class="col-9">
                             <ul class="list-group list-group-flush ms-3">
-                                <li *ngFor="let tarea of arrTareaProyectoNombre" class="list-group-item">
-                                    <a [routerLink]="['/descripcion-tarea-cliente',proyecto._id]">{{tarea}}</a>
+                                <li *ngFor="let tarea of arrTareasProyecto" class="list-group-item">
+                                    <a [routerLink]="['/descripcion-tarea-cliente',proyecto._id]">{{tarea.nombre}}</a>
                                     <img id="addTarea" src="./assets/borrar-tarea.png" alt="Borrar usuario" width="40" height="40" style="cursor: pointer; margin-left: 88%;" />
                             </ul>
                         </div>

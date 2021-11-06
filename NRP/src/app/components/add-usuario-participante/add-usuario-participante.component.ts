@@ -15,8 +15,8 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class AddUsuarioParticipanteComponent implements OnInit {
 
-  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], []);
-  public usuarioDelProyecto: Usuario = new Usuario("", "", "", "", "", 0, false, [], []);
+  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", []);
+  public usuarioDelProyecto: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", []);
   public proyecto: Proyecto;
   public arrUsuarios: any[];
 
