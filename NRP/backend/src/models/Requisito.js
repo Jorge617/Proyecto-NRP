@@ -10,7 +10,10 @@ const requisitoSchema = new Schema({
         usuario: { type: Schema.ObjectId, ref: "Usuario" },
         valor: Number
     }],
-    coste: Number 
+    coste: Number,
+    descripcion : String,
+    fechaInicio:String,
+    fechaFin:String
 });
 
 

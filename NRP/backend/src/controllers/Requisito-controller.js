@@ -12,8 +12,8 @@ requisitoController.getRequisito = async (req, res)=> {
     res.json(getrequisito);
 }
 requisitoController.crearRequisito = async (req, res)=> {
-    const {nombre, prioridad, coste, idProyecto} = req.body;
-    const nuevoRequisito = new requisito({nombre, prioridad, coste});
+    const {nombre, prioridad, coste, idProyecto, descripcion, fechaInicio, fechaFin} = req.body;
+    const nuevoRequisito = new requisito({nombre, prioridad, coste, descripcion, fechaInicio, fechaFin});
     await nuevoRequisito.save();
 
     await proyecto.updateOne({ _id: { $eq: idProyecto } }, { $push: { requisitos: nuevoRequisito._id } })
@@ -34,11 +34,14 @@ requisitoController.deleteAll = async (req, res) => {
 }
 
 requisitoController.updateRequisito = async (req, res) => {
-    const {nombre, prioridad, coste} = req.body;
+    const {nombre, prioridad, coste, descripcion, fechaInicio, fechaFin} = req.body;
 
     await requisito.updateOne({_id : {$eq:req.params.id}} , {$set : { nombre:nombre,
                                                                       prioridad:prioridad,
-                                                                      coste:coste  } })
+                                                                      coste:coste,
+                                                                      descripcion:descripcion,
+                                                                      fechaInicio:fechaInicio,
+                                                                      fechaFin:fechaFin} })
 
     res.json("Put completado");
 }
