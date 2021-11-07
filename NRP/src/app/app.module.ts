@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 
-import { routing,appRoutingProviders } from './app.routing';
+import { routing, appRoutingProviders } from './app.routing';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -50,9 +50,9 @@ import { GestionarTareaComponent } from './components/gestionar-tarea/gestionar-
     BrowserAnimationsModule,
     MatDatepickerModule,
     MatMomentDateModule
-    
+
   ],
-  providers: [appRoutingProviders,CookieService],
+  providers: [appRoutingProviders, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
