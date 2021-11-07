@@ -75,7 +75,7 @@ requisitoController.getUsuariosDisponibles = async (req, res) => {
         aux.push(String(usuariosRequisitos[i].usuario))
     }
     for (var i = 0; i < usuariosProyecto.length; i++) {
-        if ((usuariosProyecto.length == 0) || (!(aux.includes(String(usuariosProyecto[i].usuario))))) {
+        if ((usuariosProyecto.length == 0) || (!(aux.includes(String(usuariosProyecto[i].usuario)))&& !project.propietarios.includes(String(usuariosProyecto[i].usuario)))) {
             resultado.push(await usuario.findById(usuariosProyecto[i].usuario))
         }
 
@@ -93,5 +93,18 @@ requisitoController.postUsuarios = async (req, res ) =>{
     res.json(prioridad)
 }
 
+requisitoController.updateImportancia = async (req, res ) =>{    
+    const getRequisito = await requisito.findById(req.params.id)
+
+
+    for(var i = 0; i < getRequisito.prioridad.length; i++){
+
+        if(String(getRequisito.prioridad[i].usuario)==String(req.query.usuario)) {
+            getRequisito.prioridad[i].valor = req.query.valor
+            getRequisito.save()
+        }
+    }
+    res.json(getRequisito)
+}
 
 module.exports = requisitoController;

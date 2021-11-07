@@ -61,6 +61,10 @@ usuarioController.getUsuario = async (req, res) => {
 
 usuarioController.borrarUsuario = async (req, res) => {
     const { id } = req.params;
+    const getUsuario = await usuario.findById(id)
+
+    
+
     await usuario.findByIdAndDelete(id);
     res.json('usuario borrado');
 }
