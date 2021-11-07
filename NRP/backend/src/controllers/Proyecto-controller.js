@@ -221,7 +221,6 @@ proyectoController.getUsuariosInfo = async (req, res) => {
 proyectoController.calcularPrioridad = async (req, res) =>{
     const proyect = await proyecto.findById(req.params.id);
 
-    const {limite} = req.body;
     var coste = 0;
     var requisitos = []
 
@@ -261,7 +260,7 @@ proyectoController.calcularPrioridad = async (req, res) =>{
 
     coste = 0;
     for(var i = 0; i < ordenPrioridad.length; i++){
-        if(coste+(ordenPrioridad[i].coste)<=limite){
+        if(coste+(ordenPrioridad[i].coste)<=req.query.limite){
             var aux = await requisito.findById(ordenPrioridad[i].idRequisito)
             resultado.push({"requisito": aux, "importancia":ordenPrioridad[i].importancia, "coste":ordenPrioridad[i].coste});
             coste+= ordenPrioridad[i].coste

@@ -93,5 +93,18 @@ requisitoController.postUsuarios = async (req, res ) =>{
     res.json(prioridad)
 }
 
+requisitoController.updateImportancia = async (req, res ) =>{    
+    const getRequisito = await requisito.findById(req.params.id)
+
+
+    for(var i = 0; i < getRequisito.prioridad.length; i++){
+
+        if(String(getRequisito.prioridad[i].usuario)==String(req.query.usuario)) {
+            getRequisito.prioridad[i].valor = req.query.valor
+            getRequisito.save()
+        }
+    }
+    res.json(getRequisito)
+}
 
 module.exports = requisitoController;
