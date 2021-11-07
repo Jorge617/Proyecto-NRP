@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Proyecto } from 'src/app/models/proyecto';
+import { Requisito } from 'src/app/models/requisito';
 import { Usuario } from 'src/app/models/usuario';
 import { ProyectoService } from 'src/app/services/proyecto.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -13,10 +14,12 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class ProyectoClienteComponent implements OnInit {
 
-  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], []);
+  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", []);
   public proyecto: Proyecto; //Proyecto actual
+  public arrTareasProyecto: Requisito[];
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, public route: ActivatedRoute) {
     this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "");
+    this.arrTareasProyecto = [];
   }
 
   ngOnInit(): void {
@@ -24,11 +27,16 @@ export class ProyectoClienteComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.getProyecto(params.id);
     });
+
+    this.route.params.subscribe(params => {
+      this.usuario.idProyecto = params.id;
+      this.getRequisitosProyecto(params.idUsuario);
+    });
+
   }
 
   getUserLogged() {
     this._usuarioService.getUserLogged(this.usuario);
-
   }
 
   getProyecto(id: any) {
@@ -50,6 +58,14 @@ export class ProyectoClienteComponent implements OnInit {
 
     );
 
+  }
+
+  getRequisitosProyecto(idUsuario: any) {
+    this._usuarioService.getRequisitosProyecto(this.usuario, idUsuario).subscribe(response => {
+      this.arrTareasProyecto = response;
+    }, error => {
+      console.log(<any>error);
+    });
   }
 
 }

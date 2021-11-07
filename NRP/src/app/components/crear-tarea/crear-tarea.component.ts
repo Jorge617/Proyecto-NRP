@@ -15,11 +15,12 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   providers: [UsuarioService, ProyectoService, RequisitoService]
 })
 export class CrearTareaComponent implements OnInit {
-  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], []);
+  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", []);
   public proyecto: Proyecto;
   public arrUsuarios: Usuario[];
   public arrUsuariosAdd: Usuario[];
-  public requisito: Requisito;
+  public arrUsuariosProyecto: Usuario[] | any; //Usuarios que participan en el proyecto
+  public requisito: Requisito = new Requisito("", "", "", "", "", [], 1, "");
 
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>,
     public route: ActivatedRoute, private _requisitoService: RequisitoService) {
@@ -27,17 +28,22 @@ export class CrearTareaComponent implements OnInit {
     this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "");
     this.arrUsuarios = [];
     this.arrUsuariosAdd = [];
-    this.requisito = new Requisito("", "", "", "", "", [], 0, "");
+
   }
 
   ngOnInit(): void {
     this.getUserLogged();
     $(".ListaClientes").hide();
     $(".ListaAñadido").hide();
+    $("#botonResetear").hide();
     this.getUsuarios();
 
     this.route.params.subscribe(params => {
       this.getProyecto(params.id);
+    });
+
+    this.route.params.subscribe(params => {
+      this.getUsuariosInfo(params.id);
     });
   }
 
@@ -53,28 +59,27 @@ export class CrearTareaComponent implements OnInit {
 
   mostrarListaClientes() {
     $(".ListaClientes").fadeIn();
-
   }
 
   cerrarLista() {
     $(".ListaClientes").hide(1000);
-    $(".ListaAñadido").hide(1000);
 
 
   }
 
   addUsuario(indice: number) {
-    this.arrUsuariosAdd.push(this.arrUsuarios[indice]);
-    $(".ListaAñadido").fadeIn();
-    $(".ListaClientes").hide(500);
+    this.arrUsuariosAdd.push(this.arrUsuariosProyecto[indice]);
+    this.removeItemFromArr(this.arrUsuariosProyecto, this.arrUsuariosProyecto[indice]);
+    $("#botonResetear").fadeIn(500);
 
   }
 
-  deleteUsuario(indice: number) {
-    this.removeItemFromArr(this.arrUsuariosAdd, this.arrUsuariosAdd[indice]);
-    $(".ListaClientes").fadeIn(500);
-    $(".ListaAñadido").hide();
-    console.log("Usuario eliminado");
+  deleteUsuario() {
+    this.arrUsuariosAdd = [];
+    this.route.params.subscribe(params => {
+      this.getUsuariosInfo(params.id);
+    });
+
   }
 
   removeItemFromArr(arr: any, item: any) {
@@ -118,12 +123,28 @@ export class CrearTareaComponent implements OnInit {
   }
 
   crearRequisito() {
-    this.requisito.prioridad.push({ "usuario": this.arrUsuariosAdd[0], "valor": 0 });
+    for (var i = 0; i < this.arrUsuariosAdd.length; i++) {
+      this.requisito.prioridad.push({ "usuario": this.arrUsuariosAdd[i], "valor": 0 });
+    }
     this.requisito.idProyecto = this.proyecto._id;
     this.proyecto.requisitos.push(this.requisito);
-    this._requisitoService.crearRequisito(this.requisito).subscribe();
-    this.router.navigateByUrl("proyecto/" + this.proyecto._id);
+    this._requisitoService.crearRequisito(this.requisito).subscribe(response => {
+      this.router.navigateByUrl("proyecto/" + this.proyecto._id);
+    });
+
 
   }
 
+  getUsuariosInfo(id: any) {
+    this._proyectoService.getUsuariosInfo(id).subscribe(response => {
+      this.arrUsuariosProyecto = response;
+    })
+
+
+  }
+
+
+
 }
+
+

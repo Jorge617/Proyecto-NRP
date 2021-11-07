@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class MenuComponent implements OnInit {
 
-  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], []);
+  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", []);
   constructor(private _usuarioService: UsuarioService, public router: Router) {
 
   }

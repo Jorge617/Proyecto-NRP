@@ -1,7 +1,7 @@
-#addTarea, #deleteTarea, #deleteUsuario,#addUsuario {
+#addTarea, #deleteTarea, #deleteUsuario,#addUsuario,#eliminarUsuarios {
     transition: all 300ms;
   }
   
-  #addTarea:hover, #deleteTarea:hover, #deleteUsuario:hover,#addUsuario:hover {
+  #addTarea:hover, #deleteTarea:hover, #deleteUsuario:hover,#addUsuario:hover,#eliminarUsuarios:hover {
     transform: scale(1.1);
   }

@@ -17,7 +17,7 @@ import { DateAdapter } from '@angular/material/core';
 })
 export class CrearProyectoComponent implements OnInit {
 
-  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], []);
+  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", []);
   public proyecto: Proyecto;
 
   constructor(private _usuarioService: UsuarioService, private _proyectoService: ProyectoService, public router: Router, private dateAdapter: DateAdapter<Date>) {

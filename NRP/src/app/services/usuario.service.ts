@@ -104,6 +104,18 @@ export class UsuarioService {
 		return this._http.get(this.url + 'usuarios/' + id + '/proyectos/propietario', { headers: headers });
 	}
 
+	getRequisitosProyecto(usuario: Usuario, idUsuario: any): Observable<any> {
+		let body = JSON.stringify({ "idProyecto": usuario.idProyecto });
+
+		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+		const options = {
+			headers: headers,
+			body: body
+
+		};
+		console.log(options.body);
+		return this._http.get(this.url + 'usuarios/' + idUsuario + '/proyecto/requisitos?idProyecto=' + usuario.idProyecto, options);
+	}
 
 
 }

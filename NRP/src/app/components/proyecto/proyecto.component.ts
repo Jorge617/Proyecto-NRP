@@ -19,13 +19,12 @@ import { param } from 'jquery';
 })
 export class ProyectoComponent implements OnInit {
 
-  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], []);
+  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", []);
   public proyecto: Proyecto; //Proyecto actual
   public arrUsuariosProyecto: Usuario[] | any; //Usuarios que participan en el proyecto
   public arrUsuariosNombre: any[]; //Los nombres de los usuarios que participan en el proyecto
   public arrUsuariosDisponibles: Usuario[] | undefined; //Los usuarios que se pueden asignar a un proyecto
   public arrTareasProyecto: Requisito[];
-  public arrTareaProyectoNombre: string[];
 
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>,
     public route: ActivatedRoute, private _requisitoService: RequisitoService) {
@@ -34,7 +33,7 @@ export class ProyectoComponent implements OnInit {
     this.arrUsuariosNombre = [];
     this.arrUsuariosDisponibles = [];
     this.arrTareasProyecto = [];
-    this.arrTareaProyectoNombre = [];
+
 
   }
 
@@ -59,6 +58,7 @@ export class ProyectoComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       this.getRequisitos(params.id);
+      console.log(this.arrTareasProyecto);
     });
 
   }
@@ -139,14 +139,6 @@ export class ProyectoComponent implements OnInit {
     this._proyectoService.getRequisitos(idProyecto).subscribe(
       response => {
         this.arrTareasProyecto = response.requisitos;
-        for (var i = 0; i < this.arrTareasProyecto.length; i++) {
-          this._requisitoService.getRequisito(this.arrTareasProyecto[i]._id).subscribe( 
-            response => {
-              this.arrTareaProyectoNombre.push(response.nombre);
-            }, error => {
-              console.log(<any>error);
-            });
-        }
       }, error => {
         console.log(<any>error);
       });
