@@ -103,25 +103,19 @@ proyectoController.deleteUsuarios = async (req, res) => {
 
                 if (String(usuariosProyecto[j].usuario) == String(usuarios[i])) {
 
-
-                    
-                    for(var k = 0; k < proyect.requisitos.length; k++){
-                        
-
+                    for (var k = 0; k < proyect.requisitos.length; k++) {
                         var aux = await requisito.findById(proyect.requisitos[k])
+                        for (var t = 0; t < aux.prioridad.length; t++) {
 
-                        for(var t = 0; t < aux.prioridad.length; t++){
-                            
-
-                            if( String(aux.prioridad[t].usuario) == String(usuariosProyecto[j].usuario)){
-                                await proyect.updateOne({ $pull: { "requisitos": proyect.requisitos[k] } });
+                            if (String(aux.prioridad[t].usuario) == String(usuariosProyecto[j].usuario)) {
+                                var deletePrioridad = {"usuario":String(aux.prioridad[t].usuario), "valor":aux.prioridad[t].valor}
+                                await aux.updateOne({ $pull: { "prioridad": deletePrioridad } });
+                                aux.save()
                             }
+                        }
 
                     }
-        
-                    }
-
-                    await proyect.updateOne({ $pull: { "usuarios": usuariosProyecto[j] } });
+                   await proyect.updateOne({ $pull: { "usuarios": usuariosProyecto[j] } });
                 }
             }
         } catch (e) {
@@ -196,7 +190,7 @@ proyectoController.getRequisitos = async (req, res) => {
 
     var req = []
 
-    for(var i = 0; i < proyect.requisitos.length; i++){
+    for (var i = 0; i < proyect.requisitos.length; i++) {
         req.push(await requisito.findById(proyect.requisitos[i]))
     }
     res.send({ requisitos: req })
@@ -239,7 +233,7 @@ proyectoController.getUsuariosInfo = async (req, res) => {
 }
 
 
-proyectoController.calcularPrioridad = async (req, res) =>{
+proyectoController.calcularPrioridad = async (req, res) => {
     const proyect = await proyecto.findById(req.params.id);
 
     var coste = 0;
@@ -251,7 +245,7 @@ proyectoController.calcularPrioridad = async (req, res) =>{
     usuarios = proyect.usuarios
 
 
-    for(var i = 0; i < proyect.requisitos.length; i++){
+    for (var i = 0; i < proyect.requisitos.length; i++) {
         requisitos.push(await requisito.findById(proyect.requisitos[i]))
     }
 
@@ -264,31 +258,31 @@ proyectoController.calcularPrioridad = async (req, res) =>{
             var aux = usuarios.find(element => String(element.usuario) == String(requisitos[i].prioridad[j].usuario))
 
 
-            if(aux!=undefined){
+            if (aux != undefined) {
 
                 suma += aux.importancia * requisitos[i].prioridad[j].valor
             }
         }
 
-            ordenPrioridad.push({"importancia":suma, "idRequisito":requisitos[i]._id, "coste":requisitos[i].coste});
+        ordenPrioridad.push({ "importancia": suma, "idRequisito": requisitos[i]._id, "coste": requisitos[i].coste });
 
 
     }
-    ordenPrioridad.sort(function(a, b) { return b.importancia - a.importancia });
+    ordenPrioridad.sort(function (a, b) { return b.importancia - a.importancia });
 
 
     var resultado = []
 
     coste = 0;
-    for(var i = 0; i < ordenPrioridad.length; i++){
-        if(coste+(ordenPrioridad[i].coste)<=req.query.limite){
+    for (var i = 0; i < ordenPrioridad.length; i++) {
+        if (coste + (ordenPrioridad[i].coste) <= req.query.limite) {
             var aux = await requisito.findById(ordenPrioridad[i].idRequisito)
-            resultado.push({"requisito": aux, "importancia":ordenPrioridad[i].importancia, "coste":ordenPrioridad[i].coste});
-            coste+= ordenPrioridad[i].coste
+            resultado.push({ "requisito": aux, "importancia": ordenPrioridad[i].importancia, "coste": ordenPrioridad[i].coste });
+            coste += ordenPrioridad[i].coste
         }
     }
-    
-    
+
+
     res.send(resultado);
 
 
