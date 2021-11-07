@@ -73,22 +73,16 @@
                                         <div class="accordion-body">
                                             <div class="row">
                                                 <h2>Descripción</h2>
-                                                <p>Descripción de la tarea</p>
+                                                <p>{{tarea.descripcion}}</p>
 
                                             </div>
                                             <hr>
                                             <div class="row">
                                                 <div class="col-5">
-                                                    <span><strong>Introduzca la importancía de la tarea</strong></span>
+                                                    <span><strong>Introduzca la importancia de la tarea</strong></span>
                                                 </div>
                                                 <div class="col-2">
-                                                    <select class="form-select" aria-label="Default select example">
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                        <option value="5">5</option> 
-                                                    </select>
+                                                    <input class="form-control" type="number" placeholder="[1 - 5]" required>
                                                 </div>
                                             </div>
                                             <div class="row-2">

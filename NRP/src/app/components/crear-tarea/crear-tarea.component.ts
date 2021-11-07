@@ -20,7 +20,7 @@ export class CrearTareaComponent implements OnInit {
   public arrUsuarios: Usuario[];
   public arrUsuariosAdd: Usuario[];
   public arrUsuariosProyecto: Usuario[] | any; //Usuarios que participan en el proyecto
-  public requisito: Requisito;
+  public requisito: Requisito = new Requisito("", "", "", "", "", [], 1, "");
 
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>,
     public route: ActivatedRoute, private _requisitoService: RequisitoService) {
@@ -28,7 +28,7 @@ export class CrearTareaComponent implements OnInit {
     this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "");
     this.arrUsuarios = [];
     this.arrUsuariosAdd = [];
-    this.requisito = new Requisito("", "", "", "", "", [], 0, "");
+
   }
 
   ngOnInit(): void {
