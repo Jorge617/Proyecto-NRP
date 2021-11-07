@@ -63,24 +63,7 @@ usuarioController.borrarUsuario = async (req, res) => {
     const { id } = req.params;
     const getUsuario = await usuario.findById(id)
 
-    for(var i = 0; i<getUsuario.proyectos.length; i++){
-        var proyectAux = await proyecto.findById(getUsuario.proyectos[i])
-
-        var tareasAux = proyectAux.requisitos
-        for(var j = 0; j < proyectAux.requisitos.length; j++){
-            var tareaCurrent = await requisito.findById(proyectAux.requisitos[j])
-
-
-            var importanciaAux = tareaCurrent.prioridad 
-
-            for(var k = 0; k < importanciaAux.length; k++){
-                if(String(getUsuario._id) == String(importanciaAux[k].usuario)){
-                    await requisito.updateOne({ _id: { $eq: tareaCurrent._id } }, { $pull: { prioridad: importanciaAux[k] } })
-
-                }
-            }
-        }
-     }
+    
 
     await usuario.findByIdAndDelete(id);
     res.json('usuario borrado');
