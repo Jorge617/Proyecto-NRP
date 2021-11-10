@@ -14,9 +14,11 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class ProyectoClienteComponent implements OnInit {
 
+
   public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", []);
   public proyecto: Proyecto; //Proyecto actual
   public arrTareasProyecto: Requisito[];
+  public requisito: Requisito = new Requisito("", "", "", "", "", 0, [], 1, "");
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, public route: ActivatedRoute) {
     this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "");
     this.arrTareasProyecto = [];
@@ -66,6 +68,10 @@ export class ProyectoClienteComponent implements OnInit {
     }, error => {
       console.log(<any>error);
     });
+  }
+
+  updateImportancia(indice: any) {
+
   }
 
 }

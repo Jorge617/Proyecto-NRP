@@ -20,7 +20,7 @@ export class CrearTareaComponent implements OnInit {
   public arrUsuarios: Usuario[];
   public arrUsuariosAdd: Usuario[];
   public arrUsuariosProyecto: Usuario[] | any; //Usuarios que participan en el proyecto
-  public requisito: Requisito = new Requisito("", "", "", "", "", [], 1, "");
+  public requisito: Requisito = new Requisito("", "", "", "", "", 0, [], 1, "");
 
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>,
     public route: ActivatedRoute, private _requisitoService: RequisitoService) {
