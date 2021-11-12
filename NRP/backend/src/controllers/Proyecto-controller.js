@@ -94,20 +94,19 @@ proyectoController.deleteUsuarios = async (req, res) => {
     var usuariosProyecto = []
     usuariosProyecto = proyect.usuarios
 
-
     for (var i = 0; i < usuarios.length; i++) {
         await usuario.updateOne({ _id: { $eq: usuarios[i] } }, { $pull: { proyectos: req.params.id } })
         try {
-
             for (var j = 0; j < usuariosProyecto.length; j++) {
-
-                if (String(usuariosProyecto[j].usuario) == String(usuarios[i])) {
+                if (String(usuariosProyecto[j].usuario) == String(usuarios[i]._id)) {
 
                     for (var k = 0; k < proyect.requisitos.length; k++) {
                         var aux = await requisito.findById(proyect.requisitos[k])
                         for (var t = 0; t < aux.prioridad.length; t++) {
+                            
 
                             if (String(aux.prioridad[t].usuario) == String(usuariosProyecto[j].usuario)) {
+
                                 var deletePrioridad = {"usuario":String(aux.prioridad[t].usuario), "valor":aux.prioridad[t].valor}
                                 await aux.updateOne({ $pull: { "prioridad": deletePrioridad } });
                                 aux.save()
