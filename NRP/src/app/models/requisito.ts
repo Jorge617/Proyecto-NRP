@@ -7,6 +7,7 @@ export class Requisito {
 		public descripcion: string,
 		public fechaInicio: string,
 		public fechaFin: string,
+		public importancia: number,
 		public prioridad: any[],
 		public coste: number,
 		public idProyecto: string

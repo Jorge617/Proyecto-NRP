@@ -12,6 +12,5 @@ export class Proyecto {
 		public descripcion: string,
 		public idUsuario: string
 
-
 	) { }
 }

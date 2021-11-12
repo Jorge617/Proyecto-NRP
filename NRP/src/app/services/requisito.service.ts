@@ -19,12 +19,12 @@ export class RequisitoService {
 
     }
 
-    getRequisitos():Observable<any> {
-        let headers = new HttpHeaders().set('Content-Type', 'application/json'); 
-        return this._http.get(this.url + "requisitos" , {headers: headers}); 
+    getRequisitos(): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this._http.get(this.url + "requisitos", { headers: headers });
     }
 
-    crearRequisito(requisito: Requisito):Observable<any> {
+    crearRequisito(requisito: Requisito): Observable<any> {
         let params = JSON.stringify(requisito);
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
         return this._http.post(this.url + "requisitos", params, { headers: headers });
@@ -34,17 +34,18 @@ export class RequisitoService {
 
     }
 
-    getRequisito(id: any):Observable<any> {
-        let headers = new HttpHeaders().set('Content-Type', 'application/json'); 
-        return this._http.get(this.url + "requisitos/" + id, {headers: headers});
+    getRequisito(id: any): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this._http.get(this.url + "requisitos/" + id, { headers: headers });
     }
 
     borrarRequisito() {
 
     }
 
-    updateRequisito() {
-
+    updateImportancia(id: any, idUsuario: any, valor: any): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this._http.put(this.url + "requisitos/" + id + "/prioridad?usuario=" + idUsuario + "&valor=" + valor, { headers: headers });
     }
 
 

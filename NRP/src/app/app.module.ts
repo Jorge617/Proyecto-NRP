@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 
-import { routing,appRoutingProviders } from './app.routing';
+import { routing, appRoutingProviders } from './app.routing';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -23,6 +23,7 @@ import { ProyectoClienteComponent } from './components/proyecto-cliente/proyecto
 import { CrearTareaComponent } from './components/crear-tarea/crear-tarea.component';
 import { AddUsuarioParticipanteComponent } from './components/add-usuario-participante/add-usuario-participante.component';
 import { GestionarTareaComponent } from './components/gestionar-tarea/gestionar-tarea.component';
+import { AddValorTareaComponent } from './components/add-valor-tarea/add-valor-tarea.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { GestionarTareaComponent } from './components/gestionar-tarea/gestionar-
     ProyectoClienteComponent,
     CrearTareaComponent,
     AddUsuarioParticipanteComponent,
-    GestionarTareaComponent
+    GestionarTareaComponent,
+    AddValorTareaComponent
   ],
   imports: [
     BrowserModule,
@@ -50,9 +52,9 @@ import { GestionarTareaComponent } from './components/gestionar-tarea/gestionar-
     BrowserAnimationsModule,
     MatDatepickerModule,
     MatMomentDateModule
-    
+
   ],
-  providers: [appRoutingProviders,CookieService],
+  providers: [appRoutingProviders, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
