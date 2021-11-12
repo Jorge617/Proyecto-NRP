@@ -108,14 +108,14 @@ proyectoController.deleteUsuarios = async (req, res) => {
                         for (var t = 0; t < aux.prioridad.length; t++) {
 
                             if (String(aux.prioridad[t].usuario) == String(usuariosProyecto[j].usuario)) {
-                                var deletePrioridad = {"usuario":String(aux.prioridad[t].usuario), "valor":aux.prioridad[t].valor}
+                                var deletePrioridad = { "usuario": String(aux.prioridad[t].usuario), "valor": aux.prioridad[t].valor }
                                 await aux.updateOne({ $pull: { "prioridad": deletePrioridad } });
                                 aux.save()
                             }
                         }
 
                     }
-                   await proyect.updateOne({ $pull: { "usuarios": usuariosProyecto[j] } });
+                    await proyect.updateOne({ $pull: { "usuarios": usuariosProyecto[j] } });
                 }
             }
         } catch (e) {
@@ -123,7 +123,7 @@ proyectoController.deleteUsuarios = async (req, res) => {
         }
     }
 
-    proyect.planificacion=[]
+    proyect.planificacion = []
 
     await proyect.save()
 
@@ -175,7 +175,7 @@ proyectoController.deleteRequisitos = async (req, res) => {
         proyect.requisitos.pull(requisitos[i])
     }
 
-    proyect.planificacion=[]
+    proyect.planificacion = []
 
 
     await proyect.save()
@@ -239,7 +239,7 @@ proyectoController.getUsuariosInfo = async (req, res) => {
 
 proyectoController.calcularPrioridad = async (req, res) => {
     const proyect = await proyecto.findById(req.params.id);
-    proyect.planificacion=[]
+    proyect.planificacion = []
     var coste = 0;
     var requisitos = []
     var ordenPrioridad = [];
@@ -269,7 +269,7 @@ proyectoController.calcularPrioridad = async (req, res) => {
     for (var i = 0; i < ordenPrioridad.length; i++) {
         if (coste + (ordenPrioridad[i].coste) <= req.query.limite) {
             var aux = await requisito.findById(ordenPrioridad[i].idRequisito)
-            
+
             resultado.push({ "requisito": aux, "importancia": ordenPrioridad[i].importancia, "coste": ordenPrioridad[i].coste });
             proyect.planificacion.push({ "requisito": aux, "importancia": ordenPrioridad[i].importancia, "coste": ordenPrioridad[i].coste });
 

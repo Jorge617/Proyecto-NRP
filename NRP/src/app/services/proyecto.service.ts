@@ -74,6 +74,7 @@ export class ProyectoService {
             body: body
 
         };
+        console.log(options.body)
         return this._http.delete(this.url + "proyectos/" + idProyecto + "/usuarios", options);
 
     }
