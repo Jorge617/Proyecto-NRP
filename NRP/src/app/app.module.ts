@@ -23,6 +23,7 @@ import { ProyectoClienteComponent } from './components/proyecto-cliente/proyecto
 import { CrearTareaComponent } from './components/crear-tarea/crear-tarea.component';
 import { AddUsuarioParticipanteComponent } from './components/add-usuario-participante/add-usuario-participante.component';
 import { GestionarTareaComponent } from './components/gestionar-tarea/gestionar-tarea.component';
+import { AddValorTareaComponent } from './components/add-valor-tarea/add-valor-tarea.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { GestionarTareaComponent } from './components/gestionar-tarea/gestionar-
     ProyectoClienteComponent,
     CrearTareaComponent,
     AddUsuarioParticipanteComponent,
-    GestionarTareaComponent
+    GestionarTareaComponent,
+    AddValorTareaComponent
   ],
   imports: [
     BrowserModule,

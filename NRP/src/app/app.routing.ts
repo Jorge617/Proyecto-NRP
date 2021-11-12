@@ -12,6 +12,7 @@ import { CrearTareaComponent } from './components/crear-tarea/crear-tarea.compon
 import { AddUsuarioParticipanteComponent } from './components/add-usuario-participante/add-usuario-participante.component';
 import { InicioClienteComponent } from './components/inicio-cliente/inicio-cliente.component';
 import { GestionarTareaComponent } from './components/gestionar-tarea/gestionar-tarea.component';
+import { AddValorTareaComponent } from './components/add-valor-tarea/add-valor-tarea.component';
 
 const appRoutes: Routes = [
     { path: '', component: LoginComponent },
@@ -35,6 +36,8 @@ const appRoutes: Routes = [
     { path: 'add-usuario-participante/:id/:idUsuario', component: AddUsuarioParticipanteComponent },
     { path: 'gestionar-tarea', component: GestionarTareaComponent },
     { path: 'gestionar-tarea/:id', component: GestionarTareaComponent },
+    { path: 'add-valor-tarea', component: AddValorTareaComponent },
+    { path: 'add-valor-tarea/:id/:idProyecto', component: AddValorTareaComponent },
     { path: '**', component: LoginComponent }
 ];
 

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Página proyecto del cliente </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body>
+    <div class="container">
+
+        <!--Inicio del menu-->
+        <menu></menu>
+        <!--Fin del menu-->
+
+        <!--Inicio del contenido de INICIO-->
+        <div class="row">
+            <div class="col-11">
+                <h1 class="mt-3 ms-4">Añadir importancia a la tarea</h1>
+            </div>
+            <div class="col-1">
+                <a [routerLink]="['/proyecto-cliente',proyecto._id,usuario._id]"><img class="mt-4" src="./assets/flecha-hacia-atras.png" alt="atras" width="50" height="50" /></a>
+            </div>
+        </div>
+
+          <form #formAddImportancia="ngForm" (ngSubmit)="updateImportancia()">
+            <div class="mt-3 ms-5 row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Importancia de la tarea</label>
+                <div class="col-sm-1">
+                    <input class="form-control" type="number" name="peso" #importancia="ngModel" [(ngModel)] = "requisito.importancia" placeholder="[1 - 5]" required>
+              </div>
+            </div>
+            <div class="col-auto mt-3 ms-5">
+                <button  type="submit" class="btn btn-success mb-3" [disabled]="!formAddImportancia.form.valid" >Añadir importancia</button>
+              </div>
+          </form>
+        <!--Fin del contenido de INICIO-->
+    </div>
+</body>
+
+</html>

@@ -113,7 +113,7 @@ export class UsuarioService {
 			body: body
 
 		};
-		console.log(options.body);
+
 		return this._http.get(this.url + 'usuarios/' + idUsuario + '/proyecto/requisitos?idProyecto=' + usuario.idProyecto, options);
 	}
 
