@@ -235,21 +235,16 @@ proyectoController.getUsuariosInfo = async (req, res) => {
 
 proyectoController.calcularPrioridad = async (req, res) => {
     const proyect = await proyecto.findById(req.params.id);
-
+    proyect.planificacion=[]
     var coste = 0;
     var requisitos = []
-
     var ordenPrioridad = [];
-
     var usuarios = []
     usuarios = proyect.usuarios
-
 
     for (var i = 0; i < proyect.requisitos.length; i++) {
         requisitos.push(await requisito.findById(proyect.requisitos[i]))
     }
-
-
 
     for (var i = 0; i < requisitos.length; i++) {
         suma = 0;
@@ -257,35 +252,30 @@ proyectoController.calcularPrioridad = async (req, res) => {
         for (var j = 0; j < requisitos[i].prioridad.length; j++) {
             var aux = usuarios.find(element => String(element.usuario) == String(requisitos[i].prioridad[j].usuario))
 
-
             if (aux != undefined) {
-
                 suma += aux.importancia * requisitos[i].prioridad[j].valor
             }
         }
 
         ordenPrioridad.push({ "importancia": suma, "idRequisito": requisitos[i]._id, "coste": requisitos[i].coste });
-
-
     }
     ordenPrioridad.sort(function (a, b) { return b.importancia - a.importancia });
-
-
     var resultado = []
-
     coste = 0;
     for (var i = 0; i < ordenPrioridad.length; i++) {
         if (coste + (ordenPrioridad[i].coste) <= req.query.limite) {
             var aux = await requisito.findById(ordenPrioridad[i].idRequisito)
+            
             resultado.push({ "requisito": aux, "importancia": ordenPrioridad[i].importancia, "coste": ordenPrioridad[i].coste });
+            proyect.planificacion.push({ "requisito": aux, "importancia": ordenPrioridad[i].importancia, "coste": ordenPrioridad[i].coste });
+
             coste += ordenPrioridad[i].coste
         }
     }
 
 
+    proyect.save();
     res.send(resultado);
-
-
 }
 
 
