@@ -6,7 +6,8 @@ const ProyectoSchema = new Schema({
     fechaInicio : String,
     fechaFin : String,
     usuarios : [{usuario: {type: Schema.ObjectId, ref: "Usuario"}, importancia: Number }],
-    descripcion : String
+    descripcion : String,
+    planificacion : []
 });
 
 
