@@ -123,6 +123,7 @@ proyectoController.deleteUsuarios = async (req, res) => {
         }
     }
 
+    proyect.planificacion=[]
 
     await proyect.save()
 
@@ -174,10 +175,13 @@ proyectoController.deleteRequisitos = async (req, res) => {
         proyect.requisitos.pull(requisitos[i])
     }
 
+    proyect.planificacion=[]
+
 
     await proyect.save()
 
     res.send("Lista actualizada");
+
 }
 
 proyectoController.getUsuarios = async (req, res) => {
