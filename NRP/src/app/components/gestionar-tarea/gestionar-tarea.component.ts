@@ -66,4 +66,8 @@ export class GestionarTareaComponent implements OnInit {
     );
 
   }
+
+  calcularPrioridad() {
+
+  }
 }
