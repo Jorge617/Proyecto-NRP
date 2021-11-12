@@ -10,7 +10,8 @@ export class Proyecto {
 		public fechaFin: Date | string,
 		public usuarios: any[],
 		public descripcion: string,
-		public idUsuario: string
+		public idUsuario: string,
+		public planificacion: any[]
 
 	) { }
 }

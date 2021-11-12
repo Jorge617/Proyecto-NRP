@@ -29,7 +29,7 @@ export class ProyectoComponent implements OnInit {
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>,
     public route: ActivatedRoute, private _requisitoService: RequisitoService) {
     this.dateAdapter.setLocale('es-ES');
-    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "");
+    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", []);
     this.arrUsuariosNombre = [];
     this.arrUsuariosDisponibles = [];
     this.arrTareasProyecto = [];
@@ -92,6 +92,7 @@ export class ProyectoComponent implements OnInit {
         this.proyecto.usuarios = response.usuarios;
         this.proyecto.requisitos = response.requisitos;
         this.proyecto.idUsuario = this.usuario._id;
+        this.proyecto.planificacion = response.planificacion;
       },
       error => {
         console.log(<any>error);

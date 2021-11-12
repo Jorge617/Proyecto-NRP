@@ -19,7 +19,7 @@ export class AddValorTareaComponent implements OnInit {
   public proyecto: Proyecto; //Proyecto actual
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, public route: ActivatedRoute,
     private _requistoService: RequisitoService) {
-    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "");
+    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", []);
   }
 
   ngOnInit(): void {

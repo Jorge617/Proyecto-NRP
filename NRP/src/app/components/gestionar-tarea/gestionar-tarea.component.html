@@ -21,11 +21,11 @@
                 <a [routerLink]="['/proyecto',proyecto._id]"><img class="mt-4" src="./assets/flecha-hacia-atras.png" alt="atras" width="50" height="50" /></a>
             </div>
         </div>
-        <form #formPriorizarTareas="ngForm">
+        <form #formPriorizarTareas="ngForm" (ngSubmit)="calcularPrioridad()">
             <div class="mt-3 ms-4 row">
                 <label for="inputLimite" class="col-sm-2 col-form-label">Limite de esfuerzo </label>
                 <div class="col-sm-2">
-                    <input class="form-control" type="number" placeholder="[1 - 10]" required>
+                    <input id="limite" class="form-control" type="number" placeholder="[1 - 10]" required>
               </div>
               <div class="col-auto ms-5">
                 <button  type="submit" class="btn btn-success mb-3" [disabled]="!formPriorizarTareas.form.valid" >Priorizar tareas</button>
@@ -36,9 +36,28 @@
 
           <div class="row mt-5 ms-3">
             <h1>Lista de tareas priorizadas</h1>
-              <div class="col-11 shadow border bg-white rounded ms-3 ">
-               g
-              </div>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Fecha inicio</th>
+                    <th scope="col">Fecha fin</th>
+                    <th scope="col">Importancia</th>
+                    <th scope="col">Esfuerzo</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let tarea of proyecto.planificacion;let indice = index">
+                  <tr>
+                    <th scope="row">{{indice + 1}}</th>
+                    <td>{{tarea.requisito.nombre}}</td>
+                    <td>{{tarea.requisito.fechaInicio}}</td>
+                    <td>{{tarea.requisito.fechaFin}}</td>
+                    <td>{{tarea.importancia}}</td>
+                    <td>{{tarea.coste}}</td>
+                  </tr>
+                </tbody>
+              </table>
           </div>
     </div>
 </body>

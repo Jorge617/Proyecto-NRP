@@ -22,7 +22,7 @@ export class DescripcionTareaClienteComponent implements OnInit {
   public proyecto: Proyecto; //Proyecto actual
 
   constructor(private _usuarioService: UsuarioService, public router: Router, public route: ActivatedRoute, private _proyectoService: ProyectoService) {
-    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "");
+    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", []);
   }
 
   ngOnInit(): void {

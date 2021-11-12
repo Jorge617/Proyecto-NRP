@@ -22,7 +22,7 @@ export class CrearProyectoComponent implements OnInit {
 
   constructor(private _usuarioService: UsuarioService, private _proyectoService: ProyectoService, public router: Router, private dateAdapter: DateAdapter<Date>) {
     this.dateAdapter.setLocale('es-ES');
-    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "");
+    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", []);
   }
 
   ngOnInit(): void {

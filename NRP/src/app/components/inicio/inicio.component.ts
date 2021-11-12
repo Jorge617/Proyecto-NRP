@@ -41,7 +41,7 @@ export class InicioComponent implements OnInit {
 
   getUserLogged() {
     this._usuarioService.getUserLogged(this.usuario);
-    console.log(this.usuario);
+
   }
 
   cerrarSesion() {
