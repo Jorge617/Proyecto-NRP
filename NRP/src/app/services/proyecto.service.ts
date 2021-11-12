@@ -80,7 +80,12 @@ export class ProyectoService {
 
     getRequisitos(idProyecto: string): Observable<any> {
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
-        return this._http.get(this.url + "proyectos/" + idProyecto + "/requisitos", { headers: headers }); 
+        return this._http.get(this.url + "proyectos/" + idProyecto + "/requisitos", { headers: headers });
+    }
+
+    calcularPrioridad(idProyecto: any, limite: any): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this._http.get(this.url + "proyectos/" + idProyecto + "/prioridad?limite=" + limite, { headers: headers });
     }
 }
 

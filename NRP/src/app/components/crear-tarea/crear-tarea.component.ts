@@ -25,7 +25,7 @@ export class CrearTareaComponent implements OnInit {
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>,
     public route: ActivatedRoute, private _requisitoService: RequisitoService) {
     this.dateAdapter.setLocale('es-ES');
-    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "");
+    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", []);
     this.arrUsuarios = [];
     this.arrUsuariosAdd = [];
 

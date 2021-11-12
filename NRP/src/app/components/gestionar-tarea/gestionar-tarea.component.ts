@@ -18,18 +18,13 @@ export class GestionarTareaComponent implements OnInit {
 
   public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", []);
   public proyecto: Proyecto; //Proyecto actual
-  public arrUsuariosProyecto: Usuario[] | any; //Usuarios que participan en el proyecto
-  public arrUsuariosNombre: any[]; //Los nombres de los usuarios que participan en el proyecto
-  public arrUsuariosDisponibles: Usuario[] | undefined; //Los usuarios que se pueden asignar a un proyecto
-  public arrTareasProyecto: Requisito[];
+  public tareasPriorizadas: Requisito[];
 
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>,
     public route: ActivatedRoute, private _requisitoService: RequisitoService) {
     this.dateAdapter.setLocale('es-ES');
-    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "");
-    this.arrUsuariosNombre = [];
-    this.arrUsuariosDisponibles = [];
-    this.arrTareasProyecto = [];
+    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", []);
+    this.tareasPriorizadas = [];
 
 
   }
@@ -58,6 +53,7 @@ export class GestionarTareaComponent implements OnInit {
         this.proyecto.usuarios = response.usuarios;
         this.proyecto.requisitos = response.requisitos;
         this.proyecto.idUsuario = this.usuario._id;
+        this.proyecto.planificacion = response.planificacion;
       },
       error => {
         console.log(<any>error);
@@ -65,5 +61,14 @@ export class GestionarTareaComponent implements OnInit {
 
     );
 
+  }
+
+  calcularPrioridad() {
+    this._proyectoService.calcularPrioridad(this.proyecto._id, $("#limite").val()).subscribe(response => {
+      this.proyecto.planificacion = response;
+
+    }, error => {
+      console.log(<any>error);
+    });
   }
 }

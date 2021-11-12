@@ -16,7 +16,7 @@ export class InicioClienteComponent implements OnInit {
   public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", []);
   public proyecto: Proyecto; //Proyecto actual
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, public route: ActivatedRoute) {
-    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "");
+    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", []);
   }
 
   ngOnInit(): void {
