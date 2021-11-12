@@ -39,8 +39,9 @@ export class RequisitoService {
         return this._http.get(this.url + "requisitos/" + id, { headers: headers });
     }
 
-    borrarRequisito() {
-
+    borrarRequisito(idRequisito: any, idProyecto: any) {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this._http.delete(this.url + "requisitos/" + idRequisito + "?idProyecto=" + idProyecto, { headers: headers });
     }
 
     updateImportancia(id: any, idUsuario: any, valor: any): Observable<any> {

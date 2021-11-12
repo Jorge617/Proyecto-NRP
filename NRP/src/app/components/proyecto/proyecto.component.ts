@@ -141,5 +141,11 @@ export class ProyectoComponent implements OnInit {
       });
   }
 
+  borrarRequisito(indice: any) {
+    this._requisitoService.borrarRequisito(this.arrTareasProyecto[indice]._id, this.proyecto._id).subscribe(response => {
+      console.log("Eliminado");
+    })
+  }
+
 
 }
