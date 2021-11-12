@@ -1,5 +1,4 @@
-import { Component, DoCheck, NgZone, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -8,8 +7,6 @@ import { DateAdapter } from '@angular/material/core';
 import { ProyectoService } from 'src/app/services/proyecto.service';
 import { Requisito } from 'src/app/models/requisito';
 import { RequisitoService } from '../../services/requisito.service';
-import { param } from 'jquery';
-
 
 @Component({
   selector: 'app-proyecto',
@@ -58,7 +55,6 @@ export class ProyectoComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       this.getRequisitos(params.id);
-      console.log(this.arrTareasProyecto);
     });
 
   }
@@ -126,7 +122,7 @@ export class ProyectoComponent implements OnInit {
     var deleteUsuario = [];
     deleteUsuario.push(this.arrUsuariosProyecto[indice]);
     this._proyectoService.deleteUsuarios(this.proyecto._id, deleteUsuario).subscribe();
-    window.location.reload();
+    //window.location.reload();
 
   }
 
