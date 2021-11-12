@@ -23,7 +23,10 @@ requisitoController.crearRequisito = async (req, res)=> {
 }
 requisitoController.borrarRequisito = async (req, res) => {
     const { id } = req.params;
-    await requisito.findByIdAndDelete(id);
+    const idProyecto = req.query.idProyecto
+    const nuevoRequisito = await requisito.findById(id);
+    await proyecto.updateOne({ _id: { $eq: idProyecto } }, { $pull: { requisitos: nuevoRequisito._id } })
+    nuevoRequisito.delete();
     res.json('Requisito borrado');
 }
 
@@ -42,6 +45,7 @@ requisitoController.updateRequisito = async (req, res) => {
                                                                       descripcion:descripcion,
                                                                       fechaInicio:fechaInicio,
                                                                       fechaFin:fechaFin} })
+
 
     res.json("Put completado");
 }
