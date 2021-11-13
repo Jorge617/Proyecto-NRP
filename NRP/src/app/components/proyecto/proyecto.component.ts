@@ -20,7 +20,7 @@ export class ProyectoComponent implements OnInit {
   public proyecto: Proyecto; //Proyecto actual
   public arrUsuariosProyecto: Usuario[] | any; //Usuarios que participan en el proyecto
   public arrUsuariosNombre: any[]; //Los nombres de los usuarios que participan en el proyecto
-  public arrUsuariosDisponibles: Usuario[] | undefined; //Los usuarios que se pueden asignar a un proyecto
+  public arrUsuariosDisponibles: Usuario[]; //Los usuarios que se pueden asignar a un proyecto
   public arrTareasProyecto: Requisito[];
 
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>,
@@ -121,8 +121,13 @@ export class ProyectoComponent implements OnInit {
 
     var deleteUsuario = [];
     deleteUsuario.push(this.arrUsuariosProyecto[indice]);
-    this._proyectoService.deleteUsuarios(this.proyecto._id, deleteUsuario).subscribe();
-    //window.location.reload();
+    this._proyectoService.deleteUsuarios(this.proyecto._id, deleteUsuario).subscribe(response => {
+      this.route.params.subscribe(params => {
+        this.getUsuariosInfo(params.id);
+        this.getUsuariosDisponibles(params.id);
+      });
+    });
+
 
   }
 
@@ -143,7 +148,9 @@ export class ProyectoComponent implements OnInit {
 
   borrarRequisito(indice: any) {
     this._requisitoService.borrarRequisito(this.arrTareasProyecto[indice]._id, this.proyecto._id).subscribe(response => {
-      console.log("Eliminado");
+      this.route.params.subscribe(params => {
+        this.getRequisitos(params.id);
+      });
     })
   }
 

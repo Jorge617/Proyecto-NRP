@@ -65,7 +65,7 @@
                                 <div class="col"></div>
                                 <div class="col">
                                     Fecha comienzo
-                                    <input matInput [matDatepicker]="datepicker" name="fechaInicio" placeholder="Elige una fecha" style="display: inline; width: 125px" required />
+                                    <input matInput [matDatepicker]="datepicker" name="fechaInicio" value= {{proyecto.fechaInicio}} placeholder="Elige una fecha" style="display: inline; width: 125px" required />
                                     <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
                                     <mat-datepicker #datepicker></mat-datepicker>
                                 </div>
@@ -75,7 +75,7 @@
                                 <div class="col"></div>
                                 <div class="col">
                                     Fecha fin
-                                    <input matInput [matDatepicker]="picker" name="fechaFin" placeholder="Elige una fecha" style="display: inline; width: 125px" required />
+                                    <input matInput [matDatepicker]="picker" name="fechaFin" value= {{proyecto.fechaFin}}  placeholder="Elige una fecha" style="display: inline; width: 125px" required />
                                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                     <mat-datepicker #picker></mat-datepicker>
                                 </div>
@@ -112,12 +112,19 @@
                         <a [routerLink]="['/crear-tarea',proyecto._id]"><img id="addTarea" src="./assets/add.png" alt="carpeta" width="55" height="55" /></a>
                     </div>
                     <div class="row">
+                        <div class="col">
+                            <div *ngIf = "arrTareasProyecto.length == 0" class="mt-3 text-center">
+                                <h1>No hay ninguna tarea añadida en este proyecto</h1>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-9">
                             <ul class="list-group list-group-flush ms-3">
                                 <li *ngFor="let tarea of arrTareasProyecto;let indice = index" class="list-group-item">
                                     <div class="row">
                                         <div class="col">
-                                            <a [routerLink]="['/descripcion-tarea-cliente',proyecto._id]">{{tarea.nombre}}</a>
+                                            <a [routerLink]="['/descripcion-tarea-cliente',proyecto._id,tarea._id]">{{tarea.nombre}}</a>
                                         </div>
                                         <div class="col">
                                             <img id="addTarea" src="./assets/borrar-tarea.png" alt="Borrar usuario" width="40" height="40" style="cursor: pointer; margin-left: 90%;" (click)="borrarRequisito(indice)" />
@@ -145,7 +152,13 @@
 
 
 
-
+                    <div class="row">
+                        <div class="col">
+                            <div *ngIf = "arrUsuariosProyecto.length == 0" class="mt-3 text-center">
+                                <h1>No participa ningún usuario en el proyecto</h1>
+                              </div>
+                        </div>
+                    </div>
                     <div class="row">
 
                         <div class="col-9">
@@ -156,7 +169,7 @@
                                         <a [routerLink]="['/proyecto']">{{usuarioProyecto.nombre}}</a>
                                     </div>
                                     <div class ="col">
-                                        <img id="deleteUsuario" src="./assets/borrar-usuario.png" alt="Borrar usuario" width="40" height="40" style="cursor: pointer;" style="margin-left: 90%;" (click)="deleteUsuarios(indice)" />
+                                        <img id="deleteUsuario" src="./assets/borrar-usuario.png" alt="Borrar usuario" width="40" height="40" style="margin-left: 90%; cursor: pointer;" (click)="deleteUsuarios(indice)" />
                                     </div>
                                 </div>
                             </li>
@@ -177,7 +190,9 @@
                                 </div>
 
                                 <div class="list-group list-group-flush  scrollarea ">
-
+                                    <div *ngIf = "arrUsuariosDisponibles.length == 0" class="mt-4 text-center">
+                                        <h2>Todos los usuarios posibles añadidos</h2>
+                                      </div>
                                     <div *ngFor="let usuarioAdd of arrUsuariosDisponibles;" class="row m-3">
                                         <div class="col-10">
                                             <strong>{{usuarioAdd.nombre}} </strong>
@@ -224,11 +239,11 @@
                         <tbody *ngFor="let tarea of proyecto.planificacion;let indice = index">
                           <tr>
                             <th scope="row">{{indice + 1}}</th>
-                            <td>{{tarea.requisito.nombre}}</td>
-                            <td>{{tarea.requisito.fechaInicio}}</td>
-                            <td>{{tarea.requisito.fechaFin}}</td>
-                            <td>{{tarea.importancia}}</td>
-                            <td>{{tarea.coste}}</td>
+                            <td >{{tarea.requisito.nombre}}</td>
+                            <td >{{tarea.requisito.fechaInicio}}</td>
+                            <td >{{tarea.requisito.fechaFin}}</td>
+                            <td class="text-center">{{tarea.importancia}}</td>
+                            <td class="text-center">{{tarea.coste}}</td>
                           </tr>
                         </tbody>
                       </table>
