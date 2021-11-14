@@ -95,7 +95,7 @@
                     <div class="row justify-content-end">
                         <div class="col-2 mt-2">
                             <button type="button" class="btn btn-danger" (click)="deleteProyecto()">
-                            Borrar proyecto
+                           Eliminar proyecto
                           </button>
                         </div>
 
@@ -216,16 +216,24 @@
             <div class="tab-pane fade show" id="priorizar" role="tabpanel" aria-labelledby="priorizar-tab">
                 <div class="row">
                     <div class="col">
-                        <h2 class="m-3">Priorize sus tareas del proyecto <a [routerLink]="['/gestionar-tarea',proyecto._id]"><button type="button" class="btn">
-                            <img id="priorizarTarea" src="./assets/time.png" alt="" width="60" height="60">
-                           </button></a></h2>
+                        <h2 class="m-3">Priorize sus tareas del proyecto</h2>
                     </div>
                 </div>
 
-                <div class="row mt-2 m-3">
-                    <h2>Lista de tareas priorizadas</h2>
+                <div *ngIf="proyecto.planificacion.length == 0" class="row mt-5 ms-3 text-center">
+                    <h1>No se han priorizado aún las tareas del proyecto</h1>
+                    <a [routerLink]="['/gestionar-tarea',proyecto._id]"><button type="button" class="btn">
+                        <img id="priorizarTarea" src="./assets/time.png" alt="" width="60" height="60">
+                       </button></a>
+            </div>
+
+                <div *ngIf="proyecto.planificacion.length != 0"  class="row mt-2 m-3">
+                    <h2>Lista de tareas priorizadas <a [routerLink]="['/gestionar-tarea',proyecto._id]"><button type="button" class="btn">
+                        <img id="priorizarTarea" src="./assets/time.png" alt="" width="60" height="60">
+                       </button></a></h2>
                    
                     <table class="table">
+                        
                         <thead>
                           <tr>
                             <th scope="col">#</th>
@@ -242,8 +250,9 @@
                             <td >{{tarea.requisito.nombre}}</td>
                             <td >{{tarea.requisito.fechaInicio}}</td>
                             <td >{{tarea.requisito.fechaFin}}</td>
-                            <td class="text-center">{{tarea.importancia}}</td>
-                            <td class="text-center">{{tarea.coste}}</td>
+                            <td *ngIf= "tarea.importancia == 0">Sin importancia</td>
+                            <td  *ngIf= "tarea.importancia != 0" >{{tarea.importancia}}</td>
+                            <td >{{tarea.coste}}</td>
                           </tr>
                         </tbody>
                       </table>
