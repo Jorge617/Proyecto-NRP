@@ -42,6 +42,9 @@
                 <div class="col-sm-1">
                     <input class="form-control" type="number" name="peso" #peso="ngModel" [(ngModel)] = "usuario.importancia" placeholder="[1 - 5]" required>
               </div>
+              <div *ngIf="0>= pesoUsuario || pesoUsuario > 5"  class="col-sm-4 mt-2">
+                <span style="color: red;">El peso del usuario tiene que ser entre 1 y 5</span>
+              </div>
             </div>
             <div class="col-auto mt-3 ms-5">
                 <button  type="submit" class="btn btn-success mb-3" [disabled]="!formAddUsuario.form.valid" >Añadir usuario</button>

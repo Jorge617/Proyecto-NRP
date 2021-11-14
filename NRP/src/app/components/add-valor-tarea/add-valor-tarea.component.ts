@@ -15,11 +15,13 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class AddValorTareaComponent implements OnInit {
   public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", []);
-  public requisito: Requisito = new Requisito("", "", "", "", "", 0, [], 1, "");
+  public requisito: Requisito = new Requisito("", "", "", "", "", 1, [], 1, "");
   public proyecto: Proyecto; //Proyecto actual
+  public importanciaTarea: Number;
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, public route: ActivatedRoute,
     private _requistoService: RequisitoService) {
     this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", []);
+    this.importanciaTarea = 1;
   }
 
   ngOnInit(): void {
@@ -54,12 +56,14 @@ export class AddValorTareaComponent implements OnInit {
 
   }
   updateImportancia() {
-    this.route.params.subscribe(params => {
-      this._requistoService.updateImportancia(params.id, this.usuario._id, this.requisito.importancia).subscribe(response => {
-        this.router.navigateByUrl("proyecto-cliente/" + this.proyecto._id + "/" + this.usuario._id);
-      });
-    })
-
+    this.importanciaTarea = this.requisito.importancia;
+    if (this.importanciaTarea > 0 && this.importanciaTarea <= 5) {
+      this.route.params.subscribe(params => {
+        this._requistoService.updateImportancia(params.id, this.usuario._id, this.requisito.importancia).subscribe(response => {
+          this.router.navigateByUrl("proyecto-cliente/" + this.proyecto._id + "/" + this.usuario._id);
+        });
+      })
+    }
   }
 }
 

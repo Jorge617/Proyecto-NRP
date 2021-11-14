@@ -38,10 +38,13 @@
                     </div>
                 </div>
                 <div class="mt-3 row-3">
-                    <label for="inputPassword" class="col-sm-2 col-form-label"><strong>Esfuerzo de la tarea [1 - 10]</strong></label>
+                    <label for="inputPassword" class="col-sm-2 col-form-label"><strong>Esfuerzo de la tarea</strong></label>
                     <div class="col-2">
                         <input class="form-control" type="number" name="coste" #coste="ngModel" [(ngModel)] = "requisito.coste" placeholder = "[1 - 10]"  required>
                   </div>
+                  <div class="col-4 mt-2">
+                    <span *ngIf = "0>=esfuerzoTarea || esfuerzoTarea > 10" style="color:red;">El esfuerzo de la tarea tiene que ser entre 1 y 10</span>
+              </div>
                 </div>
               
 

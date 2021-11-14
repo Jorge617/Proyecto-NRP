@@ -21,6 +21,7 @@ export class CrearTareaComponent implements OnInit {
   public arrUsuariosAdd: Usuario[];
   public arrUsuariosProyecto: Usuario[] | any; //Usuarios que participan en el proyecto
   public requisito: Requisito = new Requisito("", "", "", "", "", 0, [], 1, "");
+  public esfuerzoTarea: Number;
 
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>,
     public route: ActivatedRoute, private _requisitoService: RequisitoService) {
@@ -28,6 +29,7 @@ export class CrearTareaComponent implements OnInit {
     this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", []);
     this.arrUsuarios = [];
     this.arrUsuariosAdd = [];
+    this.esfuerzoTarea = 1;
 
   }
 
@@ -123,15 +125,17 @@ export class CrearTareaComponent implements OnInit {
   }
 
   crearRequisito() {
-    for (var i = 0; i < this.arrUsuariosAdd.length; i++) {
-      this.requisito.prioridad.push({ "usuario": this.arrUsuariosAdd[i], "valor": 0 });
+    this.esfuerzoTarea = this.requisito.coste;
+    if (this.esfuerzoTarea > 0 && this.esfuerzoTarea <= 10) {
+      for (var i = 0; i < this.arrUsuariosAdd.length; i++) {
+        this.requisito.prioridad.push({ "usuario": this.arrUsuariosAdd[i], "valor": 0 });
+      }
+      this.requisito.idProyecto = this.proyecto._id;
+      this.proyecto.requisitos.push(this.requisito);
+      this._requisitoService.crearRequisito(this.requisito).subscribe(response => {
+        this.router.navigateByUrl("proyecto/" + this.proyecto._id);
+      });
     }
-    this.requisito.idProyecto = this.proyecto._id;
-    this.proyecto.requisitos.push(this.requisito);
-    this._requisitoService.crearRequisito(this.requisito).subscribe(response => {
-      this.router.navigateByUrl("proyecto/" + this.proyecto._id);
-    });
-
 
   }
 

@@ -19,13 +19,16 @@ export class GestionarTareaComponent implements OnInit {
   public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", []);
   public proyecto: Proyecto; //Proyecto actual
   public tareasPriorizadas: Requisito[];
+  public limiteEsfuerzo: Number;
+  public tamanioListaTareas: Number | undefined;
+
 
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>,
     public route: ActivatedRoute, private _requisitoService: RequisitoService) {
     this.dateAdapter.setLocale('es-ES');
     this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", []);
     this.tareasPriorizadas = [];
-
+    this.limiteEsfuerzo = 1;
 
   }
 
@@ -54,6 +57,7 @@ export class GestionarTareaComponent implements OnInit {
         this.proyecto.requisitos = response.requisitos;
         this.proyecto.idUsuario = this.usuario._id;
         this.proyecto.planificacion = response.planificacion;
+
       },
       error => {
         console.log(<any>error);
@@ -64,11 +68,17 @@ export class GestionarTareaComponent implements OnInit {
   }
 
   calcularPrioridad() {
-    this._proyectoService.calcularPrioridad(this.proyecto._id, $("#limite").val()).subscribe(response => {
-      this.proyecto.planificacion = response;
+    this.limiteEsfuerzo = Number($("#limite").val());
+    if (Number($("#limite").val()) > 0) {
+      this._proyectoService.calcularPrioridad(this.proyecto._id, $("#limite").val()).subscribe(response => {
+        this.proyecto.planificacion = response;
+        this.tamanioListaTareas = response.length;
 
-    }, error => {
-      console.log(<any>error);
-    });
+      }, error => {
+        console.log(<any>error);
+      });
+    } else {
+      this.limiteEsfuerzo = Number($("#limite").val());
+    }
   }
 }
