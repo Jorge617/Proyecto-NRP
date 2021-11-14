@@ -281,6 +281,21 @@ proyectoController.calcularPrioridad = async (req, res) => {
     res.send(resultado);
 }
 
+proyectoController.getPesoUsuario = async (req, res) => {
+    const idUsuario = req.query.idUsuario
+    const proyect = await proyecto.findById(req.params.id);
+    var importancia;
+    for(var i = 0; i < proyect.usuarios.length; i++){
+        if(String(proyect.usuarios[i].usuario) == String(idUsuario)){
+            importancia = proyect.usuarios[i].importancia
+        }
+    }
+
+    res.send({"importancia":importancia})
+
+}
+
+
 
 module.exports = proyectoController;
 
