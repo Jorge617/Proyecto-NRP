@@ -19,12 +19,14 @@ export class AddUsuarioParticipanteComponent implements OnInit {
   public usuarioDelProyecto: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", []);
   public proyecto: Proyecto;
   public arrUsuarios: any[];
-
+  public pesoUsuario: Number;
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>,
     public route: ActivatedRoute) {
     this.dateAdapter.setLocale('es-ES');
     this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", []);
-    this.arrUsuarios = []
+    this.arrUsuarios = [];
+    this.pesoUsuario = 1;
+
   }
 
   ngOnInit(): void {
@@ -83,12 +85,15 @@ export class AddUsuarioParticipanteComponent implements OnInit {
     )
   }
   anadirUsuarioProyecto() {
-    this.arrUsuarios.push({ "usuario": this.usuario._id, "importancia": this.usuario.importancia });
-    this._proyectoService.postUsuarios(this.proyecto._id, this.arrUsuarios).subscribe(response => {
-      this.route.params.subscribe(params => {
-        this.router.navigateByUrl("proyecto/" + params.id);
+    this.pesoUsuario = this.usuario.importancia;
+    if (this.pesoUsuario > 0 && this.pesoUsuario <= 5) {
+      this.arrUsuarios.push({ "usuario": this.usuario._id, "importancia": this.usuario.importancia });
+      this._proyectoService.postUsuarios(this.proyecto._id, this.arrUsuarios).subscribe(response => {
+        this.route.params.subscribe(params => {
+          this.router.navigateByUrl("proyecto/" + params.id);
+        });
       });
-    });
 
+    }
   }
 }

@@ -30,6 +30,9 @@
                 <div class="col-sm-1">
                     <input class="form-control" type="number" name="peso" #importancia="ngModel" [(ngModel)] = "requisito.importancia" placeholder="[1 - 5]" required>
               </div>
+              <div *ngIf="0>= importanciaTarea || importanciaTarea > 5"  class="col-sm-4 mt-2">
+                <span style="color: red;">La importancia tiene que ser entre 1 y 5</span>
+              </div>
             </div>
             <div class="col-auto mt-3 ms-5">
                 <button  type="submit" class="btn btn-success mb-3" [disabled]="!formAddImportancia.form.valid" >Añadir importancia</button>

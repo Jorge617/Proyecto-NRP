@@ -110,7 +110,11 @@ export class DescripcionTareaClienteComponent implements OnInit {
     });
   }
 
-
+  borrarRequisito() {
+    this._requisitoService.borrarRequisito(this.requisito._id, this.proyecto._id).subscribe(response => {
+      this.router.navigateByUrl('/proyecto/' + this.proyecto._id);
+    })
+  }
 
 
 }

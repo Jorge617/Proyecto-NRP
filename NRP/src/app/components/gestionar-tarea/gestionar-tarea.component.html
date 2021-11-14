@@ -26,6 +26,10 @@
                 <label for="inputLimite" class="col-sm-2 col-form-label">Limite de esfuerzo </label>
                 <div class="col-sm-2">
                     <input id="limite" class="form-control" type="number" placeholder="[1 - 10]" required>
+                    
+              </div>
+              <div *ngIf="0 >= limiteEsfuerzo" class="col-4 mt-2">
+                <span style="color: red;">El limite de esfuerzo tiene que ser mayor que 0</span>
               </div>
               <div class="col-auto ms-5">
                 <button  type="submit" class="btn btn-success mb-3" [disabled]="!formPriorizarTareas.form.valid" >Priorizar tareas</button>
@@ -34,8 +38,8 @@
            
           </form>
 
-          <div *ngIf="proyecto.planificacion.length == 0" class="row mt-5 ms-3 text-center">
-                  <h1>Introduzca un limite de esfuerzo para poder priorizar las tareas</h1>
+          <div *ngIf="tamanioListaTareas == 0" class="row mt-5 ms-3 text-center">
+                  <h1>No hay tareas con esa limite de esfuerzo, por favor introduzca un limite de esfuerzo más alto</h1>
           </div>
 
           <div *ngIf="proyecto.planificacion.length != 0" class="row mt-5 ms-3">
