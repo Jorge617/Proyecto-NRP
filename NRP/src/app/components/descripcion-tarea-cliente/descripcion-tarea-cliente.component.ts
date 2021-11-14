@@ -25,12 +25,14 @@ export class DescripcionTareaClienteComponent implements OnInit {
   public requisito: Requisito = new Requisito("", "", "", "", "", 0, [], 1, "");
   public arrUsuariosResponsables: any[];
   public arrPesosUsuariosProyecto: any[];
+  public pesosUsuarios: Number[];
 
   constructor(private _usuarioService: UsuarioService, public router: Router, public route: ActivatedRoute, private _proyectoService: ProyectoService, private _requisitoService: RequisitoService) {
     this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", []);
     this.arrUsuarios = [];
     this.arrUsuariosResponsables = [];
     this.arrPesosUsuariosProyecto = [];
+    this.pesosUsuarios = [];
   }
 
   ngOnInit(): void {
@@ -104,10 +106,22 @@ export class DescripcionTareaClienteComponent implements OnInit {
         });
       }
 
+      this.getPesosUsuarios();
+
 
     }, error => {
       console.log(<any>error);
     });
+  }
+
+  getPesosUsuarios() {
+    for (var j = 0; j < this.requisito.prioridad.length; j++) {
+      this._proyectoService.getPesoUsuario(this.proyecto._id, this.requisito.prioridad[j].usuario).subscribe(response => {
+        this.pesosUsuarios.push(response.importancia);
+      }, error => {
+        console.log(<any>error);
+      })
+    }
   }
 
   borrarRequisito() {

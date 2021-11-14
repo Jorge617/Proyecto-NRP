@@ -88,5 +88,10 @@ export class ProyectoService {
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
         return this._http.get(this.url + "proyectos/" + idProyecto + "/prioridad?limite=" + limite, { headers: headers });
     }
+
+    getPesoUsuario(idProyecto: any, idUsuario: any): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this._http.get(this.url + "proyectos/" + idProyecto + "/importancia?idUsuario=" + idUsuario, { headers: headers });
+    }
 }
 
