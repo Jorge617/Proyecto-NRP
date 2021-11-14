@@ -58,35 +58,23 @@
                         </section>
 
                     </div>
-                    
-                    <div class="col-2">
-                        <div id="fechaInicioFin" class="row align-items-center mt-3 ms-4">
-                            <div class="col">
-                                <div class="col"></div>
-                                <div class="col">
-                                    Fecha comienzo
-                                    <input matInput [matDatepicker]="datepicker" name="fechaInicio" value= {{proyecto.fechaInicio}} placeholder="Elige una fecha" style="display: inline; width: 125px" required />
-                                    <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
-                                    <mat-datepicker #datepicker></mat-datepicker>
-                                </div>
-                            </div>
 
-                            <div class="col">
-                                <div class="col"></div>
-                                <div class="col">
-                                    Fecha fin
-                                    <input matInput [matDatepicker]="picker" name="fechaFin" value= {{proyecto.fechaFin}}  placeholder="Elige una fecha" style="display: inline; width: 125px" required />
-                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                    <mat-datepicker #picker></mat-datepicker>
-                                </div>
-                            </div>
+                    <div class="row m-2">
+                        <div class="col-4">
+                            <label for="fechaInicio"><strong>Fecha inicio:</strong></label>
+                            {{proyecto.fechaInicio}}
+                        </div>
+                        <div class="col-4">
+                            <label for="fechaInicio"><strong>Fecha fin:</strong></label>
+                            {{proyecto.fechaFin}}
                         </div>
                     </div>
+                   
                   
                     <div class="row justify-content-end">
                         <div class="col-2 mt-5">
-                            <button type="button" class="btn btn-success ">
-                            Guardar proyecto
+                            <button type="button" class="btn btn-success " [routerLink]="['/editar-proyecto',proyecto._id]">
+                            Editar proyecto
                           </button>
                         </div>
 

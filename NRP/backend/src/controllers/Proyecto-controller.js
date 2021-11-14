@@ -48,11 +48,9 @@ proyectoController.deleteProyecto = async (req, res) => {
 
 proyectoController.updateProyecto = async (req, res) => {
 
-    //PENDIENTE DE CAMBIOS
-
     const { nombre, fechaInicio, fechaFin, descripcion } = req.body;
-    await usuario.findByIdAndUpdate(req.params.id, {
-        nombre, fechaInicio, fechaFin, usuarios, descripcion
+    await proyecto.findByIdAndUpdate(req.params.id, {
+        nombre, fechaInicio, fechaFin, descripcion
     });
 }
 
@@ -285,13 +283,13 @@ proyectoController.getPesoUsuario = async (req, res) => {
     const idUsuario = req.query.idUsuario
     const proyect = await proyecto.findById(req.params.id);
     var importancia;
-    for(var i = 0; i < proyect.usuarios.length; i++){
-        if(String(proyect.usuarios[i].usuario) == String(idUsuario)){
+    for (var i = 0; i < proyect.usuarios.length; i++) {
+        if (String(proyect.usuarios[i].usuario) == String(idUsuario)) {
             importancia = proyect.usuarios[i].importancia
         }
     }
 
-    res.send({"importancia":importancia})
+    res.send({ "importancia": importancia })
 
 }
 
