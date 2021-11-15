@@ -65,11 +65,13 @@ export class ProyectoClienteComponent implements OnInit {
         this.proyecto._id = response._id;
         this.proyecto.nombre = response.nombre;
         this.proyecto.descripcion = response.descripcion;
-        this.proyecto.fechaInicio = response.fechaInicio;
-        this.proyecto.fechaFin = response.fechaFin;
+        this.proyecto.fechaInicio = this.formatearFecha(response.fechaInicio.toString());
+        this.proyecto.fechaFin = this.formatearFecha(response.fechaFin.toString());
         this.proyecto.usuarios = response.usuarios;
         this.proyecto.requisitos = response.requisitos;
         this.proyecto.idUsuario = this.usuario._id;
+
+
       },
       error => {
         console.log(<any>error);
