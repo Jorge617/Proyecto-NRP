@@ -91,6 +91,9 @@ export class GestionarTareaComponent implements OnInit {
       this._proyectoService.calcularPrioridad(this.proyecto._id, $("#limite").val()).subscribe(response => {
         this.proyecto.planificacion = response;
         this.tamanioListaTareas = response.length;
+        this.route.params.subscribe(params => {
+          this.getProyecto(params.id);
+        });
 
       }, error => {
         console.log(<any>error);
