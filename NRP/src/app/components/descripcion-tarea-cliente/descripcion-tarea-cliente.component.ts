@@ -47,6 +47,20 @@ export class DescripcionTareaClienteComponent implements OnInit {
 
   }
 
+  formatearFecha(fecha: string): string {
+    var fechaFormateada: string;
+    var dia: string = "";
+    var mes: string = "";
+    var anio: string = "";
+    dia = fecha.substring(8, 10);
+    mes = fecha.substring(5, 7);
+    anio = fecha.substring(0, 4);
+
+
+    fechaFormateada = dia + "/" + mes + "/" + anio;
+    return fechaFormateada;
+  }
+
   getUsuarios() {
     this._usuarioService.getUsuarios().subscribe(
 
@@ -94,8 +108,8 @@ export class DescripcionTareaClienteComponent implements OnInit {
       this.requisito.prioridad = response.prioridad;
       this.requisito.coste = response.coste;
       this.requisito.descripcion = response.descripcion;
-      this.requisito.fechaInicio = response.fechaInicio;
-      this.requisito.fechaFin = response.fechaFin;
+      this.requisito.fechaInicio = this.formatearFecha(response.fechaInicio);
+      this.requisito.fechaFin = this.formatearFecha(response.fechaFin);
 
       for (var i = 0; i < this.requisito.prioridad.length; i++) {
 

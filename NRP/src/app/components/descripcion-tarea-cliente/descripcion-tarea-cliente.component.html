@@ -24,13 +24,10 @@
               <a [routerLink]="['/proyecto',proyecto._id]"><img class="mt-4" src="./assets/flecha-hacia-atras.png" alt="atras" width="50" height="50" /></a>
           </div>
       </div>
-    
-        <div class="row mt-3 ms-4 ">
-            <div class="col-3 mb-3 ">
-                <label for="exampleFormControlInput1 " class="form-label ">Nombre de tarea </label>
-                <input type="text " class="form-control " value= {{requisito.nombre}} id="exampleFormControlInput1 " name="nombre " placeholder="Nombre " required />
-            </div>
-
+    <div class ="mt-3 ms-4" *ngIf="arrUsuariosResponsables.length==0">
+            <h2>No hay ningún usuario asignado a la tarea</h2>
+    </div>
+        <div *ngIf="arrUsuariosResponsables.length!=0" class="row mt-3 ms-4 ">
             <div class="row ">
                 <div class="col-6 mb-3 ">
                     <h2>Responsables de la tarea</h2>
@@ -58,47 +55,36 @@
             
             <div class="row ">
                 <div class="col-5 mb-3 ">
-                    <label for="exampleFormControlTextarea1 " class="form-label ">Descripción de la tarea </label>
-                    <textarea class="form-control " id="exampleFormControlTextarea1 " value= {{requisito.descripcion}} name="descripcion " rows="3 " required></textarea>
+                    <h2 for="exampleFormControlTextarea1 " class="form-label ">Descripción de la tarea </h2>
+                    <section>
+                        {{requisito.descripcion}}
+                    </section>
                 </div>
             </div>
             
         </div>
 
         <!-- Fecha inicio y ficha fin-->
-        <div id="fechaInicioFin " class="row align-items-center mt-3 ms-4 ">
-            <div class="col ">
-                <div class="col "></div>
-                <div class="col ">
-                    Fecha comienzo
-                    <input matInput [matDatepicker]="datepicker " name="fechaInicio " value= {{requisito.fechaInicio}} placeholder="Elige una fecha " style="display: inline; width: 125px " required />
-                    <mat-datepicker-toggle matSuffix [for]="datepicker "></mat-datepicker-toggle>
-                    <mat-datepicker #datepicker></mat-datepicker>
-                </div>
+        <div class="row m-2 ms-4 mt-5">
+            <div class="col-4">
+                <label for="fechaInicio"><strong>Fecha inicio:</strong></label>
+                {{requisito.fechaInicio}}
             </div>
-
-            <div class="col ">
-                <div class="col "></div>
-                <div class="col ">
-                    Fecha fin
-                    <input matInput [matDatepicker]="picker " name="fechaFin " placeholder="Elige una fecha " value= {{requisito.fechaFin}}  style="display: inline; width: 125px " required />
-                    <mat-datepicker-toggle matSuffix [for]="picker "></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </div>
+            <div class="col-4">
+                <label for="fechaInicio"><strong>Fecha fin:</strong></label>
+                {{requisito.fechaFin}}
             </div>
         </div>
 
 
-
         <div class="row justify-content-end mt-4 ">
-      <div class="col-3 mt-2">
-           <button type="button " class="btn btn-success ms-5 " [routerLink]="[ '/proyecto', proyecto._id] ">
-               Modificar tarea 
-                </button>
+      <div class="col-4 mt-2">
                 <button type="button " class="btn btn-danger ms-5 mt-2 " (click) = "borrarRequisito()">
                     Terminar tarea
                      </button>
-
+                     <button type="button " class="btn btn-success ms-3 mt-2 " [routerLink]="[ '/editar-tarea', proyecto._id,requisito._id] ">
+                       Editar tarea 
+                         </button>
       </div>
 </div>
 

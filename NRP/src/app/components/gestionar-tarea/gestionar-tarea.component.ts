@@ -40,6 +40,19 @@ export class GestionarTareaComponent implements OnInit {
     });
   }
 
+  formatearFecha(fecha: string): string {
+    var fechaFormateada: string;
+    var dia: string = "";
+    var mes: string = "";
+    var anio: string = "";
+    dia = fecha.substring(8, 10);
+    mes = fecha.substring(5, 7);
+    anio = fecha.substring(0, 4);
+
+
+    fechaFormateada = dia + "/" + mes + "/" + anio;
+    return fechaFormateada;
+  }
   getUserLogged() {
     this._usuarioService.getUserLogged(this.usuario);
 
@@ -57,6 +70,11 @@ export class GestionarTareaComponent implements OnInit {
         this.proyecto.requisitos = response.requisitos;
         this.proyecto.idUsuario = this.usuario._id;
         this.proyecto.planificacion = response.planificacion;
+
+        for (var i = 0; i < this.proyecto.planificacion.length; i++) {
+          this.proyecto.planificacion[i].requisito.fechaInicio = this.formatearFecha(this.proyecto.planificacion[i].requisito.fechaInicio.toString());
+          this.proyecto.planificacion[i].requisito.fechaFin = this.formatearFecha(this.proyecto.planificacion[i].requisito.fechaFin.toString());
+        }
 
       },
       error => {

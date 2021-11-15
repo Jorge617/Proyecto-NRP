@@ -14,6 +14,7 @@ import { InicioClienteComponent } from './components/inicio-cliente/inicio-clien
 import { GestionarTareaComponent } from './components/gestionar-tarea/gestionar-tarea.component';
 import { AddValorTareaComponent } from './components/add-valor-tarea/add-valor-tarea.component';
 import { EditarProyectoComponent } from './components/editar-proyecto/editar-proyecto.component';
+import { EditarTareaComponent } from './components/editar-tarea/editar-tarea.component';
 
 const appRoutes: Routes = [
     { path: '', component: LoginComponent },
@@ -40,6 +41,7 @@ const appRoutes: Routes = [
     { path: 'add-valor-tarea', component: AddValorTareaComponent },
     { path: 'add-valor-tarea/:id/:idProyecto', component: AddValorTareaComponent },
     { path: 'editar-proyecto/:id', component: EditarProyectoComponent },
+    { path: 'editar-tarea/:id/:idTarea', component: EditarTareaComponent },
     { path: '**', component: LoginComponent }
 ];
 

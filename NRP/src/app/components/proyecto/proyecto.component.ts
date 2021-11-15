@@ -64,6 +64,20 @@ export class ProyectoComponent implements OnInit {
 
   }
 
+  formatearFecha(fecha: string): string {
+    var fechaFormateada: string;
+    var dia: string = "";
+    var mes: string = "";
+    var anio: string = "";
+    dia = fecha.substring(8, 10);
+    mes = fecha.substring(5, 7);
+    anio = fecha.substring(0, 4);
+
+
+    fechaFormateada = dia + "/" + mes + "/" + anio;
+    return fechaFormateada;
+  }
+
 
   mostrarListaClientes() {
     $("#ListaClientes").fadeIn();
@@ -83,12 +97,18 @@ export class ProyectoComponent implements OnInit {
         this.proyecto._id = response._id;
         this.proyecto.nombre = response.nombre;
         this.proyecto.descripcion = response.descripcion;
-        this.proyecto.fechaInicio = response.fechaInicio;
-        this.proyecto.fechaFin = response.fechaFin;
+        this.proyecto.fechaInicio = this.formatearFecha(response.fechaInicio.toString());
+        this.proyecto.fechaFin = this.formatearFecha(response.fechaFin.toString());
         this.proyecto.usuarios = response.usuarios;
         this.proyecto.requisitos = response.requisitos;
         this.proyecto.idUsuario = this.usuario._id;
         this.proyecto.planificacion = response.planificacion;
+
+        for (var i = 0; i < this.proyecto.planificacion.length; i++) {
+          this.proyecto.planificacion[i].requisito.fechaInicio = this.formatearFecha(this.proyecto.planificacion[i].requisito.fechaInicio.toString());
+          this.proyecto.planificacion[i].requisito.fechaFin = this.formatearFecha(this.proyecto.planificacion[i].requisito.fechaFin.toString());
+        }
+
       },
       error => {
         console.log(<any>error);

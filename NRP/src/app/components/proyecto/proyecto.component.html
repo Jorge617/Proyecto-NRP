@@ -70,24 +70,18 @@
                         </div>
                     </div>
                    
-                  
-                    <div class="row justify-content-end">
-                        <div class="col-2 mt-5">
-                            <button type="button" class="btn btn-success " [routerLink]="['/editar-proyecto',proyecto._id]">
-                            Editar proyecto
-                          </button>
+                    <div class="row justify-content-end mt-4 ">
+                        <div class="col-4">
+                            <button type="button " class="btn btn-danger ms-3 " (click)="deleteProyecto()">
+                      Eliminar proyecto
+                    </button>
+                            <button class="btn btn-success ms-3 " type="button " [routerLink]="['/editar-proyecto',proyecto._id]">
+                     Editar proyecto
+                    </button>
                         </div>
-
                     </div>
 
-                    <div class="row justify-content-end">
-                        <div class="col-2 mt-2">
-                            <button type="button" class="btn btn-danger" (click)="deleteProyecto()">
-                           Eliminar proyecto
-                          </button>
-                        </div>
-
-                    </div>
+                    
 
                 </div>
                 <!--Fin de la información del proyecto-->
@@ -154,7 +148,7 @@
                                 <li *ngFor="let usuarioProyecto of arrUsuariosProyecto;let indice = index" class="list-group-item">
                                 <div class="row">
                                     <div class ="col">
-                                        <a [routerLink]="['/proyecto']">{{usuarioProyecto.nombre}}</a>
+                                        <strong>{{usuarioProyecto.nombre}}</strong>
                                     </div>
                                     <div class ="col">
                                         <img id="deleteUsuario" src="./assets/borrar-usuario.png" alt="Borrar usuario" width="40" height="40" style="margin-left: 90%; cursor: pointer;" (click)="deleteUsuarios(indice)" />
