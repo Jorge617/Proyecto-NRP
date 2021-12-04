@@ -3,23 +3,23 @@ const requisitoController = {};
 const requisito = require('../models/Requisito.js');
 const usuario = require('../models/Usuario.js')
 const proyecto = require('../models/Proyecto.js')
-requisitoController.getRequisitos = async (req, res)=> {
+requisitoController.getRequisitos = async (req, res) => {
     const requisitos = await requisito.find();
     res.json(requisitos);
 }
-requisitoController.getRequisito = async (req, res)=> {
+requisitoController.getRequisito = async (req, res) => {
     const getrequisito = await requisito.findById(req.params.id);
     res.json(getrequisito);
 }
-requisitoController.crearRequisito = async (req, res)=> {
-    const {nombre, prioridad, coste, idProyecto, descripcion, fechaInicio, fechaFin} = req.body;
-    const nuevoRequisito = new requisito({nombre, prioridad, coste, descripcion, fechaInicio, fechaFin});
+requisitoController.crearRequisito = async (req, res) => {
+    const { nombre, prioridad, coste, idProyecto, descripcion, fechaInicio, fechaFin } = req.body;
+    const nuevoRequisito = new requisito({ nombre, prioridad, coste, descripcion, fechaInicio, fechaFin });
     await nuevoRequisito.save();
 
     await proyecto.updateOne({ _id: { $eq: idProyecto } }, { $push: { requisitos: nuevoRequisito._id } })
 
-    
-    res.json({message : `Requisito dado de alta ${nombre} ${prioridad} ${coste} `});
+
+    res.json({ message: `Requisito dado de alta ${nombre} ${prioridad} ${coste} ` });
 }
 requisitoController.borrarRequisito = async (req, res) => {
     const { id } = req.params;
@@ -37,30 +37,33 @@ requisitoController.deleteAll = async (req, res) => {
 }
 
 requisitoController.updateRequisito = async (req, res) => {
-    const {nombre, prioridad, coste, descripcion, fechaInicio, fechaFin} = req.body;
+    const { nombre, prioridad, coste, descripcion, fechaInicio, fechaFin } = req.body;
 
-    await requisito.updateOne({_id : {$eq:req.params.id}} , {$set : { nombre:nombre,
-                                                                      prioridad:prioridad,
-                                                                      coste:coste,
-                                                                      descripcion:descripcion,
-                                                                      fechaInicio:fechaInicio,
-                                                                      fechaFin:fechaFin} })
+    await requisito.updateOne({ _id: { $eq: req.params.id } }, {
+        $set: {
+            nombre: nombre,
+            coste: coste,
+            descripcion: descripcion,
+            fechaInicio: fechaInicio,
+            fechaFin: fechaFin
+        }
+    })
 
 
     res.json("Put completado");
 }
 
 
-requisitoController.getUsuarios = async (req, res ) =>{
-    const {id} = req.params
+requisitoController.getUsuarios = async (req, res) => {
+    const { id } = req.params
     var getRequisito = await requisito.findById(id)
     var listaUsuarios = []
 
-    for(var i = 0; i < getRequisito.prioridad.length; i++) {
+    for (var i = 0; i < getRequisito.prioridad.length; i++) {
         var user = await usuario.findById(getRequisito.prioridad[i].usuario)
         listaUsuarios.push(user)
     }
-    res.json({usuarios:listaUsuarios})
+    res.json({ usuarios: listaUsuarios })
 }
 
 
@@ -79,7 +82,7 @@ requisitoController.getUsuariosDisponibles = async (req, res) => {
         aux.push(String(usuariosRequisitos[i].usuario))
     }
     for (var i = 0; i < usuariosProyecto.length; i++) {
-        if ((usuariosProyecto.length == 0) || (!(aux.includes(String(usuariosProyecto[i].usuario)))&& !project.propietarios.includes(String(usuariosProyecto[i].usuario)))) {
+        if ((usuariosProyecto.length == 0) || (!(aux.includes(String(usuariosProyecto[i].usuario))) && !project.propietarios.includes(String(usuariosProyecto[i].usuario)))) {
             resultado.push(await usuario.findById(usuariosProyecto[i].usuario))
         }
 
@@ -88,22 +91,22 @@ requisitoController.getUsuariosDisponibles = async (req, res) => {
 }
 
 
-requisitoController.postUsuarios = async (req, res ) =>{
+requisitoController.postUsuarios = async (req, res) => {
     var prioridad = req.body.prioridad
     await requisito.updateOne({ _id: { $eq: req.params.id } }, { $push: { prioridad: prioridad } })
 
 
-    
+
     res.json(prioridad)
 }
 
-requisitoController.updateImportancia = async (req, res ) =>{    
+requisitoController.updateImportancia = async (req, res) => {
     const getRequisito = await requisito.findById(req.params.id)
 
 
-    for(var i = 0; i < getRequisito.prioridad.length; i++){
+    for (var i = 0; i < getRequisito.prioridad.length; i++) {
 
-        if(String(getRequisito.prioridad[i].usuario)==String(req.query.usuario)) {
+        if (String(getRequisito.prioridad[i].usuario) == String(req.query.usuario)) {
             getRequisito.prioridad[i].valor = req.query.valor
             getRequisito.save()
         }

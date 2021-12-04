@@ -10,14 +10,13 @@ import { RequisitoService } from 'src/app/services/requisito.service';
 import { Requisito } from 'src/app/models/requisito';
 
 
-
 @Component({
-  selector: 'app-descripcion-tarea-cliente',
-  templateUrl: './descripcion-tarea-cliente.component.html',
-  styleUrls: ['./descripcion-tarea-cliente.component.css'],
+  selector: 'app-editar-tarea',
+  templateUrl: './editar-tarea.component.html',
+  styleUrls: ['./editar-tarea.component.css'],
   providers: [UsuarioService, ProyectoService, RequisitoService]
 })
-export class DescripcionTareaClienteComponent implements OnInit {
+export class EditarTareaComponent implements OnInit {
 
   public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", []);
   public arrUsuarios: Usuario[];
@@ -45,20 +44,6 @@ export class DescripcionTareaClienteComponent implements OnInit {
     });
 
 
-  }
-
-  formatearFecha(fecha: string): string {
-    var fechaFormateada: string;
-    var dia: string = "";
-    var mes: string = "";
-    var anio: string = "";
-    dia = fecha.substring(8, 10);
-    mes = fecha.substring(5, 7);
-    anio = fecha.substring(0, 4);
-
-
-    fechaFormateada = dia + "/" + mes + "/" + anio;
-    return fechaFormateada;
   }
 
   getUsuarios() {
@@ -108,8 +93,8 @@ export class DescripcionTareaClienteComponent implements OnInit {
       this.requisito.prioridad = response.prioridad;
       this.requisito.coste = response.coste;
       this.requisito.descripcion = response.descripcion;
-      this.requisito.fechaInicio = this.formatearFecha(response.fechaInicio);
-      this.requisito.fechaFin = this.formatearFecha(response.fechaFin);
+      this.requisito.fechaInicio = response.fechaInicio;
+      this.requisito.fechaFin = response.fechaFin;
 
       for (var i = 0; i < this.requisito.prioridad.length; i++) {
 
@@ -143,6 +128,5 @@ export class DescripcionTareaClienteComponent implements OnInit {
       this.router.navigateByUrl('/proyecto/' + this.proyecto._id);
     })
   }
-
 
 }

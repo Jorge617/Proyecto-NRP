@@ -48,11 +48,9 @@ proyectoController.deleteProyecto = async (req, res) => {
 
 proyectoController.updateProyecto = async (req, res) => {
 
-    //PENDIENTE DE CAMBIOS
-
     const { nombre, fechaInicio, fechaFin, descripcion } = req.body;
-    await usuario.findByIdAndUpdate(req.params.id, {
-        nombre, fechaInicio, fechaFin, usuarios, descripcion
+    await proyecto.findByIdAndUpdate(req.params.id, {
+        nombre, fechaInicio, fechaFin, descripcion
     });
 }
 

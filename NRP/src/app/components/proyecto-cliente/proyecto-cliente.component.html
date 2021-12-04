@@ -50,6 +50,16 @@
 
                     </div>
                 </div>
+                <div class="row m-2">
+                    <div class="col-4">
+                        <label for="fechaInicio"><strong>Fecha inicio:</strong></label>
+                        {{proyecto.fechaInicio}}
+                    </div>
+                    <div class="col-4">
+                        <label for="fechaInicio"><strong>Fecha fin:</strong></label>
+                        {{proyecto.fechaFin}}
+                    </div>
+                </div>
                 <!--Fin de la información del proyecto-->
             </div>
             <!--Inicio de las tareas del proyecto-->
@@ -93,8 +103,22 @@
                                             <div class="row ms-1">
                                                 <h2>Descripción</h2>
                                                 <p>{{tarea.descripcion}}</p>
-
+                                                <h2 *ngIf="arrTareasProyecto[indice].prioridad.length > 1" class="mt-2">Compañeros tarea</h2>
+                                                    <div *ngIf="arrTareasProyecto[indice].prioridad.length > 1" class="mt-2 col-10">
+                                                       <div>
+                                                           <div *ngFor="let usuarioCompanero of arrTareasProyecto[indice].prioridad">
+                                                                <div *ngIf="usuario._id != usuarioCompanero.usuario">
+                                                                    <!--EJECUTAR METODO PARA OBTENER NOMBRE-->
+                                                                    <span><strong>{{usuarioCompanero.usuario}}</strong></span>
+                                                                </div>
+                                                              
+                                                           </div>   
+                                                       </div>
+                                                 
+                                                 
+                                                </div>
                                             </div>
+                                            
                                             <hr>
                                                 <div class="row ms-2">
     
@@ -106,8 +130,8 @@
                                                             </div>
                                                            
                                                         </div>
-                                                        
                                                     </div>
+                                                  
                                                 </div>
                                                 <div class="row-2 m-3">
                                                     <button type="button" class="btn btn-primary"[routerLink]="['/add-valor-tarea',tarea._id,proyecto._id]">Añadir importancia</button>

@@ -22,6 +22,9 @@ export class ProyectoComponent implements OnInit {
   public arrUsuariosNombre: any[]; //Los nombres de los usuarios que participan en el proyecto
   public arrUsuariosDisponibles: Usuario[]; //Los usuarios que se pueden asignar a un proyecto
   public arrTareasProyecto: Requisito[];
+  public tareasDentroLimiteEsfuerzo: any[];
+  public tareasFueraLimiteEsfuerzo: any[];
+
 
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>,
     public route: ActivatedRoute, private _requisitoService: RequisitoService) {
@@ -30,6 +33,8 @@ export class ProyectoComponent implements OnInit {
     this.arrUsuariosNombre = [];
     this.arrUsuariosDisponibles = [];
     this.arrTareasProyecto = [];
+    this.tareasDentroLimiteEsfuerzo = [];
+    this.tareasFueraLimiteEsfuerzo = [];
 
 
   }
@@ -64,6 +69,20 @@ export class ProyectoComponent implements OnInit {
 
   }
 
+  formatearFecha(fecha: string): string {
+    var fechaFormateada: string;
+    var dia: string = "";
+    var mes: string = "";
+    var anio: string = "";
+    dia = fecha.substring(8, 10);
+    mes = fecha.substring(5, 7);
+    anio = fecha.substring(0, 4);
+
+
+    fechaFormateada = dia + "/" + mes + "/" + anio;
+    return fechaFormateada;
+  }
+
 
   mostrarListaClientes() {
     $("#ListaClientes").fadeIn();
@@ -83,12 +102,20 @@ export class ProyectoComponent implements OnInit {
         this.proyecto._id = response._id;
         this.proyecto.nombre = response.nombre;
         this.proyecto.descripcion = response.descripcion;
-        this.proyecto.fechaInicio = response.fechaInicio;
-        this.proyecto.fechaFin = response.fechaFin;
+        this.proyecto.fechaInicio = this.formatearFecha(response.fechaInicio.toString());
+        this.proyecto.fechaFin = this.formatearFecha(response.fechaFin.toString());
         this.proyecto.usuarios = response.usuarios;
         this.proyecto.requisitos = response.requisitos;
         this.proyecto.idUsuario = this.usuario._id;
         this.proyecto.planificacion = response.planificacion;
+        this.tareasDentroLimiteEsfuerzo = this.proyecto.planificacion;
+
+
+        for (var i = 0; i < this.proyecto.planificacion.length; i++) {
+          this.proyecto.planificacion[i].requisito.fechaInicio = this.formatearFecha(this.proyecto.planificacion[i].requisito.fechaInicio.toString());
+          this.proyecto.planificacion[i].requisito.fechaFin = this.formatearFecha(this.proyecto.planificacion[i].requisito.fechaFin.toString());
+        }
+
       },
       error => {
         console.log(<any>error);
@@ -154,5 +181,24 @@ export class ProyectoComponent implements OnInit {
     })
   }
 
+  remove(lista: any, elemento: any) {
+    var i = lista.indexOf(elemento);
+
+    if (i !== -1) {
+      lista.splice(i, 1);
+    }
+
+  }
+
+  bajarTarea(indice: any) {
+    this.tareasFueraLimiteEsfuerzo.push(this.tareasDentroLimiteEsfuerzo[indice]);
+    this.remove(this.tareasDentroLimiteEsfuerzo, this.tareasDentroLimiteEsfuerzo[indice]);
+
+  }
+
+  subirTarea(indice: any) {
+    this.tareasDentroLimiteEsfuerzo.push(this.tareasFueraLimiteEsfuerzo[indice]);
+    this.remove(this.tareasFueraLimiteEsfuerzo, this.tareasFueraLimiteEsfuerzo[indice]);
+  }
 
 }

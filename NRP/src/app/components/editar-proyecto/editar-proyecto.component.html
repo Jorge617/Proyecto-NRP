@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Pagina crear tarea jefe de proyecto</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body>
+    <div class="container">
+
+        <!--Inicio del menu-->
+        <menu></menu>
+        <!--Fin del menu-->
+
+        <!--Inicio del contenido de INICIO-->
+
+        <div class="row">
+            <div class="col">
+                <h1 class="text-black mt-3 ms-4">Editar proyecto</h1>
+            </div>
+            <div class="col-1">
+                <a [routerLink]="['/proyecto',proyecto._id]"><img class="mt-4" src="./assets/flecha-hacia-atras.png" alt="atras" width="50" height="50" /></a>
+            </div>
+        </div>
+
+        <div class="row mt-3 ms-4 ">
+            <div class="col-3 mb-3 ">
+                <label for="exampleFormControlInput1 " class="form-label ">Nombre del proyecto</label>
+                <input type="text " class="form-control " value= {{proyecto.nombre}} id="exampleFormControlInput1 " name="nombre " #nombre="ngModel" [(ngModel)] = "proyecto.nombre" placeholder="Nombre " required />
+            </div>
+        </div>
+
+        <div class="row mt-3 ms-4 ">
+            <div class="col-3 mb-3 ">
+                <label for="exampleFormControlInput2 " class="form-label ">Descripción del proyecto</label>
+                <textarea type="text " class="form-control " value= {{proyecto.descripcion}} id="exampleFormControlInput1 " name="descripcion " #descripcion="ngModel" [(ngModel)] = "proyecto.descripcion"  placeholder="Nombre " required></textarea> 
+            </div>
+        </div>
+                  <!-- Fecha inicio y ficha fin-->
+            <div id="fechaInicioFin " class="row align-items-center mt-3 ms-4 ">
+                <div class="col ">
+                    <div class="col "></div>
+                    <div class="col ">
+                        Fecha comienzo
+                        <input matInput [matDatepicker]="datepicker " name="fechaInicio " value= {{proyecto.fechaInicio}} #fechaInicio="ngModel" [(ngModel)] = "proyecto.fechaInicio"  placeholder="Elige una fecha " style="display: inline; width: 125px " required />
+                        <mat-datepicker-toggle matSuffix [for]="datepicker "></mat-datepicker-toggle>
+                        <mat-datepicker #datepicker></mat-datepicker>
+                    </div>
+                </div>
+
+                <div class="col ">
+                    <div class="col "></div>
+                    <div class="col ">
+                        Fecha fin
+                        <input matInput [matDatepicker]="picker " name="fechaFin " value= {{proyecto.fechaFin}} #fechaFin="ngModel" [(ngModel)] = "proyecto.fechaFin" placeholder="Elige una fecha " style="display: inline; width: 125px " required />
+                        <mat-datepicker-toggle matSuffix [for]="picker "></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-end mt-4 ">
+                <div class="col-3 ">
+                    <button type="button " class="btn btn-danger ms-5 " [routerLink]="[ '/proyecto', proyecto._id] ">
+              Cancelar
+            </button>
+                    <button class="btn btn-success ms-3 " type="button " (click) ="updateProyecto()">
+              Guardar
+            </button>
+                </div>
+            </div>
+        <!--Fin del contenido de INICIO-->
+    </div>
+</body>
+
+</html>
