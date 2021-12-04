@@ -244,6 +244,7 @@ proyectoController.calcularPrioridad = async (req, res) => {
     var ordenPrioridad = [];
     var usuarios = []
     usuarios = proyect.usuarios
+    var importanciaMax = 0;
 
     for (var i = 0; i < proyect.requisitos.length; i++) {
         requisitos.push(await requisito.findById(proyect.requisitos[i]))
@@ -271,11 +272,13 @@ proyectoController.calcularPrioridad = async (req, res) => {
 
             resultado.push({ "requisito": aux, "importancia": ordenPrioridad[i].importancia, "coste": ordenPrioridad[i].coste });
             proyect.planificacion.push({ "requisito": aux, "importancia": ordenPrioridad[i].importancia, "coste": ordenPrioridad[i].coste });
-
+            importanciaMax+=ordenPrioridad[i].importancia
             coste += ordenPrioridad[i].coste
         }
     }
 
+    await proyect.updateOne({ $set: { esfuerzoMax: req.query.limite } });
+    await proyect.updateOne({ $set: { satisfaccionMax: importanciaMax } });
 
     proyect.save();
     res.send(resultado);
@@ -285,16 +288,96 @@ proyectoController.getPesoUsuario = async (req, res) => {
     const idUsuario = req.query.idUsuario
     const proyect = await proyecto.findById(req.params.id);
     var importancia;
-    for(var i = 0; i < proyect.usuarios.length; i++){
-        if(String(proyect.usuarios[i].usuario) == String(idUsuario)){
+    for (var i = 0; i < proyect.usuarios.length; i++) {
+        if (String(proyect.usuarios[i].usuario) == String(idUsuario)) {
             importancia = proyect.usuarios[i].importancia
         }
     }
 
-    res.send({"importancia":importancia})
+    res.send({ "importancia": importancia })
 
 }
 
+
+
+proyectoController.calcularMetricas = async (req, res) => {
+    const proyect = await proyecto.findById(req.params.id);
+    var satisfaccion = 0
+    var coste = 0
+    var pesoUsuario = -1;
+    var usuarios = []
+    usuarios = proyect.usuarios
+    var contribuciones = []
+    var coberturas = []
+    var contribucion, cobertura, coberturaTotal;
+    for (var i = 0; i < proyect.planificacion.length; i++) {
+
+        satisfaccion += proyect.planificacion[i].importancia
+        coste += proyect.planificacion[i].requisito.coste
+
+    }
+
+
+    for (var i = 0; i < usuarios.length; i++) {
+        contribucion = 0;
+        cobertura = 0;
+        coberturaTotal = 0;
+        proyect.planificacion.forEach(element => {
+
+            element.requisito.prioridad.forEach(e => {
+                if (String(e.usuario) == String(usuarios[i].usuario)) {
+
+                    contribucion += (e.valor * usuarios[i].importancia)
+                    cobertura += e.valor
+                }
+
+                coberturaTotal = e.valor;
+            });
+
+        });
+
+        contribuciones.push({ "usuario": usuarios[i].usuario, "contribucion": Number((contribucion / satisfaccion).toFixed(2)) })
+        coberturas.push({ "usuario": usuarios[i].usuario, "cobertura": Number((cobertura / coberturaTotal).toFixed(2)) })
+    }
+
+    res.send({ "productividad": Number((satisfaccion / coste).toFixed(2)), "contribubciones": contribuciones, "coberturas": coberturas })
+
+}
+
+
+
+proyectoController.calcularProductividadRequisito = async (req, res) => {
+    const proyect = await proyecto.findById(req.params.id);
+      
+    var productividad = 0;
+    var satisfaccion = req.query.satisfaccion
+    var esfuerzo = req.query.esfuerzo
+    productividad = satisfaccion / esfuerzo
+
+    res.send({ "productividad": Number(productividad.toFixed(2))})
+
+}
+
+proyectoController.calcularContribucionRequisito = async (req, res) => {
+    const proyect = await proyecto.findById(req.params.id);
+    var contribucion = 0;
+    var getrequisito = await requisito.findById(req.query.requisito)
+    var satisfaccion = req.query.satisfaccion
+    var usuarios = []
+    usuarios = proyect.usuarios
+
+    getrequisito.prioridad.forEach(e=>{
+
+        for(var i = 0; i < usuarios.length; i++){
+            if(String(usuarios[i].usuario)==e.usuario){
+                contribucion+=e.valor*usuarios[i].importancia
+            }
+        }
+    })
+
+    res.send({ "contribucion": Number(contribucion/satisfaccion).toFixed(2)})
+
+}
 
 
 module.exports = proyectoController;
