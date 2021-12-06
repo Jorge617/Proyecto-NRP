@@ -42,6 +42,9 @@
                   <h1>No hay tareas con esa limite de esfuerzo, por favor introduzca un limite de esfuerzo más alto</h1>
           </div>
 
+          <div>
+            
+          </div>
           <div *ngIf="proyecto.planificacion.length != 0" class="row mt-5 ms-3">
             <h1>Lista de tareas priorizadas</h1>
             <table class="table">
@@ -64,9 +67,48 @@
                     <td *ngIf= "tarea.importancia == 0">Sin importancia</td>
                     <td  *ngIf= "tarea.importancia != 0" >{{tarea.importancia}}</td>
                     <td >{{tarea.coste}}</td>
+                    <td><img class = "flecha" src="./assets/flecha-abajo.png" alt="Bajar tarea" width="30" height="30" style="cursor: pointer;" (click)="bajarTarea(indice)"></td>
                   </tr>
                 </tbody>
               </table>
+
+              <h2 class="mt-4">
+                Lista de tareas que no cumplen el limite de esfuerzo
+            </h2>
+
+              <div *ngIf= "tareasFueraLimiteEsfuerzo.length == 0" class="mt-4">
+               
+                <h2 style="text-align: center;" class="mt-3">
+                    Las tareas cumplen el límite de esfuerzo
+                </h2>
+            </div>
+
+              <table *ngIf= "tareasFueraLimiteEsfuerzo.length != 0" class="table">
+                
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Fecha inicio</th>
+                    <th scope="col">Fecha fin</th>
+                    <th scope="col">Importancia</th>
+                    <th scope="col">Esfuerzo</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let tarea of tareasFueraLimiteEsfuerzo;let indice = index">
+                  <tr>
+                    <th scope="row">{{indice + 1}}</th>
+                    <td >{{tarea}}</td>
+                    <td >{{tarea.fechaInicio}}</td>
+                    <td >{{tarea.fechaFin}}</td>
+                    <td *ngIf= "tarea.importancia == 0">Sin importancia</td>
+                    <td  *ngIf= "tarea.importancia != 0" >{{tarea.importancia}}</td>
+                    <td >{{tarea.coste}}</td>
+                    <td><img class = "flecha" src="./assets/flecha-arriba.png" alt="Bajar tarea" width="30" height="30" style="cursor: pointer;"(click)="subirTarea(indice)"></td>
+                  </tr>
+                </tbody>
+              </table>
+          
           </div>
     </div>
 </body>
