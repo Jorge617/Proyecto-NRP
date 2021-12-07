@@ -20,7 +20,7 @@ export class AddValorTareaComponent implements OnInit {
   public importanciaTarea: Number;
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, public route: ActivatedRoute,
     private _requistoService: RequisitoService) {
-    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", []);
+    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", [], 0, 0);
     this.importanciaTarea = 1;
   }
 

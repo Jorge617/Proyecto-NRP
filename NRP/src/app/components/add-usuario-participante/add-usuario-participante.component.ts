@@ -23,7 +23,7 @@ export class AddUsuarioParticipanteComponent implements OnInit {
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>,
     public route: ActivatedRoute) {
     this.dateAdapter.setLocale('es-ES');
-    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", []);
+    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", [], 0, 0);
     this.arrUsuarios = [];
     this.pesoUsuario = 1;
 

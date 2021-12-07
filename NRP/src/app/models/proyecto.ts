@@ -11,7 +11,9 @@ export class Proyecto {
 		public usuarios: any[],
 		public descripcion: string,
 		public idUsuario: string,
-		public planificacion: any[]
+		public planificacion: any[],
+		public esfuerzoMax: any,
+		public satisfaccionMax: any
 
 	) { }
 }

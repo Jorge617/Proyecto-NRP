@@ -28,7 +28,7 @@ export class DescripcionTareaClienteComponent implements OnInit {
   public pesosUsuarios: Number[];
 
   constructor(private _usuarioService: UsuarioService, public router: Router, public route: ActivatedRoute, private _proyectoService: ProyectoService, private _requisitoService: RequisitoService) {
-    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", []);
+    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", [], 0, 0);
     this.arrUsuarios = [];
     this.arrUsuariosResponsables = [];
     this.arrPesosUsuariosProyecto = [];

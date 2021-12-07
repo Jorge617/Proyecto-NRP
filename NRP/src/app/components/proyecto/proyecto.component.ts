@@ -22,19 +22,17 @@ export class ProyectoComponent implements OnInit {
   public arrUsuariosNombre: any[]; //Los nombres de los usuarios que participan en el proyecto
   public arrUsuariosDisponibles: Usuario[]; //Los usuarios que se pueden asignar a un proyecto
   public arrTareasProyecto: Requisito[];
-  public tareasDentroLimiteEsfuerzo: any[];
-  public tareasFueraLimiteEsfuerzo: any[];
+
 
 
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>,
     public route: ActivatedRoute, private _requisitoService: RequisitoService) {
     this.dateAdapter.setLocale('es-ES');
-    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", []);
+    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", [], 0, 0);
     this.arrUsuariosNombre = [];
     this.arrUsuariosDisponibles = [];
     this.arrTareasProyecto = [];
-    this.tareasDentroLimiteEsfuerzo = [];
-    this.tareasFueraLimiteEsfuerzo = [];
+
 
 
   }
@@ -108,7 +106,6 @@ export class ProyectoComponent implements OnInit {
         this.proyecto.requisitos = response.requisitos;
         this.proyecto.idUsuario = this.usuario._id;
         this.proyecto.planificacion = response.planificacion;
-        this.tareasDentroLimiteEsfuerzo = this.proyecto.planificacion;
 
 
         for (var i = 0; i < this.proyecto.planificacion.length; i++) {
@@ -181,24 +178,7 @@ export class ProyectoComponent implements OnInit {
     })
   }
 
-  remove(lista: any, elemento: any) {
-    var i = lista.indexOf(elemento);
 
-    if (i !== -1) {
-      lista.splice(i, 1);
-    }
 
-  }
-
-  bajarTarea(indice: any) {
-    this.tareasFueraLimiteEsfuerzo.push(this.tareasDentroLimiteEsfuerzo[indice]);
-    this.remove(this.tareasDentroLimiteEsfuerzo, this.tareasDentroLimiteEsfuerzo[indice]);
-
-  }
-
-  subirTarea(indice: any) {
-    this.tareasDentroLimiteEsfuerzo.push(this.tareasFueraLimiteEsfuerzo[indice]);
-    this.remove(this.tareasFueraLimiteEsfuerzo, this.tareasFueraLimiteEsfuerzo[indice]);
-  }
 
 }
