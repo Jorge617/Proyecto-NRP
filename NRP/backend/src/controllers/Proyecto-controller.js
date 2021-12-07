@@ -270,7 +270,7 @@ proyectoController.calcularPrioridad = async (req, res) => {
 
             resultado.push({ "requisito": aux, "importancia": ordenPrioridad[i].importancia, "coste": ordenPrioridad[i].coste });
             proyect.planificacion.push({ "requisito": aux, "importancia": ordenPrioridad[i].importancia, "coste": ordenPrioridad[i].coste });
-            importanciaMax+=ordenPrioridad[i].importancia
+            importanciaMax += ordenPrioridad[i].importancia
             coste += ordenPrioridad[i].coste
         }
     }
@@ -346,13 +346,13 @@ proyectoController.calcularMetricas = async (req, res) => {
 
 proyectoController.calcularProductividadRequisito = async (req, res) => {
     const proyect = await proyecto.findById(req.params.id);
-      
+
     var productividad = 0;
     var satisfaccion = req.query.satisfaccion
     var esfuerzo = req.query.esfuerzo
     productividad = satisfaccion / esfuerzo
 
-    res.send({ "productividad": Number(productividad.toFixed(2))})
+    res.send({ "productividad": Number(productividad.toFixed(2)) })
 
 }
 
@@ -364,19 +364,30 @@ proyectoController.calcularContribucionRequisito = async (req, res) => {
     var usuarios = []
     usuarios = proyect.usuarios
 
-    getrequisito.prioridad.forEach(e=>{
+    getrequisito.prioridad.forEach(e => {
 
-        for(var i = 0; i < usuarios.length; i++){
-            if(String(usuarios[i].usuario)==e.usuario){
-                contribucion+=e.valor*usuarios[i].importancia
+        for (var i = 0; i < usuarios.length; i++) {
+            if (String(usuarios[i].usuario) == e.usuario) {
+                contribucion += e.valor * usuarios[i].importancia
             }
         }
     })
 
-    res.send({ "contribucion": Number(contribucion/satisfaccion).toFixed(2)})
+    res.send({ "contribucion": Number(contribucion / satisfaccion).toFixed(2) })
 
 }
 
+proyectoController.updatePrioridad = async (req, res) => {
+    const {id} = req.params.id;
+    var planificacion = req.body.planificacion;
 
+
+    const proyect = await proyecto.findById(req.params.id);
+    proyect.planificacion = req.body.planificacion;
+    await proyect.save();
+    console.log(planificacion)
+    res.send(proyect.planificacion)
+
+}
 module.exports = proyectoController;
 
