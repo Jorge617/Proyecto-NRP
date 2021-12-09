@@ -47,5 +47,9 @@ export class RequisitoService {
     }
 
 
+    calcularPrioridadRequisito(idProyecto:any, idRequisito:any){
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this._http.get(this.url + "proyectos/" + idProyecto + "/requisito/prioridad?requisito="+idRequisito, { headers: headers });
+    }
 
 }

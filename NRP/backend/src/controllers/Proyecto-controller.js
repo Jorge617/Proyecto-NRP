@@ -379,15 +379,36 @@ proyectoController.calcularContribucionRequisito = async (req, res) => {
 
 proyectoController.updatePrioridad = async (req, res) => {
     const {id} = req.params.id;
-    var planificacion = req.body.planificacion;
+    var planificacion = []
+    planificacion = JSON.parse(req.body.body);
 
 
     const proyect = await proyecto.findById(req.params.id);
-    proyect.planificacion = req.body.planificacion;
+    proyect.planificacion = planificacion.planificacion;
     await proyect.save();
-    console.log(planificacion)
     res.send(proyect.planificacion)
 
 }
+
+
+proyectoController.calcularPrioridadRequisito = async (req, res) => {
+
+    const proyect = await proyecto.findById(req.params.id);
+    
+    var usuarios = []
+    usuarios = proyect.usuarios
+    var suma=0;
+    var getrequisito = await requisito.findById(req.query.requisito);
+    for (var j = 0; j < getrequisito.prioridad.length; j++) {
+        var aux = usuarios.find(element => String(element.usuario) == String(getrequisito.prioridad[j].usuario))
+
+        if (aux != undefined) {
+            suma += aux.importancia * getrequisito.prioridad[j].valor
+        }
+    }
+
+    res.send({ "requisito": getrequisito, "importancia": suma, "coste": getrequisito.coste });
+}
+    
 module.exports = proyectoController;
 

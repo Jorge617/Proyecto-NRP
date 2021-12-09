@@ -7,6 +7,7 @@ import { ProyectoService } from 'src/app/services/proyecto.service';
 import { RequisitoService } from 'src/app/services/requisito.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { DateAdapter } from '@angular/material/core';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-gestionar-tarea',
@@ -23,22 +24,25 @@ export class GestionarTareaComponent implements OnInit {
   public tamanioListaTareas: Number | undefined;
   public tareasFueraLimiteEsfuerzo: any[];
 
-
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>,
     public route: ActivatedRoute, private _requisitoService: RequisitoService) {
     this.dateAdapter.setLocale('es-ES');
-    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", [], 0, 0);
+    this.proyecto = new Proyecto("k", "", [], new Date(), new Date(), [], "", "", [], 0, 0);
     this.tareasPriorizadas = [];
     this.limiteEsfuerzo = 1;
     this.tareasFueraLimiteEsfuerzo = [];
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.getUserLogged();
 
-    this.route.params.subscribe(params => {
-      this.getProyecto(params.id);
+    this.route.params.subscribe(async params => {
+      await this.getProyecto(params.id);
+
     });
+
+
+
 
   }
 
@@ -60,8 +64,8 @@ export class GestionarTareaComponent implements OnInit {
 
   }
   getProyecto(id: any) {
-    this._proyectoService.getProyecto(id).subscribe(
 
+    this._proyectoService.getProyecto(id).subscribe(
       response => {
         this.proyecto._id = response._id;
         this.proyecto.nombre = response.nombre;
@@ -76,10 +80,15 @@ export class GestionarTareaComponent implements OnInit {
         this.proyecto.satisfaccionMax = response.satisfaccionMax;
 
 
+
+
         for (var i = 0; i < this.proyecto.planificacion.length; i++) {
           this.proyecto.planificacion[i].requisito.fechaInicio = this.formatearFecha(this.proyecto.planificacion[i].requisito.fechaInicio.toString());
           this.proyecto.planificacion[i].requisito.fechaFin = this.formatearFecha(this.proyecto.planificacion[i].requisito.fechaFin.toString());
         }
+
+        this.cargarRequisitosNoPriorizados();
+
       },
       error => {
         console.log(<any>error);
@@ -107,9 +116,9 @@ export class GestionarTareaComponent implements OnInit {
       this.limiteEsfuerzo = Number($("#limite").val());
     }
   }
-
   remove(lista: any, elemento: any) {
     var i = lista.indexOf(elemento);
+
 
     if (i !== -1) {
       lista.splice(i, 1);
@@ -128,4 +137,35 @@ export class GestionarTareaComponent implements OnInit {
     this.remove(this.tareasFueraLimiteEsfuerzo, this.tareasFueraLimiteEsfuerzo[indice]);
   }
 
+
+  cargarRequisitosNoPriorizados() {
+
+    var aux: any[];
+    aux = [];
+    this.proyecto.planificacion.forEach(e => {
+
+      aux.push(String(e.requisito._id))
+
+
+    })
+
+    this.proyecto.requisitos.forEach(e => {
+
+
+      if (!aux.includes(String(e))) {
+
+        this._requisitoService.calcularPrioridadRequisito(this.proyecto._id, e).subscribe(
+          response=>{
+            this.tareasFueraLimiteEsfuerzo.push(response)
+          }
+        );
+      }
+    })
+
+    console.log(this.tareasFueraLimiteEsfuerzo)
+  }
+
+  updatePrioridad(prioridad:any[]){
+    this._proyectoService.updatePrioridad(this.proyecto._id, prioridad).subscribe()
+   }
 }

@@ -74,7 +74,6 @@ export class ProyectoService {
             body: body
 
         };
-        console.log(options.body)
         return this._http.delete(this.url + "proyectos/" + idProyecto + "/usuarios", options);
 
     }
@@ -92,6 +91,20 @@ export class ProyectoService {
     getPesoUsuario(idProyecto: any, idUsuario: any): Observable<any> {
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
         return this._http.get(this.url + "proyectos/" + idProyecto + "/importancia?idUsuario=" + idUsuario, { headers: headers });
+    }
+
+
+    updatePrioridad(idProyecto: any, planificacion: any[]) {
+
+        let body = JSON.stringify({ "planificacion": planificacion });
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        const options = {
+            headers: headers,
+            body: body
+
+        };
+        return this._http.put(this.url + "proyectos/" + idProyecto + "/prioridad", options);
+
     }
 }
 
