@@ -45,16 +45,42 @@
           <div>
             
           </div>
-          <div class="row justify-content-end mt-4 ">
-            <div class="col-3 ">
-                <button class="btn btn-success ms-3 " type="submit " (click)="updatePrioridad(proyecto.planificacion)">
-          Guardar
-        </button>
+          <div class="row justify-content-end mt-5 ">
+            <div class="col-2 ">
+              <button type="button" class="btn btn-success ms-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="updatePrioridad(proyecto.planificacion)">
+                Actualizar lista
+              </button>
+
+              <!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Actualización lista de tareas priorizadas</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h2>Lista de tareas actualizada</h2>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+        
             </div>
         </div>
-          <div *ngIf="proyecto.planificacion.length != 0" class="row mt-5 ms-3">
-            <h1>Lista de tareas priorizadas</h1>
-            <table class="table">
+        
+          <div *ngIf="proyecto.planificacion.length != 0 || tareasFueraLimiteEsfuerzo.length != 0" class="row mt-5 ms-3">
+            <h1>Lista de tareas priorizadas - Limite de esfuerzo {{proyecto.esfuerzoMax}} <span *ngIf="limiteSuperado == true" style="color: red;"> [No puedes superar el limite de esfuerzo]</span></h1>
+
+            <div *ngIf="proyecto.planificacion.length == 0">
+              <h2 style="text-align: center;" class="mt-4">
+                No hay tareas añadidas
+            </h2>
+            </div>
+            <table *ngIf="proyecto.planificacion.length != 0"  class=table>
                 <thead>
                   <tr>
                     <th scope="col">#</th>
@@ -105,9 +131,9 @@
                 <tbody *ngFor="let tarea of tareasFueraLimiteEsfuerzo;let indice = index">
                   <tr>
                     <th scope="row">{{indice + 1}}</th>
-                    <td >{{tarea}}</td>
-                    <td >{{tarea.fechaInicio}}</td>
-                    <td >{{tarea.fechaFin}}</td>
+                    <td >{{tarea.requisito.nombre}}</td>
+                    <td >{{tarea.requisito.fechaInicio}}</td>
+                    <td >{{tarea.requisito.fechaFin}}</td>
                     <td *ngIf= "tarea.importancia == 0">Sin importancia</td>
                     <td  *ngIf= "tarea.importancia != 0" >{{tarea.importancia}}</td>
                     <td >{{tarea.coste}}</td>

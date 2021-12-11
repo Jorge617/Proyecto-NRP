@@ -23,6 +23,7 @@ export class GestionarTareaComponent implements OnInit {
   public limiteEsfuerzo: Number;
   public tamanioListaTareas: Number | undefined;
   public tareasFueraLimiteEsfuerzo: any[];
+  public limiteSuperado: boolean;
 
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>,
     public route: ActivatedRoute, private _requisitoService: RequisitoService) {
@@ -31,33 +32,34 @@ export class GestionarTareaComponent implements OnInit {
     this.tareasPriorizadas = [];
     this.limiteEsfuerzo = 1;
     this.tareasFueraLimiteEsfuerzo = [];
+    this.limiteSuperado = false;
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     this.getUserLogged();
 
     this.route.params.subscribe(async params => {
-      await this.getProyecto(params.id);
+      this.getProyecto(params.id);
 
     });
-
-
-
-
   }
 
   formatearFecha(fecha: string): string {
-    var fechaFormateada: string;
-    var dia: string = "";
-    var mes: string = "";
-    var anio: string = "";
-    dia = fecha.substring(8, 10);
-    mes = fecha.substring(5, 7);
-    anio = fecha.substring(0, 4);
+    if (fecha.length != 10 && fecha.length != 9) {
+      var fechaFormateada: string;
+      var dia: string = "";
+      var mes: string = "";
+      var anio: string = "";
+      dia = fecha.substring(8, 10);
+      mes = fecha.substring(5, 7);
+      anio = fecha.substring(0, 4);
+      fechaFormateada = dia + "/" + mes + "/" + anio;
+      return fechaFormateada;
+    } else {
+      return fecha
+    }
 
 
-    fechaFormateada = dia + "/" + mes + "/" + anio;
-    return fechaFormateada;
   }
   getUserLogged() {
     this._usuarioService.getUserLogged(this.usuario);
@@ -79,16 +81,11 @@ export class GestionarTareaComponent implements OnInit {
         this.proyecto.esfuerzoMax = response.esfuerzoMax;
         this.proyecto.satisfaccionMax = response.satisfaccionMax;
 
-
-
-
         for (var i = 0; i < this.proyecto.planificacion.length; i++) {
           this.proyecto.planificacion[i].requisito.fechaInicio = this.formatearFecha(this.proyecto.planificacion[i].requisito.fechaInicio.toString());
           this.proyecto.planificacion[i].requisito.fechaFin = this.formatearFecha(this.proyecto.planificacion[i].requisito.fechaFin.toString());
         }
-
         this.cargarRequisitosNoPriorizados();
-
       },
       error => {
         console.log(<any>error);
@@ -105,6 +102,7 @@ export class GestionarTareaComponent implements OnInit {
         this.proyecto.planificacion = response;
         this.tamanioListaTareas = response.length;
         this.proyecto.esfuerzoMax = this.limiteEsfuerzo;
+        this.tareasFueraLimiteEsfuerzo = []
         this.route.params.subscribe(params => {
           this.getProyecto(params.id);
         });
@@ -127,14 +125,25 @@ export class GestionarTareaComponent implements OnInit {
   }
 
   bajarTarea(indice: any) {
+    this.limiteSuperado = false;
     this.tareasFueraLimiteEsfuerzo.push(this.proyecto.planificacion[indice]);
     this.remove(this.proyecto.planificacion, this.proyecto.planificacion[indice]);
 
   }
 
   subirTarea(indice: any) {
-    this.proyecto.planificacion.push(this.tareasFueraLimiteEsfuerzo[indice]);
-    this.remove(this.tareasFueraLimiteEsfuerzo, this.tareasFueraLimiteEsfuerzo[indice]);
+    var esfuerzoTotal = this.proyecto.esfuerzoMax;
+    var esfuerzo = 0;
+    for (var i = 0; i < this.proyecto.planificacion.length; i++) {
+      esfuerzo += this.proyecto.planificacion[i].coste;
+    }
+    if ((esfuerzo + this.tareasFueraLimiteEsfuerzo[indice].coste) <= esfuerzoTotal) {
+      this.limiteSuperado = false;
+      this.proyecto.planificacion.push(this.tareasFueraLimiteEsfuerzo[indice]);
+      this.remove(this.tareasFueraLimiteEsfuerzo, this.tareasFueraLimiteEsfuerzo[indice]);
+    } else {
+      this.limiteSuperado = true;
+    }
   }
 
 
@@ -150,22 +159,25 @@ export class GestionarTareaComponent implements OnInit {
     })
 
     this.proyecto.requisitos.forEach(e => {
-
-
       if (!aux.includes(String(e))) {
 
         this._requisitoService.calcularPrioridadRequisito(this.proyecto._id, e).subscribe(
-          response=>{
+          response => {
             this.tareasFueraLimiteEsfuerzo.push(response)
+            this.tareasFueraLimiteEsfuerzo.forEach((e, indice) => {
+              e.requisito.fechaInicio = this.formatearFecha(this.tareasFueraLimiteEsfuerzo[indice].requisito.fechaInicio.toString());
+              e.requisito.fechaFin = this.formatearFecha(this.tareasFueraLimiteEsfuerzo[indice].requisito.fechaFin.toString());
+            });
           }
         );
       }
     })
-
-    console.log(this.tareasFueraLimiteEsfuerzo)
   }
 
-  updatePrioridad(prioridad:any[]){
-    this._proyectoService.updatePrioridad(this.proyecto._id, prioridad).subscribe()
-   }
+  updatePrioridad(prioridad: any[]) {
+    this._proyectoService.updatePrioridad(this.proyecto._id, prioridad).subscribe(response => {
+
+    })
+
+  }
 }
