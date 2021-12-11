@@ -47,7 +47,7 @@
           </div>
           <div class="row justify-content-end mt-5 ">
             <div class="col-2 ">
-              <button type="button" class="btn btn-success ms-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="updatePrioridad(proyecto.planificacion)">
+              <button *ngIf="proyecto.planificacion.length != 0" type="button" class="btn btn-success ms-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="updatePrioridad(proyecto.planificacion)">
                 Actualizar lista
               </button>
 

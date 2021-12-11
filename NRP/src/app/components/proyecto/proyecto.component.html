@@ -209,7 +209,7 @@
                        </button></a>
             </div>
 
-                <div class="row mt-2 m-3">
+                <div *ngIf = "proyecto.planificacion.length != 0" class="row mt-2 m-3">
                     <h2>Lista de tareas priorizadas <a [routerLink]="['/gestionar-tarea',proyecto._id]"><button type="button" class="btn">
                         <img id="priorizarTarea" src="./assets/time.png" alt="" width="60" height="60">
                        </button></a></h2>

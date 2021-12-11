@@ -96,6 +96,7 @@ export class GestionarTareaComponent implements OnInit {
   }
 
   calcularPrioridad() {
+    this.limiteSuperado = false;
     this.limiteEsfuerzo = Number($("#limite").val());
     if (Number($("#limite").val()) > 0) {
       this._proyectoService.calcularPrioridad(this.proyecto._id, $("#limite").val()).subscribe(response => {
