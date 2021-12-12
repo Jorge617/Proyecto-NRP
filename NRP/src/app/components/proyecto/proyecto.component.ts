@@ -68,17 +68,19 @@ export class ProyectoComponent implements OnInit {
   }
 
   formatearFecha(fecha: string): string {
-    var fechaFormateada: string;
-    var dia: string = "";
-    var mes: string = "";
-    var anio: string = "";
-    dia = fecha.substring(8, 10);
-    mes = fecha.substring(5, 7);
-    anio = fecha.substring(0, 4);
-
-
-    fechaFormateada = dia + "/" + mes + "/" + anio;
-    return fechaFormateada;
+    if (fecha.length != 10 && fecha.length != 9) {
+      var fechaFormateada: string;
+      var dia: string = "";
+      var mes: string = "";
+      var anio: string = "";
+      dia = fecha.substring(8, 10);
+      mes = fecha.substring(5, 7);
+      anio = fecha.substring(0, 4);
+      fechaFormateada = dia + "/" + mes + "/" + anio;
+      return fechaFormateada;
+    } else {
+      return fecha
+    }
   }
 
 

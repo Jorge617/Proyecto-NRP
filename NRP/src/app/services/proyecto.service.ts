@@ -106,5 +106,9 @@ export class ProyectoService {
         return this._http.put(this.url + "proyectos/" + idProyecto + "/prioridad", options);
 
     }
+
+    calcularMetricas() {
+
+    }
 }
 

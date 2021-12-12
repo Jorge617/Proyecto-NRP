@@ -150,6 +150,14 @@
                                     <div class ="col">
                                         <strong>{{usuarioProyecto.nombre}}</strong>
                                     </div>
+                                    <div class = "col">
+                                        <strong>Contribución: </strong>
+                                        <span>...</span>
+                                    </div>
+                                    <div class = "col">
+                                        <strong>Cobertura: </strong>
+                                        <span>...</span>
+                                    </div>
                                     <div class ="col">
                                         <img id="deleteUsuario" src="./assets/borrar-usuario.png" alt="Borrar usuario" width="40" height="40" style="margin-left: 90%; cursor: pointer;" (click)="deleteUsuarios(indice)" />
                                     </div>
@@ -202,6 +210,11 @@
                     </div>
                 </div>
 
+                <div *ngIf="proyecto.planificacion.length != 0" class="row mt-3 ms-3">
+                    <h2>Productividad de las tareas del proyecto</h2>
+                    <p>La productividad es ...</p>
+            </div>
+
                 <div *ngIf="proyecto.planificacion.length == 0" class="row mt-5 ms-3 text-center">
                     <h1>No se han priorizado aún las tareas del proyecto</h1>
                     <a [routerLink]="['/gestionar-tarea',proyecto._id]"><button type="button" class="btn">
@@ -209,7 +222,7 @@
                        </button></a>
             </div>
 
-                <div class="row mt-2 m-3">
+                <div *ngIf = "proyecto.planificacion.length != 0" class="row mt-2 m-3">
                     <h2>Lista de tareas priorizadas <a [routerLink]="['/gestionar-tarea',proyecto._id]"><button type="button" class="btn">
                         <img id="priorizarTarea" src="./assets/time.png" alt="" width="60" height="60">
                        </button></a></h2>
