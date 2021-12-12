@@ -135,11 +135,30 @@
                     <button type="button " class="btn btn-danger ms-5 " [routerLink]="[ '/proyecto', proyecto._id] ">
               Cancelar
             </button>
-                    <button class="btn btn-success ms-3 " type="submit " [disabled]="!formCrearTarea.form.valid " (click)="crearRequisito()">
-              Guardar
+                    <button class="btn btn-success ms-3 " type="submit " [disabled]="!formCrearTarea.form.valid " data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+             Crear
             </button>
                 </div>
             </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                 <div class="modal-content">
+                    <div class="modal-header">
+                         <h2 class="modal-title" id="staticBackdropLabel">Crear tarea</h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                     </div>
+                <div class="modal-body">
+                 <p>Crear esta tarea supondra una productividad ... en tu proyecto. ¿Estás seguro?</p>
+             </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success" (click)="crearRequisito()">Crear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         </form>
 
         <!--Fin del contenido de INICIO-->
