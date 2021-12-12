@@ -329,7 +329,7 @@ proyectoController.calcularMetricas = async (req, res) => {
                     cobertura += e.valor
                 }
 
-                coberturaTotal = e.valor;
+                coberturaTotal += e.valor;
             });
 
         });
