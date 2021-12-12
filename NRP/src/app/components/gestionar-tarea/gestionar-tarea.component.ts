@@ -150,8 +150,6 @@ export class GestionarTareaComponent implements OnInit {
     })
 
     this.proyecto.requisitos.forEach(e => {
-
-
       if (!aux.includes(String(e))) {
 
         this._requisitoService.calcularPrioridadRequisito(this.proyecto._id, e).subscribe(

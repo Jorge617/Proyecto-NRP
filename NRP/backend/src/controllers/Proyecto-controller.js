@@ -338,7 +338,7 @@ proyectoController.calcularMetricas = async (req, res) => {
         coberturas.push({ "usuario": usuarios[i].usuario, "cobertura": Number((cobertura / coberturaTotal).toFixed(2)) })
     }
 
-    res.send({ "productividad": Number((satisfaccion / coste).toFixed(2)), "contribubciones": contribuciones, "coberturas": coberturas })
+    res.send({ "productividad": Number((satisfaccion / coste).toFixed(2)), "contribuciones": contribuciones, "coberturas": coberturas })
 
 }
 
