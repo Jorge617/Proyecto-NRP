@@ -361,22 +361,28 @@ proyectoController.calcularContribucionRequisito = async (req, res) => {
     var contribucion = 0;
     var getrequisito = await requisito.findById(req.query.requisito)
 
+    var contribucionList = []
+
     var satisfaccion = req.query.satisfaccion
     var usuarios = []
     usuarios = proyect.usuarios
 
     getrequisito.prioridad.forEach(e => {
-
+        contribucion = 0;
         for (var i = 0; i < usuarios.length; i++) {
-            if (String(usuarios[i].usuario) == req.query.usuario) {
+            
+            if (String(usuarios[i].usuario) == e.usuario) {
                 contribucion += e.valor * usuarios[i].importancia
             }
             
 
         }
+        contribucionList.push({"usuario":e.usuario, "contribucion": Number(contribucion / satisfaccion).toFixed(2) })
+
+        
     })
 
-    res.send({ "contribucion": Number(contribucion / satisfaccion).toFixed(2) })
+    res.send({"contribucion":contribucionList})
 
 }
 
