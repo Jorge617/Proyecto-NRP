@@ -106,10 +106,10 @@
                                                 <h2 *ngIf="arrTareasProyecto[indice].prioridad.length > 1" class="mt-2">Compañeros tarea</h2>
                                                     <div *ngIf="arrTareasProyecto[indice].prioridad.length > 1" class="mt-2 col-10">
                                                        <div>
-                                                           <div *ngFor="let usuarioCompanero of arrTareasProyecto[indice].prioridad">
-                                                                <div *ngIf="usuario._id != usuarioCompanero.usuario">
+                                                           <div *ngFor="let usuarioCompanero of companeros">
+                                                                <div *ngIf="usuario._id != usuarioCompanero._id">
                                                                     <!--EJECUTAR METODO PARA OBTENER NOMBRE-->
-                                                                    <span><strong>{{usuarioCompanero.usuario}}</strong></span>
+                                                                    <span><strong>{{usuarioCompanero.nombre}}</strong></span>
                                                                 </div>
                                                               
                                                            </div>   

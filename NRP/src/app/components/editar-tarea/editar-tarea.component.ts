@@ -18,7 +18,7 @@ import { Requisito } from 'src/app/models/requisito';
 })
 export class EditarTareaComponent implements OnInit {
 
-  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", []);
+  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", [], 0);
   public arrUsuarios: Usuario[];
   public proyecto: Proyecto; //Proyecto actual
   public requisito: Requisito = new Requisito("", "", "", "", "", 0, [], 1, "");
@@ -27,7 +27,7 @@ export class EditarTareaComponent implements OnInit {
   public pesosUsuarios: Number[];
 
   constructor(private _usuarioService: UsuarioService, public router: Router, public route: ActivatedRoute, private _proyectoService: ProyectoService, private _requisitoService: RequisitoService) {
-    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", [], 0, 0);
+    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", [], 0, 0, 0, [], []);
     this.arrUsuarios = [];
     this.arrUsuariosResponsables = [];
     this.arrPesosUsuariosProyecto = [];

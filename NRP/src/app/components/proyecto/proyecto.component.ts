@@ -16,7 +16,7 @@ import { RequisitoService } from '../../services/requisito.service';
 })
 export class ProyectoComponent implements OnInit {
 
-  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", []);
+  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", [], 0);
   public proyecto: Proyecto; //Proyecto actual
   public arrUsuariosProyecto: Usuario[] | any; //Usuarios que participan en el proyecto
   public arrUsuariosNombre: any[]; //Los nombres de los usuarios que participan en el proyecto
@@ -28,7 +28,7 @@ export class ProyectoComponent implements OnInit {
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>,
     public route: ActivatedRoute, private _requisitoService: RequisitoService) {
     this.dateAdapter.setLocale('es-ES');
-    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", [], 0, 0);
+    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", [], 0, 0, 0, [], []);
     this.arrUsuariosNombre = [];
     this.arrUsuariosDisponibles = [];
     this.arrTareasProyecto = [];
@@ -46,6 +46,7 @@ export class ProyectoComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       this.getProyecto(params.id);
+
     });
 
     this.route.params.subscribe(params => {
@@ -59,7 +60,6 @@ export class ProyectoComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.getRequisitos(params.id);
     });
-
   }
 
   getUserLogged() {
@@ -108,6 +108,9 @@ export class ProyectoComponent implements OnInit {
         this.proyecto.requisitos = response.requisitos;
         this.proyecto.idUsuario = this.usuario._id;
         this.proyecto.planificacion = response.planificacion;
+        this.proyecto.esfuerzoMax = response.esfuerzoMax;
+        this.proyecto.satisfaccionMax = response.satisfaccionMax;
+        this.calcularMetricas(this.proyecto._id);
 
 
         for (var i = 0; i < this.proyecto.planificacion.length; i++) {
@@ -180,6 +183,15 @@ export class ProyectoComponent implements OnInit {
     })
   }
 
+  calcularMetricas(idProyecto: any) {
+    this._proyectoService.calcularMetricas(idProyecto).subscribe(response => {
+      this.proyecto.productividad = response.productividad;
+      this.proyecto.contribuciones = response.contribuciones;
+      this.proyecto.coberturas = response.coberturas;
+    }, error => {
+      console.log(<any>error);
+    });
+  }
 
 
 

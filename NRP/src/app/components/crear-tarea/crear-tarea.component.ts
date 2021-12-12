@@ -15,21 +15,23 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   providers: [UsuarioService, ProyectoService, RequisitoService]
 })
 export class CrearTareaComponent implements OnInit {
-  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", []);
+  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", [], 0);
   public proyecto: Proyecto;
   public arrUsuarios: Usuario[];
   public arrUsuariosAdd: Usuario[];
   public arrUsuariosProyecto: Usuario[] | any; //Usuarios que participan en el proyecto
   public requisito: Requisito = new Requisito("", "", "", "", "", 0, [], 1, "");
   public esfuerzoTarea: Number;
+  public productividadTarea: Number;
 
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>,
     public route: ActivatedRoute, private _requisitoService: RequisitoService) {
     this.dateAdapter.setLocale('es-ES');
-    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", [], 0, 0);
+    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", [], 0, 0, 0, [], []);
     this.arrUsuarios = [];
     this.arrUsuariosAdd = [];
     this.esfuerzoTarea = 1;
+    this.productividadTarea = 0;
 
   }
 
@@ -147,6 +149,14 @@ export class CrearTareaComponent implements OnInit {
 
   }
 
+  calcularProductividadRequisito() {
+    let pesoTotal: any = 0;
+    for (var i = 0; i < this.arrUsuariosAdd.length; i++) {
+      pesoTotal += this.arrUsuariosAdd[i].pesoSimulado;
+    }
+    this.productividadTarea = pesoTotal / this.requisito.coste;
+
+  }
 
 
 }

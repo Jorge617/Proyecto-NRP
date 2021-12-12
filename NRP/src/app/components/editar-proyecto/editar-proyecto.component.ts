@@ -16,13 +16,13 @@ import { DateAdapter } from '@angular/material/core';
 })
 export class EditarProyectoComponent implements OnInit {
 
-  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", []);
+  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", [], 0);
   public proyecto: Proyecto; //Proyecto actual
 
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>,
     public route: ActivatedRoute, private _requisitoService: RequisitoService) {
     this.dateAdapter.setLocale('es-ES');
-    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", [], 0, 0);
+    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", [], 0, 0, 0, [], []);
 
 
 

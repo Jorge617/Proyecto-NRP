@@ -17,15 +17,17 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 export class ProyectoClienteComponent implements OnInit {
 
 
-  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", []);
+  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", [], 0);
   public proyecto: Proyecto; //Proyecto actual
   public arrTareasProyecto: Requisito[];
+  public companeros: any[];
 
   public requisito: Requisito = new Requisito("", "", "", "", "", 0, [], 1, "");
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, public route: ActivatedRoute,
     private _requistoService: RequisitoService) {
-    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", [], 0, 0);
+    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", [], 0, 0, 0, [], []);
     this.arrTareasProyecto = [];
+    this.companeros = [];
   }
 
   ngOnInit(): void {
@@ -38,6 +40,8 @@ export class ProyectoClienteComponent implements OnInit {
       this.usuario.idProyecto = params.id;
       this.getRequisitosProyecto(params.idUsuario);
     });
+
+
   }
 
   getUserLogged() {
@@ -71,7 +75,6 @@ export class ProyectoClienteComponent implements OnInit {
         this.proyecto.requisitos = response.requisitos;
         this.proyecto.idUsuario = this.usuario._id;
 
-
       },
       error => {
         console.log(<any>error);
@@ -84,23 +87,42 @@ export class ProyectoClienteComponent implements OnInit {
   getRequisitosProyecto(idUsuario: any) {
     this._usuarioService.getRequisitosProyecto(this.usuario, idUsuario).subscribe(response => {
       this.arrTareasProyecto = response;
+      var aux: any[] = [];
       for (var i = 0; this.arrTareasProyecto.length; i++) {
         this.arrTareasProyecto[i].fechaInicio = this.formatearFecha(this.arrTareasProyecto[i].fechaInicio.toString());
         this.arrTareasProyecto[i].fechaFin = this.formatearFecha(this.arrTareasProyecto[i].fechaFin.toString());
+
+        for (var j = 0; j < this.arrTareasProyecto[i].prioridad.length; j++) {
+          this._usuarioService.getUsuario(this.arrTareasProyecto[i].prioridad[j].usuario).subscribe(response => {
+            aux.push(response);
+          }, error => {
+            console.log(<any>error);
+          });
+
+        }
+        this.companeros.push();
       }
+
+
+
+
 
     }, error => {
       console.log(<any>error);
     });
   }
 
-  getUsuarioCompanero(idUsuario: any) {
-    idUsuario = "Guillermo";
-    /*this._usuarioService.getUsuario(idUsuario).subscribe(response => {
-      idUsuario = response.nombre;
-    }, error => {
-      console.log(<any>error);
-    });*/
+  getUsuarioCompanero() {
+    for (var i = 0; i < this.arrTareasProyecto.length; i++) {
+      console.log("hola");
+      for (var j = 0; j < this.arrTareasProyecto[i].prioridad.length; j++) {
+        this._usuarioService.getUsuario(this.arrTareasProyecto[i].prioridad[j].usuario).subscribe(response => {
+          console.log(response);
+        }, error => {
+          console.log(<any>error);
+        });
+      }
+    }
   }
 
 }

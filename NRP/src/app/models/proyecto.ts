@@ -13,7 +13,10 @@ export class Proyecto {
 		public idUsuario: string,
 		public planificacion: any[],
 		public esfuerzoMax: any,
-		public satisfaccionMax: any
+		public satisfaccionMax: any,
+		public productividad: Number,
+		public contribuciones: any[],
+		public coberturas: any[]
 
 	) { }
 }

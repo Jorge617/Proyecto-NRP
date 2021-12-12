@@ -14,13 +14,13 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   providers: [UsuarioService, ProyectoService, RequisitoService]
 })
 export class AddValorTareaComponent implements OnInit {
-  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", []);
+  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", [], 0);
   public requisito: Requisito = new Requisito("", "", "", "", "", 1, [], 1, "");
   public proyecto: Proyecto; //Proyecto actual
   public importanciaTarea: Number;
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, public route: ActivatedRoute,
     private _requistoService: RequisitoService) {
-    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", [], 0, 0);
+    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", [], 0, 0, 0, [], []);
     this.importanciaTarea = 1;
   }
 

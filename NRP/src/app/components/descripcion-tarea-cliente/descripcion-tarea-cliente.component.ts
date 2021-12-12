@@ -19,20 +19,23 @@ import { Requisito } from 'src/app/models/requisito';
 })
 export class DescripcionTareaClienteComponent implements OnInit {
 
-  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", []);
+  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", [], 0);
   public arrUsuarios: Usuario[];
   public proyecto: Proyecto; //Proyecto actual
   public requisito: Requisito = new Requisito("", "", "", "", "", 0, [], 1, "");
   public arrUsuariosResponsables: any[];
   public arrPesosUsuariosProyecto: any[];
   public pesosUsuarios: Number[];
+  public contribucion: any[];
+  public idTarea: any;
 
   constructor(private _usuarioService: UsuarioService, public router: Router, public route: ActivatedRoute, private _proyectoService: ProyectoService, private _requisitoService: RequisitoService) {
-    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", [], 0, 0);
+    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", [], 0, 0, 0, [], []);
     this.arrUsuarios = [];
     this.arrUsuariosResponsables = [];
     this.arrPesosUsuariosProyecto = [];
     this.pesosUsuarios = [];
+    this.contribucion = [];
   }
 
   ngOnInit(): void {
@@ -40,8 +43,10 @@ export class DescripcionTareaClienteComponent implements OnInit {
     this.getUserLogged();
 
     this.route.params.subscribe(params => {
+      this.idTarea = params.idTarea;
       this.getProyecto(params.id);
       this.getRequisito(params.idTarea);
+
     });
 
 
@@ -85,7 +90,10 @@ export class DescripcionTareaClienteComponent implements OnInit {
         this.proyecto.usuarios = response.usuarios;
         this.proyecto.requisitos = response.requisitos;
         this.proyecto.idUsuario = this.usuario._id;
-
+        this.proyecto.planificacion = response.planificacion;
+        this.proyecto.esfuerzoMax = response.esfuerzoMax;
+        this.proyecto.satisfaccionMax = response.satisfaccionMax;
+        this.calcularContribucionRequisito(this.proyecto._id, this.idTarea, this.proyecto.satisfaccionMax);
 
       },
       error => {
@@ -142,6 +150,15 @@ export class DescripcionTareaClienteComponent implements OnInit {
     this._requisitoService.borrarRequisito(this.requisito._id, this.proyecto._id).subscribe(response => {
       this.router.navigateByUrl('/proyecto/' + this.proyecto._id);
     })
+  }
+
+  calcularContribucionRequisito(idProyecto: any, idRequisito: any, satisfaccionTotal: any) {
+    console.log(idRequisito);
+    console.log(idProyecto);
+
+    this._proyectoService.calcularContribucionRequisito(idProyecto, idRequisito, satisfaccionTotal).subscribe(response => {
+      this.contribucion = response.contribucion;
+    });
   }
 
 

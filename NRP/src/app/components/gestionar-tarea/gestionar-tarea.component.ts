@@ -17,7 +17,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 })
 export class GestionarTareaComponent implements OnInit {
 
-  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", []);
+  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", [], 0);
   public proyecto: Proyecto; //Proyecto actual
   public tareasPriorizadas: Requisito[];
   public limiteEsfuerzo: Number;
@@ -28,7 +28,7 @@ export class GestionarTareaComponent implements OnInit {
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>,
     public route: ActivatedRoute, private _requisitoService: RequisitoService) {
     this.dateAdapter.setLocale('es-ES');
-    this.proyecto = new Proyecto("k", "", [], new Date(), new Date(), [], "", "", [], 0, 0);
+    this.proyecto = new Proyecto("k", "", [], new Date(), new Date(), [], "", "", [], 0, 0, 0, [], []);
     this.tareasPriorizadas = [];
     this.limiteEsfuerzo = 1;
     this.tareasFueraLimiteEsfuerzo = [];
@@ -80,6 +80,7 @@ export class GestionarTareaComponent implements OnInit {
         this.proyecto.planificacion = response.planificacion;
         this.proyecto.esfuerzoMax = response.esfuerzoMax;
         this.proyecto.satisfaccionMax = response.satisfaccionMax;
+
 
         for (var i = 0; i < this.proyecto.planificacion.length; i++) {
           this.proyecto.planificacion[i].requisito.fechaInicio = this.formatearFecha(this.proyecto.planificacion[i].requisito.fechaInicio.toString());

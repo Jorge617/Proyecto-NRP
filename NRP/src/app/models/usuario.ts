@@ -11,7 +11,8 @@ export class Usuario {
 		public esCliente: boolean,
 		public proyectos: Proyecto[],
 		public idProyecto: string,
-		public propietario: String[]
+		public propietario: String[],
+		public pesoSimulado: Number
 
 	) { }
 }

@@ -94,7 +94,7 @@ export class ProyectoService {
     }
 
 
-    updatePrioridad(idProyecto: any, planificacion: any[]) {
+    updatePrioridad(idProyecto: any, planificacion: any[]): Observable<any> {
 
         let body = JSON.stringify({ "planificacion": planificacion });
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
@@ -107,8 +107,19 @@ export class ProyectoService {
 
     }
 
-    calcularMetricas() {
+    calcularMetricas(idProyecto: any): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this._http.get(this.url + "proyectos/" + idProyecto + "/metricas", { headers: headers });
+    }
 
+    calcularProductividadRequisito(idProyecto: any): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this._http.get(this.url + "proyectos/" + idProyecto + "/requisitos/metricas/productividad?satisfaccion=", { headers: headers });
+    }
+
+    calcularContribucionRequisito(idProyecto: any, idRequisito: any, satisfaccionTotal: any): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this._http.get(this.url + "proyectos/" + idProyecto + "/requisitos/metricas/contribucion?requisito=" + idRequisito + "&satisfaccion=" + satisfaccionTotal, { headers: headers });
     }
 }
 

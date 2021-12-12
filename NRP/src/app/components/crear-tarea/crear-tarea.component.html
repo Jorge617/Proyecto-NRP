@@ -150,7 +150,29 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                      </div>
                 <div class="modal-body">
-                 <p>Crear esta tarea supondra una productividad ... en tu proyecto. ¿Estás seguro?</p>
+                    <p>A continuación, ingrese los pesos aproximados que cree que le van a dar los usuarios a la tarea, 
+                        para calcular la productividad de la tarea que se va a crear. </p>
+                    <div class="list-group list-group-flush  scrollarea ">
+                        <div *ngFor="let usuario of arrUsuariosAdd; let indice = index" class="row m-3">
+                            <div class="col-10">
+                                <strong>{{usuario.nombre}} </strong>
+                                <label for="inputPassword" class="col-sm-10 col-form-label">Asigna un peso simulado al usuario</label>
+                                <div class="col-sm-5">
+                                    <input class="form-control" type="number" name="pesoSimulado" #pesoSimulado="ngModel" [(ngModel)] = "arrUsuariosAdd[indice].pesoSimulado" placeholder="[1 - 5]">
+                              </div>
+                              <div *ngIf="0>= arrUsuariosAdd[indice].pesoSimulado || arrUsuariosAdd[indice].pesoSimulado > 5"  class="col-sm-4 mt-2">
+                                <span style="color: red;">El peso del usuario tiene que ser entre 1 y 5</span>
+                              </div>
+                            </div>
+                        
+                        </div>
+                        <div >
+                            <button type="button" class="btn btn-primary row m-3" (click)="calcularProductividadRequisito()" >Calcular productividad</button>
+                        </div>
+                        <div *ngIf = "productividadTarea != 0" >
+                            <p>La productividad que supondrá la inclusión de esta tarea sería de {{productividadTarea}}</p>
+                        </div>
+                    </div>
              </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>

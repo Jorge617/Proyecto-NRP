@@ -16,7 +16,7 @@ import { parseI18nMeta } from '@angular/compiler/src/render3/view/i18n/meta';
 })
 export class InicioComponent implements OnInit {
 
-  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", []);
+  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", [], 0);
 
   public arrProyectosCreados: Proyecto[];
   public arrProyectosParticipo: Proyecto[];

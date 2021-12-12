@@ -17,12 +17,12 @@ import { DateAdapter } from '@angular/material/core';
 })
 export class CrearProyectoComponent implements OnInit {
 
-  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", []);
+  public usuario: Usuario = new Usuario("", "", "", "", "", 0, false, [], "", [], 0);
   public proyecto: Proyecto;
 
   constructor(private _usuarioService: UsuarioService, private _proyectoService: ProyectoService, public router: Router, private dateAdapter: DateAdapter<Date>) {
     this.dateAdapter.setLocale('es-ES');
-    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", [], 0, 0);
+    this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", [], 0, 0, 0, [], []);
   }
 
   ngOnInit(): void {

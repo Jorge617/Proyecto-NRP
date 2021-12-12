@@ -38,7 +38,7 @@
                             <th scope="col">Nombre</th>
                             <th scope="col">Peso del usuario en el proyecto</th>
                             <th scope="col">Importancia asignada a la tarea</th>
-                            <th scope="col">Cobertura</th>
+                            <th scope="col">Contribución</th>
                           </tr>
                         </thead>
                         <tbody *ngFor="let usuario of arrUsuariosResponsables;let indice = index">
@@ -48,7 +48,7 @@
                             <td class="text-center">{{pesosUsuarios[indice]}}</td>
                             <td *ngIf="requisito.prioridad[indice].valor == 0" class="text-center">Importancia sin asignar aún</td>
                             <td *ngIf="requisito.prioridad[indice].valor != 0" class="text-center">{{requisito.prioridad[indice].valor}}</td>
-                            <td class="text-center">...</td>
+                            <td class="text-center">{{contribucion[indice].contribucion}}</td>
                           </tr>
                         </tbody>
                       </table>
