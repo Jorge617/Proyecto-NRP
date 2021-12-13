@@ -24,6 +24,10 @@ export class GestionarTareaComponent implements OnInit {
   public tamanioListaTareas: Number | undefined;
   public tareasFueraLimiteEsfuerzo: any[];
   public limiteSuperado: boolean;
+  public cambio1: boolean;
+  public cambio2: boolean;
+  public tareaSeleccionada: any;
+  public posicion: any;
 
   constructor(private _usuarioService: UsuarioService, public router: Router, private _proyectoService: ProyectoService, private dateAdapter: DateAdapter<Date>,
     public route: ActivatedRoute, private _requisitoService: RequisitoService) {
@@ -33,6 +37,11 @@ export class GestionarTareaComponent implements OnInit {
     this.limiteEsfuerzo = 1;
     this.tareasFueraLimiteEsfuerzo = [];
     this.limiteSuperado = false;
+    this.cambio1 = false;
+    this.cambio2 = false;
+    this.tareaSeleccionada = null;
+    this.posicion = null;
+
   }
 
   ngOnInit(): void {
@@ -126,6 +135,31 @@ export class GestionarTareaComponent implements OnInit {
 
   }
 
+  intercambiarTareas(tareaSeleccionadaP?: any, posicionP?: any, tareaIntercambio?: any, posicionIntercambio?: any) {
+
+    if (this.tareaSeleccionada == null) {
+      this.tareaSeleccionada = tareaSeleccionadaP
+      this.posicion = posicionP;
+
+      console.log(this.tareaSeleccionada);
+      console.log(this.posicion);
+
+    } else {
+      this.cambio1 = true;
+    }
+
+    if (this.cambio1 == true && this.cambio2 == false) {
+      this.proyecto.planificacion[this.posicion] = tareaIntercambio;
+      this.proyecto.planificacion[posicionIntercambio] = this.tareaSeleccionada;
+
+      this.tareaSeleccionada = null;
+      this.posicion = null;
+      this.cambio1 = false;
+      this.cambio2 = false;
+    }
+
+  }
+
   bajarTarea(indice: any) {
     this.limiteSuperado = false;
     this.tareasFueraLimiteEsfuerzo.push(this.proyecto.planificacion[indice]);
@@ -180,6 +214,6 @@ export class GestionarTareaComponent implements OnInit {
     this._proyectoService.updatePrioridad(this.proyecto._id, prioridad).subscribe(response => {
 
     })
-
+    this.limiteSuperado = false;
   }
 }
