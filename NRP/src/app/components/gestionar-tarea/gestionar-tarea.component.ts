@@ -95,6 +95,7 @@ export class GestionarTareaComponent implements OnInit {
         this.proyecto.esfuerzoMax = response.esfuerzoMax;
         this.proyecto.satisfaccionMax = response.satisfaccionMax;
 
+        this.comprobarRequisitosPriorizados(this.proyecto._id);
 
         for (var i = 0; i < aux.length; i++) {
           aux[i].requisito.fechaInicio = this.formatearFecha(aux[i].requisito.fechaInicio.toString());
@@ -116,14 +117,14 @@ export class GestionarTareaComponent implements OnInit {
 
   calcularPrioridad() {
     this.limiteSuperado = false;
-    this.comprobarRequisitosPriorizados(this.proyecto._id);
+    console.log(this.tareasValoradas);
     if (this.tareasValoradas == false) {
 
       this.controlTareas = false;
     } else {
       this.controlTareas = true;
     }
-    console.log(this.controlTareas);
+
     if (this.tareasValoradas) {
       this.limiteEsfuerzo = Number($("#limite").val());
       if (Number($("#limite").val()) > 0) {
