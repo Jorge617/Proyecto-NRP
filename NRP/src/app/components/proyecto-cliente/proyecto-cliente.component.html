@@ -106,6 +106,7 @@
                                     <h2>Descripción</h2>
                                     <p>{{tarea.descripcion}}</p>
 
+                                    <h2 *ngIf = "arrTareasProyecto[indice].prioridad.length > 1">Compañeros de la tarea</h2>
                                     <div *ngIf="arrTareasProyecto[indice].prioridad.length > 1" class="mt-2 col-10">
                                         <div>
 

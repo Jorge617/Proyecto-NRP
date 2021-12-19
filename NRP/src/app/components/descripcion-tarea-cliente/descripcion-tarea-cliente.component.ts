@@ -28,6 +28,7 @@ export class DescripcionTareaClienteComponent implements OnInit {
   public pesosUsuarios: Number[];
   public contribucion: any[];
   public idTarea: any;
+  public tareasValoradas: boolean;
 
   constructor(private _usuarioService: UsuarioService, public router: Router, public route: ActivatedRoute, private _proyectoService: ProyectoService, private _requisitoService: RequisitoService) {
     this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", [], 0, 0, 0, [], []);
@@ -36,6 +37,7 @@ export class DescripcionTareaClienteComponent implements OnInit {
     this.arrPesosUsuariosProyecto = [];
     this.pesosUsuarios = [];
     this.contribucion = [];
+    this.tareasValoradas = false;
   }
 
   ngOnInit(): void {
@@ -94,7 +96,7 @@ export class DescripcionTareaClienteComponent implements OnInit {
         this.proyecto.esfuerzoMax = response.esfuerzoMax;
         this.proyecto.satisfaccionMax = response.satisfaccionMax;
         this.calcularContribucionRequisito(this.proyecto._id, this.idTarea, this.proyecto.satisfaccionMax);
-
+        this.comprobarRequisitosPriorizados(this.proyecto._id);
       },
       error => {
         console.log(<any>error);
@@ -160,6 +162,11 @@ export class DescripcionTareaClienteComponent implements OnInit {
       this.contribucion = response.contribucion;
     });
   }
+  comprobarRequisitosPriorizados(idProyecto: any) {
+    this._proyectoService.comprobarRequisitosPriorizados(idProyecto).subscribe(response => {
 
+      this.tareasValoradas = response.priorizados;
+    })
+  }
 
 }

@@ -22,6 +22,7 @@ export class ProyectoComponent implements OnInit {
   public arrUsuariosNombre: any[]; //Los nombres de los usuarios que participan en el proyecto
   public arrUsuariosDisponibles: Usuario[]; //Los usuarios que se pueden asignar a un proyecto
   public arrTareasProyecto: Requisito[];
+  public tareasValoradas: boolean;
 
 
 
@@ -32,7 +33,7 @@ export class ProyectoComponent implements OnInit {
     this.arrUsuariosNombre = [];
     this.arrUsuariosDisponibles = [];
     this.arrTareasProyecto = [];
-
+    this.tareasValoradas = false;
 
 
   }
@@ -99,7 +100,7 @@ export class ProyectoComponent implements OnInit {
     this._proyectoService.getProyecto(id).subscribe(
 
       response => {
-        var aux =  response.planificacion;
+        var aux = response.planificacion;
         this.proyecto._id = response._id;
         this.proyecto.nombre = response.nombre;
         this.proyecto.descripcion = response.descripcion;
@@ -113,12 +114,13 @@ export class ProyectoComponent implements OnInit {
         this.proyecto.satisfaccionMax = response.satisfaccionMax;
         this.calcularMetricas(this.proyecto._id);
 
+        this.comprobarRequisitosPriorizados(this.proyecto._id);
 
         for (var i = 0; i < aux.length; i++) {
           aux[i].requisito.fechaInicio = this.formatearFecha(aux[i].requisito.fechaInicio.toString());
           aux[i].requisito.fechaFin = this.formatearFecha(aux[i].requisito.fechaFin.toString());
 
-          this.proyecto.planificacion.push({"requisito":aux[i].requisito,"importancia":aux[i].importancia ,"coste": aux[i].coste, "productividad":Number(aux[i].importancia / aux[i].coste ).toFixed(2)})
+          this.proyecto.planificacion.push({ "requisito": aux[i].requisito, "importancia": aux[i].importancia, "coste": aux[i].coste, "productividad": Number(aux[i].importancia / aux[i].coste).toFixed(2) })
         }
 
       },
@@ -196,6 +198,11 @@ export class ProyectoComponent implements OnInit {
     });
   }
 
+  comprobarRequisitosPriorizados(idProyecto: any) {
+    this._proyectoService.comprobarRequisitosPriorizados(idProyecto).subscribe(response => {
 
+      this.tareasValoradas = response.priorizados;
+    })
+  }
 
 }
