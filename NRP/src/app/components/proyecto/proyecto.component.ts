@@ -99,6 +99,7 @@ export class ProyectoComponent implements OnInit {
     this._proyectoService.getProyecto(id).subscribe(
 
       response => {
+        var aux =  response.planificacion;
         this.proyecto._id = response._id;
         this.proyecto.nombre = response.nombre;
         this.proyecto.descripcion = response.descripcion;
@@ -107,15 +108,17 @@ export class ProyectoComponent implements OnInit {
         this.proyecto.usuarios = response.usuarios;
         this.proyecto.requisitos = response.requisitos;
         this.proyecto.idUsuario = this.usuario._id;
-        this.proyecto.planificacion = response.planificacion;
+        this.proyecto.planificacion = []
         this.proyecto.esfuerzoMax = response.esfuerzoMax;
         this.proyecto.satisfaccionMax = response.satisfaccionMax;
         this.calcularMetricas(this.proyecto._id);
 
 
-        for (var i = 0; i < this.proyecto.planificacion.length; i++) {
-          this.proyecto.planificacion[i].requisito.fechaInicio = this.formatearFecha(this.proyecto.planificacion[i].requisito.fechaInicio.toString());
-          this.proyecto.planificacion[i].requisito.fechaFin = this.formatearFecha(this.proyecto.planificacion[i].requisito.fechaFin.toString());
+        for (var i = 0; i < aux.length; i++) {
+          aux[i].requisito.fechaInicio = this.formatearFecha(aux[i].requisito.fechaInicio.toString());
+          aux[i].requisito.fechaFin = this.formatearFecha(aux[i].requisito.fechaFin.toString());
+
+          this.proyecto.planificacion.push({"requisito":aux[i].requisito,"importancia":aux[i].importancia ,"coste": aux[i].coste, "productividad":Number(aux[i].importancia / aux[i].coste ).toFixed(2)})
         }
 
       },

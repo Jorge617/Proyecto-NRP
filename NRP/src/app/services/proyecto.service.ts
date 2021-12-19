@@ -121,5 +121,10 @@ export class ProyectoService {
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
         return this._http.get(this.url + "proyectos/" + idProyecto + "/requisitos/metricas/contribucion?requisito=" + idRequisito + "&satisfaccion=" + satisfaccionTotal, { headers: headers });
     }
+
+    comprobarRequisitosPriorizados(idProyecto: any): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this._http.get(this.url + "proyectos/" + idProyecto + "/requisitos/priorizados", { headers: headers });
+    }
 }
 

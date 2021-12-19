@@ -415,8 +415,27 @@ proyectoController.calcularPrioridadRequisito = async (req, res) => {
             suma += aux.importancia * getrequisito.prioridad[j].valor
         }
     }
+    
+    res.send({ "requisito": getrequisito,"importancia":suma, "esfuerzo": getrequisito.coste, "productividad": Number(suma / getrequisito.coste).toFixed(2) });
+}
 
-    res.send({ "requisito": getrequisito, "importancia": suma, "coste": getrequisito.coste });
+
+proyectoController.comprobarRequisitosPriorizados = async (req, res) => {
+    const proyect = await proyecto.findById(req.params.id);
+    var requisitos = proyect.requisitos
+    var respuesta = true;
+    for(var i = 0; i < requisitos.length; i++){
+        var getrequisito = await requisito.findById(requisitos[i]);
+        for(var j = 0; j < getrequisito.prioridad.length; j ++){
+            if( getrequisito.prioridad[j].valor == 0){
+                respuesta = false;
+            }
+        }
+
+    }
+
+
+    res.send({"priorizados":respuesta})
 }
     
 module.exports = proyectoController;

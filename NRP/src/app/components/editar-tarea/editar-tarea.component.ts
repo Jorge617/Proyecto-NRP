@@ -25,6 +25,8 @@ export class EditarTareaComponent implements OnInit {
   public arrUsuariosResponsables: any[];
   public arrPesosUsuariosProyecto: any[];
   public pesosUsuarios: Number[];
+  public contribucion: any[];
+  public idTarea: any;
 
   constructor(private _usuarioService: UsuarioService, public router: Router, public route: ActivatedRoute, private _proyectoService: ProyectoService, private _requisitoService: RequisitoService) {
     this.proyecto = new Proyecto("", "", [], new Date(), new Date(), [], "", "", [], 0, 0, 0, [], []);
@@ -32,6 +34,7 @@ export class EditarTareaComponent implements OnInit {
     this.arrUsuariosResponsables = [];
     this.arrPesosUsuariosProyecto = [];
     this.pesosUsuarios = [];
+    this.contribucion = [];
   }
 
   ngOnInit(): void {
@@ -39,11 +42,27 @@ export class EditarTareaComponent implements OnInit {
     this.getUserLogged();
 
     this.route.params.subscribe(params => {
+      this.idTarea = params.idTarea;
       this.getProyecto(params.id);
       this.getRequisito(params.idTarea);
+
     });
 
 
+  }
+
+  formatearFecha(fecha: string): string {
+    var fechaFormateada: string;
+    var dia: string = "";
+    var mes: string = "";
+    var anio: string = "";
+    dia = fecha.substring(8, 10);
+    mes = fecha.substring(5, 7);
+    anio = fecha.substring(0, 4);
+
+
+    fechaFormateada = dia + "/" + mes + "/" + anio;
+    return fechaFormateada;
   }
 
   getUsuarios() {
@@ -70,7 +89,10 @@ export class EditarTareaComponent implements OnInit {
         this.proyecto.usuarios = response.usuarios;
         this.proyecto.requisitos = response.requisitos;
         this.proyecto.idUsuario = this.usuario._id;
-
+        this.proyecto.planificacion = response.planificacion;
+        this.proyecto.esfuerzoMax = response.esfuerzoMax;
+        this.proyecto.satisfaccionMax = response.satisfaccionMax;
+        this.calcularContribucionRequisito(this.proyecto._id, this.idTarea, this.proyecto.satisfaccionMax);
 
       },
       error => {
@@ -93,8 +115,8 @@ export class EditarTareaComponent implements OnInit {
       this.requisito.prioridad = response.prioridad;
       this.requisito.coste = response.coste;
       this.requisito.descripcion = response.descripcion;
-      this.requisito.fechaInicio = response.fechaInicio;
-      this.requisito.fechaFin = response.fechaFin;
+      this.requisito.fechaInicio = this.formatearFecha(response.fechaInicio);
+      this.requisito.fechaFin = this.formatearFecha(response.fechaFin);
 
       for (var i = 0; i < this.requisito.prioridad.length; i++) {
 
@@ -127,6 +149,15 @@ export class EditarTareaComponent implements OnInit {
     this._requisitoService.borrarRequisito(this.requisito._id, this.proyecto._id).subscribe(response => {
       this.router.navigateByUrl('/proyecto/' + this.proyecto._id);
     })
+  }
+
+  calcularContribucionRequisito(idProyecto: any, idRequisito: any, satisfaccionTotal: any) {
+    console.log(idRequisito);
+    console.log(idProyecto);
+
+    this._proyectoService.calcularContribucionRequisito(idProyecto, idRequisito, satisfaccionTotal).subscribe(response => {
+      this.contribucion = response.contribucion;
+    });
   }
 
 }
